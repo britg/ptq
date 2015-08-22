@@ -18,7 +18,7 @@ public class RoomProcessor  {
 
     List<PlayerEvent> newEvents = new List<PlayerEvent>();
 
-    newEvents.Add (PlayerEvent.PromptChoice(roomTemplate.entranceChoice));
+    newEvents.Add (PlayerEvent.PromptChoice(roomTemplate.entranceBranch));
 
 //    newEvents.Add (PlayerEvent.Info ("[Door choice atmosphere text]"));
 //

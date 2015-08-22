@@ -12,8 +12,7 @@ public class RoomTemplate {
 
   public string key;
   public Dictionary<string, float> contentOverrides;
-  public Dictionary<string, JSONNode> branches;
-  public JSONNode entranceChoice;
+  public Branch entranceBranch;
 
   public static void Cache (JSONNode json) {
     var roomTemplate = new RoomTemplate(json);
@@ -36,7 +35,8 @@ public class RoomTemplate {
       contentOverrides[contentType] = chance;
     }
 
-    entranceChoice = json["entrance_choice"];
+    entranceBranch = new Branch(json["entrance_choice"]);
+
 //    branches = new Dictionary<string, JSONNode>();
 //    var branchesArr = json["branches"].AsArray;
 //    foreach (JSONNode branchNode in branchesArr) {

@@ -46,7 +46,8 @@ public class FeedView : BaseBehaviour {
   }
 
   void DoRefresh () {
-    List<PlayerEvent> newEvents = sim.inputProcessor.Continue();
+    var inputProcessor = new InputProcessor(sim);
+    List<PlayerEvent> newEvents = inputProcessor.Continue();
     List<GameObject> eventObjs = new List<GameObject>();
     foreach (var playerEvent in newEvents) {
       eventObjs.Add(CreatePlayerEventView(playerEvent));

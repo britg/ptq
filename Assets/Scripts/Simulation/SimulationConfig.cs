@@ -17,21 +17,10 @@ public class SimulationConfig {
   // Time
   public float updateIntervalSeconds;
   public int startSeconds;
-  public int dayStartHour;
-  public int nightStartHour;
   public float initialSpeed;
 
   // Player
   public List<String> startBuildings = new List<String>();
-
-  // Adventurer
-  public int adventurerDefaultLevel;
-  public int adventurerDefaultExp;
-  public float adventurerDefaultSpeed;
-
-  // Exploration Quests
-  public float defaultExplorationRadius;
-
 
   // Model config
 //  const string CONFIG_PATH = "Assets/Scripts/Simulation/Config";
@@ -46,15 +35,6 @@ public class SimulationConfig {
     updateIntervalSeconds = json["updateIntervalSeconds"].AsFloat;
     initialSpeed = json["initialSpeed"].AsFloat;
     startSeconds = json["startSeconds"].AsInt;
-    foreach(JSONNode arrItem in json["startBuildings"].AsArray) {
-      startBuildings.Add(arrItem.Value);
-    }
-
-    adventurerDefaultLevel = json["adventurerDefaultLevel"].AsInt;
-    adventurerDefaultExp = json["adventurerDefaultExp"].AsInt;
-    adventurerDefaultSpeed = json["adventurerDefaultSpeed"].AsFloat;
-
-    defaultExplorationRadius = json["defaultExplorationRadius"].AsFloat;
   }
 
   public void LoadModels () {

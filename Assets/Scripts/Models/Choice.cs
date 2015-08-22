@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SimpleJSON;
 
 public class Choice {
 
@@ -43,6 +44,14 @@ public class Choice {
     c.direction = Direction.Right;
 
     return c;
+  }
+
+  public static Choice Create (JSONNode node) {
+    var dirStr = node["pull"].Value;
+    var key = node["key"].Value;
+    var label = node["label"].Value;
+    var choice = Choice.Swipe(dirStr, key, label);
+    return choice;
   }
 
 }

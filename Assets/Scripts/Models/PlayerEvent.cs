@@ -125,6 +125,11 @@ public class PlayerEvent {
     return ev;
   }
 
+  public static PlayerEvent PromptChoice (Branch branch) {
+    // TODO: Implement using branch stuff
+    return PromptChoice(branch.sourceData);
+  }
+
   public static Choice CreateChoice (JSONNode node) {
     var dirStr = node["pull"].Value;
     var key = node["key"].Value;

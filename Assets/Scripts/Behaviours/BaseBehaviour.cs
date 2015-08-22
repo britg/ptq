@@ -18,14 +18,10 @@ public class BaseBehaviour : MonoBehaviour {
   protected Simulation sim {
     get {
       if (_sim == null) {
-        _sim = runner.GetSim();
+        _sim = runner.sim;
       }
       return _sim;
     }
-  }
-
-  protected void Pause () {
-    runner.Pause();
   }
 
 }

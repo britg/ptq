@@ -83,7 +83,8 @@ public class EventView : BaseBehaviour {
     }
 
     hasTriggered = true;
-    sim.inputProcessor.TriggerEvent(playerEvent);
+    var inputProcessor = new InputProcessor(sim);
+    inputProcessor.TriggerEvent(playerEvent);
   }
 
   
@@ -188,12 +189,14 @@ public class EventView : BaseBehaviour {
         return;
       }
 
+      var inputProcessor = new InputProcessor(sim);
+
       if (playerEvent.hasActions) {
-        sim.inputProcessor.TriggerAction(playerEvent, actionName);
+        inputProcessor.TriggerAction(playerEvent, actionName);
       }
 
       if (playerEvent.hasChoices) {
-        sim.inputProcessor.TriggerChoice(playerEvent, actionName);
+        inputProcessor.TriggerChoice(playerEvent, actionName);
       }
     }
   }
