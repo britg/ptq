@@ -54,11 +54,7 @@ public class Player {
     Resources = new Dictionary<string, Resource>();
     Stats = new Dictionary<string, Stat>();
     Slots = new Dictionary<string, Slot>();
-
-    // TODO: Load this from persistent storage
-//    currentFloor = Floor.all[1];
     encounteredMobKeys = new List<string>();
-    currentInitiative = 0;
   }
 
   public Stat GetStat (string key) {

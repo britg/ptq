@@ -5,36 +5,24 @@ using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
-public class SimulationConfig {
+public class ResourceLoader {
 
   public const string type = "Simulation";
 
   Simulation sim;
   public Dictionary<string, List<JSONNode>> jsonCache = new Dictionary<string, List<JSONNode>>();
 
-  // Core Config
-
-  // Time
-  public float updateIntervalSeconds;
-  public int startSeconds;
-  public float initialSpeed;
-
-  // Player
-  public List<String> startBuildings = new List<String>();
 
   // Model config
 //  const string CONFIG_PATH = "Assets/Scripts/Simulation/Config";
   string CONFIG_PATH = Application.streamingAssetsPath + "/Config";
   const string EXT = ".json";
 
-  public SimulationConfig (Simulation _sim) {
+  public ResourceLoader (Simulation _sim) {
     sim = _sim;
   }
 
   public void LoadSelf (JSONNode json) {
-    updateIntervalSeconds = json["updateIntervalSeconds"].AsFloat;
-    initialSpeed = json["initialSpeed"].AsFloat;
-    startSeconds = json["startSeconds"].AsInt;
   }
 
   public void LoadModels () {
@@ -91,7 +79,7 @@ public class SimulationConfig {
     Floor.type,
     RoomTemplate.type,
     MobTemplate.type,
-    SimulationConfig.type
+    ResourceLoader.type
   };
   void ParseLoadedConfigs () {
     foreach (string type in parseOrder) {
@@ -143,7 +131,7 @@ public class SimulationConfig {
       case MobTemplate.type:
         MobTemplate.Cache(config);
         break;
-      case SimulationConfig.type:
+      case ResourceLoader.type:
         LoadSelf(config);
       break;
       case Name.type:
@@ -157,15 +145,6 @@ public class SimulationConfig {
       break;
     }
 
-  }
-
-  public void LoadExistingPlayer () {
-    
-  }
-
-  public void CreatePlayer () {
-    var playerCreator = new PlayerCreator(sim);
-    playerCreator.Create();
   }
 
 }

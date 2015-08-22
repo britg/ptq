@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 public class Simulation {
 
-  public SimulationConfig config;
-
+  public ResourceLoader resourceLoader;
   public Player player;
 
   public void Setup() {
@@ -14,12 +13,13 @@ public class Simulation {
   }
 
   void LoadResources () {
-    config = new SimulationConfig(this);
-    config.LoadModels();
+    resourceLoader = new ResourceLoader(this);
+    resourceLoader.LoadModels();
   }
 
   void SetupPlayer () {
-    config.CreatePlayer();
+    var playerCreator = new PlayerCreator(this);
+    playerCreator.Create();
   }
 
 }

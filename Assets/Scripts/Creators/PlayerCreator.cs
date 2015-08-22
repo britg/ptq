@@ -20,6 +20,7 @@ public class PlayerCreator {
     player = new Player();
     sim.player = player;
     Bootstrap();
+    LoadState();
     return player;
   }
 
@@ -29,8 +30,13 @@ public class PlayerCreator {
     BootstrapAllSlots();
   }
 
+  // TODO: Load from real persistence
+  void LoadState () {
+    player.currentInitiative = 0;
+  }
+
   void BootstrapResources () {
-    List<JSONNode> resourcesToLoad = sim.config.jsonCache[PlayerResourceType];
+    List<JSONNode> resourcesToLoad = sim.resourceLoader.jsonCache[PlayerResourceType];
     foreach (JSONNode playerResource in resourcesToLoad) {
       var resourceKey = playerResource["resource_key"].Value;
       var amount = playerResource["amount"].AsFloat;
@@ -40,7 +46,7 @@ public class PlayerCreator {
   }
 
   void BootstrapStats () {
-    List<JSONNode> statsToLoad = sim.config.jsonCache[PlayerStatType];
+    List<JSONNode> statsToLoad = sim.resourceLoader.jsonCache[PlayerStatType];
     foreach (JSONNode playerStat in statsToLoad) {
       var statKey = playerStat["stat_key"].Value;
 
@@ -54,7 +60,7 @@ public class PlayerCreator {
   }
 
   void BootstrapSlots () {
-    List<JSONNode> slotsToLoad = sim.config.jsonCache[PlayerSlotType];
+    List<JSONNode> slotsToLoad = sim.resourceLoader.jsonCache[PlayerSlotType];
     foreach (JSONNode playerSlot in slotsToLoad) {
       var slotKey = playerSlot["slot_key"].Value;
       var slot = new Slot(slotKey);
@@ -68,5 +74,6 @@ public class PlayerCreator {
       player.Slots[p.Key] = slot;
     }
   }
+
 
 }
