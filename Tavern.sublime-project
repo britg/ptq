@@ -1,0 +1,27 @@
+{
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			[
+				"*.dll",
+				"*.meta"
+			],
+			"follow_symlinks": true,
+			"path": "Assets/Scripts"
+		},
+		{
+			"file_exclude_patterns":
+			[
+				"*.dll",
+				"*.meta"
+			],
+			"follow_symlinks": true,
+			"path": "Assets/Plugins"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "Notes"
+		}
+	]
+}

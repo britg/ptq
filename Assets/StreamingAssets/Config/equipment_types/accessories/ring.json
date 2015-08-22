@@ -1,0 +1,7 @@
+{
+  "type": "EquipmentType",
+  "key": "ring",
+  "name": "Ring",
+  "slots": ["finger"],
+  "designation": "acc"
+}

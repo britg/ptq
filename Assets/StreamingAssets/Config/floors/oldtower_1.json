@@ -1,0 +1,42 @@
+{
+  "type": "Floor",
+  "number": 1,
+  "template": "old_tower",
+
+  "entrance_events": [
+    "The massive tower doors slam behind you with a clang.",
+    "You get the feeling you couldn't open them again if you tried...",
+    "__TOWER_DOOR_CHOICE__"
+  ],
+
+  "branches": [
+    {
+      "key": "__TOWER_DOOR_CHOICE__",
+      "text": "You consider trying the door for a moment...",
+      "choices": [
+        {
+          "pull": "right",
+          "key": "attempt",
+          "label": "Try the doors",
+          "results": [
+            "The door won't budge. You think you hear a faint raspy cackling from somewhere in the tower.",
+            "Looks like the only way out is deeper in..."
+          ]
+        },
+
+        {
+          "pull": "left",
+          "key": "venture_forth",
+          "label": "Venture forth",
+          "results": [
+            "A corridor stretches ahead dimly lit by unnatural flickering light.",
+            "You venture forth..."
+          ]
+        }
+      ]
+    }
+  ],
+
+  "content": [
+  ]
+}

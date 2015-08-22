@@ -1,0 +1,7 @@
+{
+  "type": "PlayerStat",
+  "stat_key": "dps",
+  "current":  10,
+  "min": 0,
+  "max": 1000
+}

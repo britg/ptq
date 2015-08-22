@@ -1,0 +1,33 @@
+{
+  "type": "MobTemplate",
+  "key": "slime",
+  "name": "Slime + Bone",
+  "level": 1,
+  "consumable_chance": 50,
+  "loot_chance": 30,
+  "gold_chance": 20,
+  "stats": [
+    {
+      "key": "hp",
+      "range": [15, 25]
+    },
+    {
+      "key": "dps",
+      "range": [7, 15]
+    },
+    {
+      "key": "crit",
+      "range": [0, 5]
+    },
+    {
+      "key": "spd",
+      "range": [5, 10]
+    }
+  ],
+  "combat": [
+    {
+      "key": "basic",
+      "chance": 100
+    }
+  ]
+}

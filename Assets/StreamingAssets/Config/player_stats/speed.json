@@ -1,0 +1,7 @@
+{
+  "type": "PlayerStat",
+  "stat_key": "spd",
+  "current": 20,
+  "min": 0,
+  "max": 1000
+}

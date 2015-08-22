@@ -1,0 +1,33 @@
+{
+  "type": "MobTemplate",
+  "key": "boss_rat",
+  "name": "Rat of Very Unusual Size",
+  "level": 2,
+  "consumable_chance": 100,
+  "loot_chance": 100,
+  "gold_chance": 100,
+  "stats": [
+    {
+      "key": "hp",
+      "range": [30, 55]
+    },
+    {
+      "key": "dps",
+      "range": [10, 20]
+    },
+    {
+      "key": "crit",
+      "range": [10, 15]
+    },
+    {
+      "key": "spd",
+      "range": [20, 30]
+    }
+  ],
+  "combat": [
+    {
+      "key": "basic",
+      "chance": 100
+    }
+  ]
+}

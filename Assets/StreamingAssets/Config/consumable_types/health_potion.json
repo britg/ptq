@@ -1,0 +1,12 @@
+{
+	"type": "ConsumableType",
+	"key": "minor_health_potion",
+	"name": "Minor Health Potion",
+	"used_name": "Empty Flask",
+  "stat_effects": [
+    {
+      "key": "hp",
+      "range": [10, 20]
+    }
+  ]
+}

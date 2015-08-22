@@ -1,0 +1,7 @@
+{
+  "type": "EquipmentType",
+  "key": "dagger",
+  "name": "Dagger",
+  "slots": ["main_hand"],
+  "designation": "weapon"
+}

@@ -1,0 +1,29 @@
+{
+	"type": "RoomTemplate",
+	"key": "standard",
+
+	"content": [
+	],
+
+  "entrance_choice": {
+    "key": "__ROOM_DOOR_CHOICE__",
+    "text": "A plain wooden door stands before you...",
+    "choices": [
+      {
+        "pull": "right",
+        "key": "leave",
+        "label": "Leave",
+        "results": [
+        ]
+      },
+
+      {
+        "pull": "left",
+        "key": "open",
+        "label": "Open",
+        "results": [
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+	"type": "Rarity",
+	"key": "common",
+	"name": "Common",
+  "chance": 100,
+  "color": "999999",
+  "multiplier": [1, 2],
+  "modifier_chances": [0, 0]
+}

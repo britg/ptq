@@ -1,0 +1,7 @@
+{
+	"type": "PlayerStat",
+	"stat_key": "level",
+	"current": 1,
+	"min": 0,
+	"max": 100
+}

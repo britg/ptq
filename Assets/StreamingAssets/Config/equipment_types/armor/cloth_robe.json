@@ -1,0 +1,17 @@
+{
+  "type": "EquipmentType",
+  "key": "cloth_robe",
+  "name": "Cloth Robe",
+  "slots": ["chest"],
+  "designation": "armor",
+  "stat_multipliers": [
+  	{
+  		"key": "def",
+  		"multiplier": 0.7,
+  	},
+  	{
+  		"key": "spd",
+  		"multiplier": 1.5
+  	}
+  ]
+}

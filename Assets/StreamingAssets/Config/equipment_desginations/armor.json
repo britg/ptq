@@ -1,0 +1,6 @@
+{
+  "type": "EquipmentDesignation",
+  "key": "armor",
+  "name": "Armor",
+  "base_stats": ["def"]
+}

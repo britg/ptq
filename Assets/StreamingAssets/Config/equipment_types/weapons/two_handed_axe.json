@@ -1,0 +1,7 @@
+{
+  "type": "EquipmentType",
+  "key": "two_handed_axe",
+  "name": "Two Handed Axe",
+  "slots": ["main_hand"],
+  "designation": "weapon"
+}

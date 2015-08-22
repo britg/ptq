@@ -1,0 +1,17 @@
+{
+  "type": "EquipmentType",
+  "key": "plate_mail",
+  "name": "Plate Mail",
+  "slots": ["chest"],
+  "designation": "armor",
+  "stat_multipliers": [
+  	{
+  		"key": "def",
+  		"multiplier": 2,
+  	},
+  	{
+  		"key": "spd",
+  		"multiplier": -2
+  	}
+  ]
+}

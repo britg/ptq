@@ -1,0 +1,6 @@
+{
+  "type": "EquipmentDesignation",
+  "key": "weapon",
+  "name": "Weapon",
+  "base_stats": ["dps"]
+}
