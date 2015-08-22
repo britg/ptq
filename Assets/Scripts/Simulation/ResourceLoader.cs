@@ -74,7 +74,7 @@ public class ResourceLoader {
     // Tier 2
     EquipmentDesignation.type,
     EquipmentType.type,
-    ConsumableType.type,
+    ConsumableTemplate.type,
     FloorTemplate.type,
     Floor.type,
     RoomTemplate.type,
@@ -116,8 +116,8 @@ public class ResourceLoader {
       case EquipmentType.type:
         EquipmentType.Cache(config);
         break;
-      case ConsumableType.type:
-        ConsumableType.Cache(config);
+      case ConsumableTemplate.type:
+        ConsumableTemplate.Cache(config);
         break;
       case FloorTemplate.type:
         FloorTemplate.Cache(config);

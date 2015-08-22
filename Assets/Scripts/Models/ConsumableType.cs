@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
-public class ConsumableType {
-  public const string type = "ConsumableType";
+public class ConsumableTemplate {
+  public const string type = "ConsumableTemplate";
 
   public string Key { get; set; }
   public string Name { get; set; }
@@ -12,19 +12,19 @@ public class ConsumableType {
 
   public Dictionary<string, RangeAttribute> statEffects;
 
-  public static Dictionary<string, ConsumableType> all = new Dictionary<string, ConsumableType>();
+  public static Dictionary<string, ConsumableTemplate> all = new Dictionary<string, ConsumableTemplate>();
 
   public static void Cache (JSONNode json) {
-    var consumableType = new ConsumableType(json);
-    all[consumableType.Key] = consumableType;
-    Debug.Log("Loaded consumable type " + consumableType.Name);
+    var consumableTemplate = new ConsumableTemplate(json);
+    all[consumableTemplate.Key] = consumableTemplate;
+    Debug.Log("Loaded consumable type " + consumableTemplate.Name);
   }
 
-  public ConsumableType () {
+  public ConsumableTemplate () {
 
   }
 
-  public ConsumableType (JSONNode json) {
+  public ConsumableTemplate (JSONNode json) {
     Key = json["key"].Value;
     Name = json["name"].Value;
     UsedName = json["used_name"].Value;
