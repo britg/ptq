@@ -42,7 +42,20 @@ public class Floor : JSONResource {
     }
   }
 
-  public Dictionary<string, JSONNode> branches;
+  Dictionary<string, Branch> _branches;
+  public Dictionary<string, Branch> branches {
+    get {
+      if (_branches == null) {
+        _branches = new Dictionary<string, Branch>();
+        var branchesArr = sourceData["branches"].AsArray;
+        foreach (JSONNode b in branchesArr) {
+          _branches[b["key"].Value] = new Branch(b);
+        }
+      }
+      
+      return _branches;
+    }
+  }
 
   public Dictionary<string, float> consumableChances {
     get {
@@ -53,25 +66,6 @@ public class Floor : JSONResource {
   public static Floor GetFloor (int num) {
     return (Floor)cache[num.ToString()];
   }
-
-  //public Floor (JSONNode json) {
-  //  num = json["number"].AsInt;
-  //  floorTemplate = FloorTemplate.all[json["template"].Value];
-
-  //  entranceEvents = new List<string>();
-  //  var entranceArr = json["entrance_events"].AsArray;
-  //  foreach (JSONNode ent in entranceArr) {
-  //    entranceEvents.Add(ent.Value);
-  //  }
-
-  //  branches = new Dictionary<string, JSONNode>();
-  //  var branchesArr = json["branches"].AsArray;
-  //  foreach (JSONNode branchNode in branchesArr) {
-  //    branches[branchNode["key"].Value] = branchNode;
-  //  }
-
-  //  CascadeContent(json["content"].AsArray);
-  //}
 
   void CascadeContent (JSONArray contentJson) {
     // Cascade content from FloorTemplate
@@ -109,4 +103,8 @@ public class Floor : JSONResource {
     return roomGenerator.CreateRoom();
   }
 
+  public Branch GetBranch (string placeholderKey) {
+    var branchKey = placeholderKey.Replace("branch:", "");
+    return branches[branchKey];
+  }
 }

@@ -30,12 +30,14 @@ public class FloorProcessor {
   }
 
   bool DetectBranch (string txt) {
-    return txt.Substring(0, 2) == "__";
+    Debug.Log("branch is " + txt + " " + txt.Substring(0, 6));
+    return txt.Substring(0, 7) == "branch:";
   }
 
   void ExecuteBranch (string key) {
-    JSONNode branch = sim.player.currentFloor.branches[key];
-    newEvents.Add(PlayerEvent.PromptChoice(branch));
+    var branch = sim.player.currentFloor.GetBranch(key);
+    var branchProcessor = new BranchProcessor(sim, branch);
+    newEvents.AddRange(branchProcessor.Start());
   }
 
 }

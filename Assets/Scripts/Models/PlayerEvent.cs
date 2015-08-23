@@ -112,30 +112,11 @@ public class PlayerEvent {
     return ev;
   }
 
-  public static PlayerEvent PromptChoice (JSONNode branch) {
-    string text = branch["text"].Value;
-    JSONArray choicesArr = branch["choices"].AsArray;
-    JSONNode firstNode = choicesArr[0];
-    JSONNode secondNode = choicesArr[1];
-    var firstChoice = CreateChoice(firstNode);
-    var secondChoice = CreateChoice(secondNode);
-    var ev = PromptChoice(text, firstChoice, secondChoice);
-
-    ev.data[PlayerEvent.branchKey] = branch;
-    return ev;
-  }
-
   public static PlayerEvent PromptChoice (Branch branch) {
     // TODO: Implement using branch stuff
-    return PromptChoice(branch.sourceData);
-  }
-
-  public static Choice CreateChoice (JSONNode node) {
-    var dirStr = node["pull"].Value;
-    var key = node["key"].Value;
-    var label = node["label"].Value;
-    var choice = Choice.Swipe(dirStr, key, label);
-    return choice;
+    var ev = PromptChoice(branch.text, branch.firstChoice, branch.secondChoice);
+    ev.data[PlayerEvent.branchKey] = branch;
+    return ev;
   }
 
   //public static PlayerEvent PlayerBasicAttack () {

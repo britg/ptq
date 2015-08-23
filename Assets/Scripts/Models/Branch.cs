@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using SimpleJSON;
 
 public class Branch : JSONResource {
-
   public const string type = "Branch";
-
   public Branch (JSONNode _sourceData) :  base(_sourceData) { }
 
   string _text;
@@ -37,6 +36,24 @@ public class Branch : JSONResource {
       return _secondChoice;
     }
   }
+
+  Dictionary<string, BranchResult> _results;
+  public Dictionary<string, BranchResult> results {
+    get {
+      if (_results == null) {
+        _results = new Dictionary<string, BranchResult>();
+        var resultsArr = sourceData["results"].AsArray;
+        foreach (JSONNode resultNode in resultsArr) {
+          var res = new BranchResult(resultNode);
+          _results[res.key] = res;
+        }
+      }
+
+      return _results;
+    }
+  }
+
+
 
 
 

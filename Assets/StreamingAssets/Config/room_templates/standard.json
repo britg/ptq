@@ -5,9 +5,10 @@
 	"content": [
 	],
 
-  "entrance_choice": {
-    "key": "__ROOM_DOOR_CHOICE__",
+  "entrance_branch": {
+    "key": "room_door_branch",
     "text": "A plain wooden door stands before you...",
+
     "choices": [
       {
         "pull": "right",
@@ -24,6 +25,23 @@
         "results": [
         ]
       }
+    ],
+
+    "results": [
+      {
+        "key": "leave",
+        "events": [
+        ],
+        "exit": "continue"
+      },
+
+      {
+        "key": "open",
+        "events": [
+        ],
+        "exit": "room"
+      }
     ]
+    
   }
 }

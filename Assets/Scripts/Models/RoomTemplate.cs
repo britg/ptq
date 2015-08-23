@@ -6,7 +6,6 @@ using SimpleJSON;
 public class RoomTemplate {
 
   public const string type = "RoomTemplate";
-  public const string entranceChoiceKey = "__ROOM_DOOR_CHOICE__";
 
   public static Dictionary<string, RoomTemplate> all = new Dictionary<string, RoomTemplate>();
 
@@ -35,13 +34,8 @@ public class RoomTemplate {
       contentOverrides[contentType] = chance;
     }
 
-    entranceBranch = new Branch(json["entrance_choice"]);
+    entranceBranch = new Branch(json["entrance_branch"]);
 
-//    branches = new Dictionary<string, JSONNode>();
-//    var branchesArr = json["branches"].AsArray;
-//    foreach (JSONNode branchNode in branchesArr) {
-//      branches[branchNode["key"].Value] = branchNode;
-//    }
   }
 
   public Dictionary<string, float> CascadeContent (Dictionary<string, float> content) {

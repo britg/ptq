@@ -5,16 +5,6 @@ using SimpleJSON;
 
 public class Player {
 
-  // data keys for persistence
-  public const string currentFloorKey = "currentFloor";
-  public const string currentRoomKey = "currentRoom";
-  public const string currentInteractibleKey = "currentInteractible";
-  public const string currentMobKey = "currentMob";
-  public const string currentEventKey = "currentEvent";
-  public const string currentInitiativeKey = "currentInitiative";
-  public const string encounteredMobsKey = "encounteredMobs";
-  public const string lastBattleMoveKey = "lastBattleMove";
-
   public Dictionary<string, Resource> Resources { get; set; }
   public Dictionary<string, Stat> Stats { get; set; }
   public Dictionary<string, Slot> Slots { get; set; }

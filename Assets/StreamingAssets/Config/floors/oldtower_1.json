@@ -6,34 +6,49 @@
   "entrance_events": [
     "The massive tower doors slam behind you with a clang.",
     "You get the feeling you couldn't open them again if you tried...",
-    "__TOWER_DOOR_CHOICE__"
+    "branch:tower_door_branch"
   ],
 
   "branches": [
     {
-      "key": "__TOWER_DOOR_CHOICE__",
+      "key": "tower_door_branch",
       "text": "You consider trying the door for a moment...",
+
       "choices": [
         {
           "pull": "right",
           "key": "attempt",
-          "label": "Try the doors",
-          "results": [
-            "The door won't budge. You think you hear a faint raspy cackling from somewhere in the tower.",
-            "Looks like the only way out is deeper in..."
-          ]
+          "label": "Try the doors"
         },
 
         {
           "pull": "left",
           "key": "venture_forth",
           "label": "Venture forth",
-          "results": [
+        }
+      ],
+
+      "results": [
+        {
+          "key": "attempt",
+          "events": [
+            "The door won't budge. You think you hear a faint raspy cackling from somewhere in the tower.",
+            "Looks like the only way out is deeper in...",
+            "You turn and step slowly through the corridor ahead."
+          ],
+          "exit": "continue"
+        },
+
+        {
+          "key": "venture_forth",
+          "events": [
             "A corridor stretches ahead dimly lit by unnatural flickering light.",
             "You venture forth..."
-          ]
+          ],
+          "exit": "continue"
         }
       ]
+
     }
   ],
 

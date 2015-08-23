@@ -43,6 +43,8 @@ public class InputProcessor {
 
     if (player.currentChoiceKey != null) {
       Debug.Log ("Current choice key " + player.currentChoiceKey);
+      var branchProcessor = new BranchProcessor(sim, player.currentEvent);
+      newEvents.AddRange(branchProcessor.Choose(player.currentChoiceKey));
     }
 
     if (player.currentRoom != null) {
