@@ -97,10 +97,9 @@ public class Floor : JSONResource {
     return floorTemplate.RandomInteractible();
   }
 
-  public Room RandomRoom () {
+  public RoomTemplate RandomRoomTemplate () {
     var roomTemplateKey = Roll.Hash(floorTemplate.roomTemplateChances);
-    var roomGenerator = new RoomGenerator(roomTemplateKey, this);
-    return roomGenerator.CreateRoom();
+    return (RoomTemplate)RoomTemplate.cache[roomTemplateKey];
   }
 
   public Branch GetBranch (string placeholderKey) {

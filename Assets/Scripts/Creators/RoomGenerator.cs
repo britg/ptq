@@ -3,17 +3,21 @@ using System.Collections;
 
 public class RoomGenerator {
 
-  string roomTemplateKey;
+  Simulation sim;
+  RoomTemplate roomTemplate;
   Floor floor;
 
-  public RoomGenerator (string _roomTemplateKey, Floor _floor) {
-    roomTemplateKey = _roomTemplateKey;
-    floor = _floor;
+
+
+  public RoomGenerator (Simulation _sim, RoomTemplate _roomTemplate) {
+    sim = _sim;
+    roomTemplate = _roomTemplate;
+    floor = sim.player.currentFloor;
   }
 
   public Room CreateRoom () {
     var room = new Room();
-    room.roomTemplate = (RoomTemplate)RoomTemplate.cache[roomTemplateKey];
+    room.roomTemplate = roomTemplate;
     room.content = room.roomTemplate.CascadeContent(floor.content);
     return room;
   }

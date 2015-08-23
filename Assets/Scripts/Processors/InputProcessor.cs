@@ -48,7 +48,7 @@ public class InputProcessor {
     }
 
     if (player.currentRoom != null) {
-      var roomProcessor = new RoomProcessor(sim);
+      var roomProcessor = new RoomProcessor(sim, player.currentRoom);
       newEvents.AddRange(roomProcessor.Continue());
     }
 

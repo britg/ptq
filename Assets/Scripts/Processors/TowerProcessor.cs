@@ -42,8 +42,10 @@ public class TowerProcessor {
     }
 
     if (content == Constants.roomContentKey) {
-      var roomProcessor = new RoomProcessor(sim);
-      newEvents.AddRange(roomProcessor.DoorChoice());
+      //var roomProcessor = new RoomProcessor(sim);
+      //newEvents.AddRange(roomProcessor.DoorChoice());
+      var roomTemplate = sim.player.currentFloor.RandomRoomTemplate();
+      newEvents.Add(PlayerEvent.PromptChoice(roomTemplate.entranceBranch));
     }
 
     return newEvents;

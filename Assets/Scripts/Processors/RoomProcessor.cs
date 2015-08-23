@@ -5,26 +5,24 @@ using System.Collections.Generic;
 public class RoomProcessor  {
 
   Simulation sim;
+  RoomTemplate roomTemplate;
+  Room currentRoom;
 
-  public RoomProcessor (Simulation _sim) {
+  public RoomProcessor (Simulation _sim, string roomTemplateKey) {
     sim = _sim;
+    roomTemplate = (RoomTemplate)RoomTemplate.cache[roomTemplateKey];
   }
 
-  public List<PlayerEvent> DoorChoice () {
-
-    // TODO: Roll for what type of room this is
-    string roomKey = "standard"; 
-    var roomTemplate = (RoomTemplate)RoomTemplate.cache[roomKey];
-
-    List<PlayerEvent> newEvents = new List<PlayerEvent>();
-    newEvents.Add (PlayerEvent.PromptChoice(roomTemplate.entranceBranch));
-    return newEvents;
+  public RoomProcessor (Simulation _sim, Room _currentRoom) {
+    sim = _sim;
+    currentRoom = _currentRoom;
   }
 
-  public List<PlayerEvent> Enter () {
+  public List<PlayerEvent> CreateAndEnter () {
+    var roomGenerator = new RoomGenerator(sim, roomTemplate);
+    sim.player.currentRoom = roomGenerator.CreateRoom();
     List<PlayerEvent> newEvents = new List<PlayerEvent>();
-    newEvents.Add (PlayerEvent.Info ("[Open door]"));
-    sim.player.currentRoom = sim.player.currentFloor.RandomRoom();
+    newEvents.Add (PlayerEvent.Info ("[Chosen room template is " + roomTemplate.key));
     return newEvents;
   }
 
