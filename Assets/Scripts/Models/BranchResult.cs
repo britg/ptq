@@ -22,9 +22,21 @@ public class BranchResult : JSONResource {
     }
   }
 
-  public string exit {
+  public string thenTo {
     get {
-      return sourceData["exit"].Value;
+      return sourceData["then_to"].Value;
+    }
+  }
+
+  public bool thenToContinue {
+    get {
+      return thenTo == "continue";
+    }
+  }
+
+  public bool thenToRoom {
+    get {
+      return thenTo.Substring(0, 5) == "room:";
     }
   }
 

@@ -14,41 +14,17 @@ public class RoomProcessor  {
 
     // TODO: Roll for what type of room this is
     string roomKey = "standard"; 
-    var roomTemplate = RoomTemplate.all[roomKey];
+    var roomTemplate = (RoomTemplate)RoomTemplate.cache[roomKey];
 
     List<PlayerEvent> newEvents = new List<PlayerEvent>();
-
     newEvents.Add (PlayerEvent.PromptChoice(roomTemplate.entranceBranch));
-
-//    newEvents.Add (PlayerEvent.Info ("[Door choice atmosphere text]"));
-//
-//    var pullLeft = new Choice();
-//    pullLeft.label = "Enter";
-//    pullLeft.key = Choice.OpenDoor;
-//    pullLeft.direction = Choice.Direction.Left;
-//
-//    var pullRight = new Choice();
-//    pullRight.label = "Leave";
-//    pullRight.key = Choice.LeaveDoor;
-//    pullRight.direction = Choice.Direction.Right;
-//
-//    var msg = "You consider your next course of action...";
-//    newEvents.Add(PlayerEvent.PromptChoice(msg, pullLeft, pullRight));
-
     return newEvents;
   }
 
-  public List<PlayerEvent> OpenDoor () {
+  public List<PlayerEvent> Enter () {
     List<PlayerEvent> newEvents = new List<PlayerEvent>();
     newEvents.Add (PlayerEvent.Info ("[Open door]"));
     sim.player.currentRoom = sim.player.currentFloor.RandomRoom();
-    return newEvents;
-  }
-
-  public List<PlayerEvent> Leave () {
-    List<PlayerEvent> newEvents = new List<PlayerEvent>();
-    newEvents.Add (PlayerEvent.Info ("[Left Room]"));
-
     return newEvents;
   }
 

@@ -13,7 +13,7 @@ public class RoomGenerator {
 
   public Room CreateRoom () {
     var room = new Room();
-    room.roomTemplate = RoomTemplate.all[roomTemplateKey];
+    room.roomTemplate = (RoomTemplate)RoomTemplate.cache[roomTemplateKey];
     room.content = room.roomTemplate.CascadeContent(floor.content);
     return room;
   }

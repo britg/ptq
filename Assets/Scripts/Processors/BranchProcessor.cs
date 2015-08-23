@@ -29,6 +29,15 @@ public class BranchProcessor {
       newEvents.Add(PlayerEvent.Story(evTxt));
     }
 
+    if (res.thenToContinue) {
+      return newEvents;
+    }
+
+    if (res.thenToRoom) {
+      var roomProcessor = new RoomProcessor(sim);
+      newEvents.AddRange(roomProcessor.Enter());
+    }
+
     return newEvents;
   }
 

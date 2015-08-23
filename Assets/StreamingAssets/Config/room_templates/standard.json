@@ -31,17 +31,19 @@
       {
         "key": "leave",
         "events": [
+          "You turn away..."
         ],
-        "exit": "continue"
+        "then_to": "continue"
       },
 
       {
         "key": "open",
         "events": [
+          "The rusty wooden door creaks loudly as you shove it open..."
         ],
-        "exit": "room"
+        "then_to": "room:standard"
       }
     ]
-    
+
   }
 }

@@ -36,7 +36,7 @@
             "Looks like the only way out is deeper in...",
             "You turn and step slowly through the corridor ahead."
           ],
-          "exit": "continue"
+          "then_to": "continue"
         },
 
         {
@@ -45,7 +45,7 @@
             "A corridor stretches ahead dimly lit by unnatural flickering light.",
             "You venture forth..."
           ],
-          "exit": "continue"
+          "then_to": "continue"
         }
       ]
 
