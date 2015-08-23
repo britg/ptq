@@ -98,7 +98,6 @@ public class FeedView : BaseBehaviour {
 
   void CullOldEvents () {
     var toCull = transform.childCount - numEvents;
-    Debug.Log ("Events to cull " + toCull);
     if (toCull < 1) {
       return;
     }

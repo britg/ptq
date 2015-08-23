@@ -210,7 +210,6 @@ public class EventView : BaseBehaviour {
       i++;
     }
 
-    Debug.Log ("Current position is " + i);
     return i == 1;
 
   }
