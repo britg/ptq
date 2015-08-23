@@ -12,7 +12,7 @@ public class JSONResource {
   public static void Cache<T>(JSONNode _sourceData) where T : JSONResource {
     T resource = (T)Activator.CreateInstance(typeof(T), new object[] { _sourceData });
     cache[resource.key] = resource; 
-    //Debug.Log("cached an instance of " + resource + " " + resource.key);
+    Debug.Log("cached an instance of " + resource + " " + resource.key);
   }
 
 

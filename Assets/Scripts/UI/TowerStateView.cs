@@ -30,6 +30,6 @@ public class TowerStateView : BaseBehaviour {
   }
 
   void Display () {
-    text.text = string.Format("{0}", sim.player.currentFloor.num);
+    text.text = string.Format("{0}", sim.player.currentFloor.key);
   }
 }

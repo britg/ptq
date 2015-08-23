@@ -121,7 +121,7 @@ public class ResourceLoader {
         FloorTemplate.Cache(config);
         break;
       case Floor.type:
-        Floor.Cache(config);
+        JSONResource.Cache<Floor>(config);
         break;
       case RoomTemplate.type:
         RoomTemplate.Cache(config);

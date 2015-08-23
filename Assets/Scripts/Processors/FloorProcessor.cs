@@ -15,7 +15,7 @@ public class FloorProcessor {
 
   public List<PlayerEvent> EnterFloor (int floorNum) {
 
-    sim.player.currentFloor = Floor.all[floorNum];
+    sim.player.currentFloor = Floor.GetFloor(floorNum);
 
     newEvents = new List<PlayerEvent>();
 

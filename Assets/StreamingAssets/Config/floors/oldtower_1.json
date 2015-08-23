@@ -1,6 +1,6 @@
 {
   "type": "Floor",
-  "number": 1,
+  "key": 1,
   "template": "old_tower",
 
   "entrance_events": [
