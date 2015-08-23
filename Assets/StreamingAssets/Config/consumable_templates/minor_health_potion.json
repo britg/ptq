@@ -1,6 +1,7 @@
 {
-	"type": "ConsumableType",
+	"type": "ConsumableTemplate",
 	"key": "minor_health_potion",
+  
 	"name": "Minor Health Potion",
 	"used_name": "Empty Flask",
   "stat_effects": [

@@ -143,8 +143,8 @@ public class BattleProcessor {
       //if (true) {
       var floor = sim.player.currentFloor;
       var consumableKey = Roll.Hash(floor.consumableChances);
-      var consumableType = ConsumableTemplate.all[consumableKey];
-      var consumable = consumableType.Consumable();
+      var consumableGenerator = new ConsumableGenerator(sim);
+      var consumable = consumableGenerator.Generate(consumableKey);
       var ev = PlayerEvent.Consumable(consumable);
 
       newEvents.Add(ev);

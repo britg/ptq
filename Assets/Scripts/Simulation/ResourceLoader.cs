@@ -7,14 +7,30 @@ using SimpleJSON;
 
 public class ResourceLoader {
 
-  public const string type = "Simulation";
-
   Simulation sim;
   public Dictionary<string, List<JSONNode>> jsonCache = new Dictionary<string, List<JSONNode>>();
 
+  List<string> parseOrder = new List<string>() {
+    // Tier 1
+    Rarity.type,
+    ResourceType.type,
+    QuestType.type,
+    StatType.type,
+    SlotType.type,
+    Name.type,
 
-  // Model config
-//  const string CONFIG_PATH = "Assets/Scripts/Simulation/Config";
+    // Tier 2
+    EquipmentDesignation.type,
+    EquipmentType.type,
+    ConsumableTemplate.type,
+    FloorTemplate.type,
+    Floor.type,
+    RoomTemplate.type,
+    MobTemplate.type,
+    Simulation.type
+  };
+
+
   string CONFIG_PATH = Application.streamingAssetsPath + "/Config";
   const string EXT = ".json";
 
@@ -25,9 +41,9 @@ public class ResourceLoader {
   public void LoadSelf (JSONNode json) {
   }
 
-  public void LoadModels () {
+  public void LoadResources () {
     LoadDirectory(CONFIG_PATH);
-    ParseLoadedConfigs();
+    ParseLoadedResources();
   }
 
   public void LoadDirectory (string dir) {
@@ -62,26 +78,8 @@ public class ResourceLoader {
     jsonCache[type].Add(parsed);
   }
 
-  List<string> parseOrder = new List<string>() {
-    // Tier 1
-    Rarity.type,
-    ResourceType.type,
-    QuestType.type,
-    StatType.type,
-    SlotType.type,
-    Name.type,
 
-    // Tier 2
-    EquipmentDesignation.type,
-    EquipmentType.type,
-    ConsumableTemplate.type,
-    FloorTemplate.type,
-    Floor.type,
-    RoomTemplate.type,
-    MobTemplate.type,
-    ResourceLoader.type
-  };
-  void ParseLoadedConfigs () {
+  void ParseLoadedResources () {
     foreach (string type in parseOrder) {
       ParseLoadedType(type);
     }
@@ -117,7 +115,7 @@ public class ResourceLoader {
         EquipmentType.Cache(config);
         break;
       case ConsumableTemplate.type:
-        ConsumableTemplate.Cache(config);
+        JSONResource.Cache<ConsumableTemplate>(config);
         break;
       case FloorTemplate.type:
         FloorTemplate.Cache(config);
@@ -131,7 +129,7 @@ public class ResourceLoader {
       case MobTemplate.type:
         MobTemplate.Cache(config);
         break;
-      case ResourceLoader.type:
+      case Simulation.type:
         LoadSelf(config);
       break;
       case Name.type:

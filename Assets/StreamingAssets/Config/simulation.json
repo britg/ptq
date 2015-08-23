@@ -1,20 +1,3 @@
 {
-  "type": "Simulation",
-
-  // Pull to Quest
-
-  // Old config for Tavernlight
-  "updateIntervalSeconds": 1,
-  "startSeconds": 28800,
-  "dayStartHour": 7,
-  "nightStartHour": 22,
-  "initialSpeed": 60,
-
-  "startBuildings": ["tavern"],
-
-  "adventurerDefaultLevel": 1,
-  "adventurerDefaultExp": 0,
-  "adventurerDefaultSpeed": 100.0,
-
-  "defaultExplorationRadius": 50
+  "type": "Simulation"
 }

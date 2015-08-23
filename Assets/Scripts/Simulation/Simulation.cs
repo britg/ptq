@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Simulation {
+  public const string type = "Simulation";
 
   public ResourceLoader resourceLoader;
   public Player player;
@@ -14,7 +15,7 @@ public class Simulation {
 
   void LoadResources () {
     resourceLoader = new ResourceLoader(this);
-    resourceLoader.LoadModels();
+    resourceLoader.LoadResources();
   }
 
   void SetupPlayer () {
