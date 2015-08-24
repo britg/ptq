@@ -7,6 +7,21 @@ public class Branch : JSONResource {
   public const string type = "Branch";
   public Branch (JSONNode _sourceData) :  base(_sourceData) { }
 
+
+  List<string> _introEvents;
+  public List<string> introEvents {
+	get {
+	  if (_introEvents == null) {
+      var introArr = sourceData["intro_events"].AsArray;
+      _introEvents = new List<string>();
+      foreach (JSONNode ev in introArr) {
+        _introEvents.Add(ev.Value);
+      }
+    }
+
+    return _introEvents;
+  }
+
   string _text;
   public string text {
     get {

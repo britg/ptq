@@ -3,6 +3,7 @@
 	"key": "rat",
 	"name": "Rat of Unusual Size",
   "level": 1,
+
   "consumable_chance": 50,
   "loot_chance": 20,
   "gold_chance": 20,

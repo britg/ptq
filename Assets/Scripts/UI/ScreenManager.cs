@@ -7,6 +7,7 @@ public class ScreenManager : MonoBehaviour {
   public GameObject equipmentView;
   public GameObject inventoryView;
   public GameObject questView;
+  public GameObject mapView;
 
   public GameObject feedMenuView;
   public GameObject characterMenuView;
@@ -19,14 +20,14 @@ public class ScreenManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-    //    SwitchToCharacterView();
-    //SwitchToFeedView();
-    OnNewGame();
+	//    SwitchToCharacterView();
+	//SwitchToFeedView();
+	OnNewGame();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
   public void OnNewGame () {
@@ -54,6 +55,8 @@ public class ScreenManager : MonoBehaviour {
   public void OnQuestButtonTapped () {
     SwitchToQuestView();
   }
+
+
 
   void ActivateCharacterMenu () {
     feedMenuView.SetActive(false);

@@ -32,7 +32,7 @@ public class Player {
 
   public string currentChoiceKey {
     get {
-      if (currentEvent == null) {
+      if (currentEvent == null || currentEvent.type != PlayerEvent.Type.Choice) {
         return null;
       } else {
         return currentEvent.chosenKey;

@@ -13,17 +13,13 @@
       {
         "pull": "right",
         "key": "leave",
-        "label": "Leave",
-        "results": [
-        ]
+        "label": "Leave"
       },
 
       {
         "pull": "left",
         "key": "open",
-        "label": "Open",
-        "results": [
-        ]
+        "label": "Open"
       }
     ],
 

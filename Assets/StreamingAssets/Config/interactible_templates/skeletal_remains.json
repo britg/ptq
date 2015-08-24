@@ -1,0 +1,38 @@
+{
+	"type": "Interactible",
+	"key": "skeletal_remains",
+	"name": "Skeletal Remains",
+
+  "mob_chance": 20,
+  "loot_chance": 20,
+  "gold_chance": 20,
+
+  "interaction_branch": {
+    "key": "interactible_branch",
+    "text": "A pile of bones lies in shambles ahead. A small pack fell nearby...",
+
+    "choices": [
+      {
+        "pull": "right",
+        "key": "inspect",
+        "label": "Investigate"
+      },
+
+      {
+        "pull": "left",
+        "key": "ignore",
+        "label": "Ignore"
+      }
+    ],
+
+    "results": [
+      {
+        "key": "inspect",
+        "events": [
+
+        ],
+        "then_to": ""
+      }
+    ]
+  }
+}
