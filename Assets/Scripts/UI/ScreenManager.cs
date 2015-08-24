@@ -76,7 +76,7 @@ public class ScreenManager : MonoBehaviour {
   }
 
   void SwitchToFeedView () {
-    ActivateFeedMenu();
+    ActivateCharacterMenu();
     statusView.SetActive(true);
 
     feedView.SetActive(true);
