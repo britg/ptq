@@ -10,16 +10,17 @@ public class Branch : JSONResource {
 
   List<string> _introEvents;
   public List<string> introEvents {
-	get {
-	  if (_introEvents == null) {
-      var introArr = sourceData["intro_events"].AsArray;
-      _introEvents = new List<string>();
-      foreach (JSONNode ev in introArr) {
-        _introEvents.Add(ev.Value);
+    get {
+      if (_introEvents == null) {
+        var introArr = sourceData["intro_events"].AsArray;
+        _introEvents = new List<string>();
+        foreach (JSONNode ev in introArr) {
+          _introEvents.Add(ev.Value);
+        }
       }
-    }
 
-    return _introEvents;
+      return _introEvents;
+    }
   }
 
   string _text;

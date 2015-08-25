@@ -37,7 +37,7 @@ public class ScreenManager : MonoBehaviour {
   }
 
   public void OnFirstPull () {
-    SwitchToFeedView();
+    //SwitchToFeedView();
   }
 
   public void OnCharacterButtonTapped () {
