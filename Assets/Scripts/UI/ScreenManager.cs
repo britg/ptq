@@ -9,6 +9,8 @@ public class ScreenManager : MonoBehaviour {
   public GameObject questView;
   public GameObject mapView;
 
+  public MapTransition mapTransition;
+
   public GameObject feedMenuView;
   public GameObject characterMenuView;
 
@@ -34,10 +36,11 @@ public class ScreenManager : MonoBehaviour {
     feedMenuView.SetActive(false);
     characterMenuView.SetActive(false);
     statusView.SetActive(false);
+    mapView.SetActive(false);
   }
 
   public void OnFirstPull () {
-    //SwitchToFeedView();
+    SwitchToFeedView();
   }
 
   public void OnCharacterButtonTapped () {
@@ -76,14 +79,18 @@ public class ScreenManager : MonoBehaviour {
     feedView.SetActive(false);
     inventoryView.SetActive(false);
     questView.SetActive(false);
+    mapView.SetActive(false);
   }
 
   void SwitchToFeedView () {
-    ActivateCharacterMenu();
-    statusView.SetActive(true);
-
+//    ActivateCharacterMenu();
+//    statusView.SetActive(true);
+    mapView.SetActive(true);
+    mapTransition.CloseMap();
     feedView.SetActive(true);
+    characterMenuView.SetActive(false);
 
+    statusView.SetActive(false);
     equipmentView.SetActive(false);
     inventoryView.SetActive(false);
     questView.SetActive(false);
@@ -98,6 +105,7 @@ public class ScreenManager : MonoBehaviour {
     feedView.SetActive(false);
     equipmentView.SetActive(false);
     inventoryView.SetActive(false);
+    mapView.SetActive(false);
   }
 
   void SwitchToInventoryView () {
@@ -109,6 +117,18 @@ public class ScreenManager : MonoBehaviour {
     feedView.SetActive(false);
     equipmentView.SetActive(false);
     questView.SetActive(false);
+    mapView.SetActive(false);
+  }
+
+  public void SwitchToMapView () {
+    mapView.SetActive(true);
+    statusView.SetActive(true);
+    characterMenuView.SetActive(true);
+
+    feedView.SetActive(false);
+    equipmentView.SetActive(false);
+    questView.SetActive(false);
+    inventoryView.SetActive(false);
   }
 
 
