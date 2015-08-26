@@ -7,10 +7,17 @@ public class Simulation {
 
   public ResourceLoader resourceLoader;
   public Player player;
+  public DunGen.TileType[,] tiles;
 
   public void Setup() {
+    LoadMap();
     LoadResources();
     SetupPlayer();
+  }
+
+  void LoadMap () {
+    var dunGen = new DunGen();
+    tiles = dunGen.CreateDungeon();
   }
 
   void LoadResources () {
