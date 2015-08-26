@@ -8,8 +8,7 @@ public class ScreenManager : MonoBehaviour {
   public GameObject inventoryView;
   public GameObject questView;
   public GameObject mapView;
-
-  public MapTransition mapTransition;
+  public GameObject miniMapView;
 
   public GameObject feedMenuView;
   public GameObject characterMenuView;
@@ -86,7 +85,6 @@ public class ScreenManager : MonoBehaviour {
 //    ActivateCharacterMenu();
 //    statusView.SetActive(true);
     mapView.SetActive(true);
-    mapTransition.CloseMap();
     feedView.SetActive(true);
     characterMenuView.SetActive(false);
 

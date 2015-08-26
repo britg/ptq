@@ -109,6 +109,7 @@ public class DunGen {
   };
 
   TileType[,] cells;
+  Hashtable rooms;
   Hashtable opts;
   int n_i;
   int n_j;
@@ -145,6 +146,7 @@ public class DunGen {
     room_base = (int)((room_min + 1) / 2);
     room_radix = (int)((room_max - room_min) / 2) + 1;
 
+    rooms = new Hashtable();
     cells = new TileType[n_rows+1, n_cols+1];
     cells = InitCells(cells);
     cells = PackRooms(cells);
@@ -227,6 +229,11 @@ public class DunGen {
         _cells[r, c] = TileType.Room;
       }
     }
+
+    rooms[room_id] = new Hashtable () {
+      {"id", room_id}, {"row", r1}, {"col", c1},
+      {"north", r1}, {"south", r2}, {"west", c1}, {"east", c2}
+    };
 
     // Perimeters
     for (var r = r1-1; r <= r2+1; r++) {
@@ -314,7 +321,19 @@ public class DunGen {
     return false;
   }
 
-  int[,] OpenRooms (int[,] _cells) {
+  TileType[,] OpenRooms (TileType[,] _cells, Hashtable _rooms) {
+
+    foreach (DictionaryEntry entry in _rooms) {
+      var room_id = (int)entry.Key;
+      var room = (Hashtable)entry.Value;
+
+      _cells = OpenRoom(_cells, room);
+    }
+
+    return _cells;
+  }
+
+  TileType[,] OpenRoom (TileType[,] _cells, Hashtable room) {
 
     return _cells;
   }
