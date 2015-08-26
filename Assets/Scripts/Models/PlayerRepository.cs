@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
-public class PlayerCreator {
+public class PlayerRepository {
 
   public const string PlayerStatType = "PlayerStat";
   public const string PlayerSlotType = "PlayerSlot";
@@ -12,7 +12,7 @@ public class PlayerCreator {
   Simulation sim;
   Player player;
 
-  public PlayerCreator (Simulation _sim) {
+  public PlayerRepository (Simulation _sim) {
     sim = _sim;
   }
 

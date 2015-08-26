@@ -19,7 +19,7 @@ public class Simulation {
   }
 
   void SetupPlayer () {
-    var playerCreator = new PlayerCreator(this);
+    var playerCreator = new PlayerRepository(this);
     playerCreator.Create();
   }
 

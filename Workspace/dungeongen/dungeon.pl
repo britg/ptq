@@ -171,9 +171,9 @@ sub get_opts {
     'dungeon_layout'    => 'None',
     'room_min'          => 3,           # minimum room size
     'room_max'          => 9,           # maximum room size
-    'room_layout'       => 'Scattered', # Packed, Scattered
+    'room_layout'       => 'Packed', # Packed, Scattered
     'corridor_layout'   => 'Bent',
-    'remove_deadends'   => 50,          # percentage
+    'remove_deadends'   => 100,          # percentage
     'add_stairs'        => 2,           # number of stairs
     'map_style'         => 'Standard',
     'cell_size'         => 18,          # pixels
@@ -235,51 +235,51 @@ sub init_cells {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # mask cells
 
-sub mask_cells {
-  my ($dungeon,$mask) = @_;
-  my $r_x = (scalar @{ $mask } * 1.0 / ($dungeon->{'n_rows'} + 1));
-  my $c_x = (scalar @{ $mask->[0] } * 1.0 / ($dungeon->{'n_cols'} + 1));
-  my $cell = $dungeon->{'cell'};
+# sub mask_cells {
+#   my ($dungeon,$mask) = @_;
+#   my $r_x = (scalar @{ $mask } * 1.0 / ($dungeon->{'n_rows'} + 1));
+#   my $c_x = (scalar @{ $mask->[0] } * 1.0 / ($dungeon->{'n_cols'} + 1));
+#   my $cell = $dungeon->{'cell'};
 
-  my $r; for ($r = 0; $r <= $dungeon->{'n_rows'}; $r++) {
-    my $c; for ($c = 0; $c <= $dungeon->{'n_cols'}; $c++) {
-      $cell->[$r][$c] = $BLOCKED unless ($mask->[$r * $r_x][$c * $c_x]);
-    }
-  }
-  return $dungeon;
-}
+#   my $r; for ($r = 0; $r <= $dungeon->{'n_rows'}; $r++) {
+#     my $c; for ($c = 0; $c <= $dungeon->{'n_cols'}; $c++) {
+#       $cell->[$r][$c] = $BLOCKED unless ($mask->[$r * $r_x][$c * $c_x]);
+#     }
+#   }
+#   return $dungeon;
+# }
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # round mask
 
-sub round_mask {
-  my ($dungeon) = @_;
-  my $center_r = int($dungeon->{'n_rows'} / 2);
-  my $center_c = int($dungeon->{'n_cols'} / 2);
-  my $cell = $dungeon->{'cell'};
+# sub round_mask {
+#   my ($dungeon) = @_;
+#   my $center_r = int($dungeon->{'n_rows'} / 2);
+#   my $center_c = int($dungeon->{'n_cols'} / 2);
+#   my $cell = $dungeon->{'cell'};
 
-  my $r; for ($r = 0; $r <= $dungeon->{'n_rows'}; $r++) {
-    my $c; for ($c = 0; $c <= $dungeon->{'n_cols'}; $c++) {
-      my $d = sqrt((($r - $center_r) ** 2) + (($c - $center_c) ** 2));
-      $cell->[$r][$c] = $BLOCKED if ($d > $center_c);
-    }
-  }
-  return $dungeon;
-}
+#   my $r; for ($r = 0; $r <= $dungeon->{'n_rows'}; $r++) {
+#     my $c; for ($c = 0; $c <= $dungeon->{'n_cols'}; $c++) {
+#       my $d = sqrt((($r - $center_r) ** 2) + (($c - $center_c) ** 2));
+#       $cell->[$r][$c] = $BLOCKED if ($d > $center_c);
+#     }
+#   }
+#   return $dungeon;
+# }
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # emplace rooms
 
-sub emplace_rooms {
-  my ($dungeon) = @_;
+# sub emplace_rooms {
+#   my ($dungeon) = @_;
 
-  if ($dungeon->{'room_layout'} eq 'Packed') {
-    $dungeon = &pack_rooms($dungeon);
-  } else {
-    $dungeon = &scatter_rooms($dungeon);
-  }
-  return $dungeon;
-}
+#   if ($dungeon->{'room_layout'} eq 'Packed') {
+#     $dungeon = &pack_rooms($dungeon);
+#   } else {
+#     $dungeon = &scatter_rooms($dungeon);
+#   }
+#   return $dungeon;
+# }
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # pack rooms
@@ -306,27 +306,27 @@ sub pack_rooms {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # scatter rooms
 
-sub scatter_rooms {
-  my ($dungeon) = @_;
-  my $n_rooms = &alloc_rooms($dungeon);
+# sub scatter_rooms {
+#   my ($dungeon) = @_;
+#   my $n_rooms = &alloc_rooms($dungeon);
 
-  my $i; for ($i = 0; $i < $n_rooms; $i++) {
-    $dungeon = &emplace_room($dungeon);
-  }
-  return $dungeon;
-}
+#   my $i; for ($i = 0; $i < $n_rooms; $i++) {
+#     $dungeon = &emplace_room($dungeon);
+#   }
+#   return $dungeon;
+# }
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# allocate number of rooms
+# # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# # allocate number of rooms
 
-sub alloc_rooms {
-  my ($dungeon) = @_;
-  my $dungeon_area = $dungeon->{'n_cols'} * $dungeon->{'n_rows'};
-  my $room_area = $dungeon->{'room_max'} * $dungeon->{'room_max'};
-  my $n_rooms = int($dungeon_area / $room_area);
+# sub alloc_rooms {
+#   my ($dungeon) = @_;
+#   my $dungeon_area = $dungeon->{'n_cols'} * $dungeon->{'n_rows'};
+#   my $room_area = $dungeon->{'room_max'} * $dungeon->{'room_max'};
+#   my $n_rooms = int($dungeon_area / $room_area);
 
-  return $n_rooms;
-}
+#   return $n_rooms;
+# }
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # emplace room
@@ -1023,7 +1023,7 @@ sub image_dungeon {
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # new image
 
-  my $ih = new GD::Image($image->{'width'},$image->{'height'},1);
+  my $ih = new GD::Image($image->{'width'},$image->{'height'});
   my $pal = &get_palette($image,$ih);
      $image->{'palette'} = $pal;
   my $base = &base_layer($dungeon,$image,$ih);
@@ -1042,11 +1042,18 @@ sub image_dungeon {
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # write image
 
-  open(OUTPUT,">$dungeon->{'seed'}.gif") and do {
-    print OUTPUT $ih->gif();
-    close(OUTPUT);
-  };
-  return "$dungeon->{'seed'}.gif";
+  # binmode STDOUT;
+  # print $ih->png;
+
+  open my $out, '>', "$dungeon->{'seed'}.png" or die;
+  binmode $out;
+  print $out $ih->png;
+
+  # open(OUTPUT,">$dungeon->{'seed'}.png") and do {
+  #   print OUTPUT $ih->png;
+  #   close(OUTPUT);
+  # };
+  # return "$dungeon->{'seed'}.png";
 }
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
