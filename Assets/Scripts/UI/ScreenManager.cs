@@ -23,7 +23,7 @@ public class ScreenManager : MonoBehaviour {
 	void Start () {
 	//    SwitchToCharacterView();
 	//SwitchToFeedView();
-	OnNewGame();
+	  OnNewGame();
 	}
 
 	// Update is called once per frame
@@ -36,6 +36,7 @@ public class ScreenManager : MonoBehaviour {
     characterMenuView.SetActive(false);
     statusView.SetActive(false);
     mapView.SetActive(false);
+    miniMapView.SetActive(false);
   }
 
   public void OnFirstPull () {
@@ -58,8 +59,6 @@ public class ScreenManager : MonoBehaviour {
     SwitchToQuestView();
   }
 
-
-
   void ActivateCharacterMenu () {
     feedMenuView.SetActive(false);
     characterMenuView.SetActive(true);
@@ -79,15 +78,17 @@ public class ScreenManager : MonoBehaviour {
     inventoryView.SetActive(false);
     questView.SetActive(false);
     mapView.SetActive(false);
+    miniMapView.SetActive(false);
   }
 
   void SwitchToFeedView () {
 //    ActivateCharacterMenu();
 //    statusView.SetActive(true);
-    mapView.SetActive(true);
     feedView.SetActive(true);
     characterMenuView.SetActive(false);
 
+    mapView.SetActive(false);
+    miniMapView.SetActive(true);
     statusView.SetActive(false);
     equipmentView.SetActive(false);
     inventoryView.SetActive(false);
@@ -104,6 +105,7 @@ public class ScreenManager : MonoBehaviour {
     equipmentView.SetActive(false);
     inventoryView.SetActive(false);
     mapView.SetActive(false);
+    miniMapView.SetActive(false);
   }
 
   void SwitchToInventoryView () {
@@ -116,6 +118,7 @@ public class ScreenManager : MonoBehaviour {
     equipmentView.SetActive(false);
     questView.SetActive(false);
     mapView.SetActive(false);
+    miniMapView.SetActive(false);
   }
 
   public void SwitchToMapView () {
@@ -127,6 +130,7 @@ public class ScreenManager : MonoBehaviour {
     equipmentView.SetActive(false);
     questView.SetActive(false);
     inventoryView.SetActive(false);
+    miniMapView.SetActive(false);
   }
 
 

@@ -19,66 +19,6 @@ public class DunGen {
   int[,] dungeonLayout = new int[,] { { 1, 1, 1, }, { 1, 0, 1 }, { 1, 1, 1 } };
   int corridorLayout = 50;
 
-  int NOTHING = 0x00000000;
-  int BLOCKED = 0x00000001;
-  int ROOM = 0x00000002;
-  int CORRIDOR = 0x00000004;
-
-  int PERIMETER   = 0x00000010;
-  int ENTRANCE = 0x00000020;
-  int ROOM_ID = 0x0000FFC0;
-
-  int ARCH = 0x00010000;
-  int DOOR = 0x00020000;
-  int LOCKED = 0x00040000;
-  int TRAPPED = 0x00080000;
-  int SECRET = 0x00100000;
-  int PORTC = 0x00200000;
-  int STAIR_DN = 0x00400000;
-  int STAIR_UP = 0x00800000;
-
-  int OPENSPACE {
-    get {
-      return ROOM | CORRIDOR;
-    }
-  }
-
-  int DOORSPACE {
-    get {
-      return ARCH | DOOR | LOCKED | TRAPPED | SECRET | PORTC;
-    }
-  }
-
-  long ESPACE {
-    get {
-      return ENTRANCE | DOORSPACE | 0xFF000000;
-    }
-  }
-
-  int STAIRS {
-    get {
-      return STAIR_DN | STAIR_UP;
-    }
-  }
-
-  int BLOCK_ROOM {
-    get {
-      return BLOCKED | ROOM;
-    }
-  }
-
-  int BLOCK_CORR {
-    get {
-      return BLOCKED | PERIMETER | CORRIDOR;
-    }
-  }
-
-  int BLOCK_DOOR {
-    get {
-      return BLOCKED | DOORSPACE;
-    }
-  }
-
   Dictionary<string, int> di = new Dictionary<string, int>() {
     { "north", -1 }, { "south", 1 }, {"west", 0 }, {"east", 0 }
   };
@@ -335,7 +275,22 @@ public class DunGen {
 
   TileType[,] OpenRoom (TileType[,] _cells, Hashtable room) {
 
+
+    int n_opens = AllocateOpens(_cells, room);
+
     return _cells;
+  }
+
+  List<Hashtable> DoorSills (TileType[,] _cells, Hashtable room) {
+
+    var list = new List<Hashtable>();
+
+    return list;
+  }
+
+  int AllocateOpens (TileType[,] _cells, Hashtable rooms) {
+
+    return 0;
   }
 
   int[,] LabelRooms (int[,] _cells) {

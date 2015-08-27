@@ -1189,7 +1189,7 @@ MonoBehaviour:
   inventoryView: {fileID: 2028877081}
   questView: {fileID: 1124438710}
   mapView: {fileID: 0}
-  mapTransition: {fileID: 0}
+  miniMapView: {fileID: 0}
   feedMenuView: {fileID: 1649402852}
   characterMenuView: {fileID: 302459532}
   statusView: {fileID: 2107577351}
