@@ -4226,7 +4226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1056553287
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5076,8 +5076,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -.000104904175}
-  m_SizeDelta: {x: 0, y: -.000244139999}
+  m_AnchoredPosition: {x: 0, y: -30.1000061}
+  m_SizeDelta: {x: 0, y: -59.7999878}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1268048647
 MonoBehaviour:
@@ -5093,7 +5093,7 @@ MonoBehaviour:
   eventList: {fileID: 1020786797}
   pullTriggerView: {fileID: 682796088}
   pullTriggerText: {fileID: 0}
-  pullTriggerMargin: .100000001
+  pullTriggerMargin: .200000003
 --- !u!114 &1268048648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6675,6 +6675,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11467936, guid: 69adf1fe943e5694b97d8f2d1d7f06c2, type: 2}
+      propertyPath: m_MinHeight
+      value: 478
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69adf1fe943e5694b97d8f2d1d7f06c2, type: 2}
   m_IsPrefabParent: 0
@@ -7456,7 +7460,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 468}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: .5, y: 0}
 --- !u!114 &1957263613

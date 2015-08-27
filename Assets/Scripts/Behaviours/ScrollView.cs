@@ -19,7 +19,7 @@ public class ScrollView : BaseBehaviour, IEndDragHandler {
   ScrollRect scrollRect;
   Rect screenRect;
 
-  public float pullTriggerMargin = 0.1f;
+  public float pullTriggerMargin = 0.17f;
   State state = State.Reset;
 
 	// Use this for initialization
