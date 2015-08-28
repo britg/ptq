@@ -62,4 +62,5 @@ public class Roll {
   public static float Range (RangeAttribute range) {
     return Random.Range(range.min, range.max);
   }
+
 }
