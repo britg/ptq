@@ -31,10 +31,33 @@ public class DunGen {
 
   Dictionary<string, string> opposite = new Dictionary<string, string>() {
     {"north", "south" },
-    
+    {"south", "north" },
     {"west", "east" },
     {"east", "west" }
   };
+
+  Dictionary<string, Dictionary<string, int[,]>> close_end = new Dictionary<string, Dictionary<string, int[,]>>() {
+    { "north", new Dictionary<string, int[,]>() {
+        { "walled", new int[,]{{0,-1},{1,-1},{1,0},{1,1},{0,1}} },
+        { "close", new int[,]{{0,0}} },
+        { "recurse", new int[,]{{-1, 0}} }
+      } },
+    { "south", new Dictionary<string, int[,]>() {
+        { "walled", new int[,]{{0,-1},{-1,-1},{-1,0},{-1,1},{0,1}} },
+        { "close", new int[,]{{0,0}} },
+        { "recurse", new int[,]{{1, 0}} }
+      }},
+    { "west", new Dictionary<string, int[,]>() {
+        { "walled", new int[,]{{-1,0},{-1,1},{0,1},{1,1},{1,0}} },
+        { "close", new int[,]{{0,0}} },
+        { "recurse", new int[,]{{0, -1}} }
+      }},
+    { "east", new Dictionary<string, int[,]>() {
+        { "walled", new int[,]{{-1,0},{-1,-1},{0,-1},{1,-1},{1,0}} },
+        { "close", new int[,]{{0,0}} },
+        { "recurse", new int[,]{{0, 1}} }
+      }}
+    };
 
   Hashtable defaultOpts = new Hashtable() {
     {"n_rows", 39 },
@@ -65,6 +88,8 @@ public class DunGen {
   int room_base;
   int room_radix;
   int last_room_id = 0;
+  int[,] roomIdForTile;
+  Dictionary<string, int> roomConnections = new Dictionary<string, int>();
 
   Hashtable proto;
 
@@ -90,10 +115,12 @@ public class DunGen {
 
     rooms = new Hashtable();
     cells = new TileType[n_rows+1, n_cols+1];
+    roomIdForTile = new int[n_rows+1, n_cols+1];
     cells = InitCells(cells);
     cells = PackRooms(cells);
     cells = OpenRooms(cells, rooms);
     cells = CreateCorridors(cells);
+    cells = CleanDungeon(cells);
 
     Debug.Log (cells);
 
@@ -169,15 +196,25 @@ public class DunGen {
 //          _cells[r, c] &= ~ ESPACE;
         } else if (_cells[r, c] == TileType.Perimeter) {
 
+        } else {
+          _cells[r, c] = TileType.Room;
+          roomIdForTile[r,c] = room_id;
         }
-        _cells[r, c] = TileType.Room;
       }
     }
 
-    rooms[room_id] = new Hashtable () {
+    var room = new Hashtable () {
       {"id", room_id}, {"row", r1}, {"col", c1},
-      {"north", r1}, {"south", r2}, {"west", c1}, {"east", c2}
+      {"north", r1}, {"south", r2}, {"west", c1}, {"east", c2},
+      {"doors", new Dictionary<string, List<Hashtable>>() {
+          {"north", new List<Hashtable>()},
+          {"south", new List<Hashtable>()},
+          {"west", new List<Hashtable>()},
+          {"east", new List<Hashtable>()}
+        } }
     };
+
+    rooms[room_id] = room;
 
     // Perimeters
     for (var r = r1-1; r <= r2+1; r++) {
@@ -277,18 +314,47 @@ public class DunGen {
     return _cells;
   }
 
+
   TileType[,] OpenRoom (TileType[,] _cells, Hashtable room) {
 
     var sills = DoorSills(_cells, room);
-//    int n_opens = AllocateOpens(_cells, room);
-    int n_opens = Random.Range (1, 3);
+    int n_opens = AllocateOpens(_cells, room);
+//    int n_opens = Random.Range (1, 3);
 
     for (var i = 0; i < n_opens; i++) {
       var rand = Random.Range (0, sills.Count-1);
       var sill = sills[rand];
       var door_r = (int)sill["door_r"];
       var door_c = (int)sill["door_c"];
+      var door_cell = _cells[door_r, door_c];
+
+      var out_id = (int)sill["out_id"];
+      if (out_id > 0) {
+        var key = string.Format("{0},{1}", (int)room["id"], out_id);
+        if (roomConnections.ContainsKey(key)) {
+          roomConnections[key] += 1;
+        } else {
+          roomConnections[key] = 1;
+        }
+      }
+
+      var open_r = (int)sill["sill_r"];
+      var open_c = (int)sill["sill_c"];
+      string open_dir = (string)sill["dir"];
+
+      for (var x = 0; x < 3; x++) {
+        var r = open_r + (di[open_dir] * x);
+        var c = open_c + (dj[open_dir] * x);
+        _cells[r,c] = TileType.Entrance;
+      }
+
       _cells[door_r, door_c] = TileType.Door;
+      var door = new Hashtable();
+      if (out_id > 0) {
+        door["out_id"] = out_id;
+      }
+
+      ((Dictionary<string, List<Hashtable>>)room["doors"])[open_dir].Add(door);
     }
 
     return _cells;
@@ -354,9 +420,14 @@ public class DunGen {
       return null;
     }
 
+    var out_id = 0;
     if (out_cell == TileType.Room) {
       // get the room id of the cell and 
       // return null if out is into the same room
+      out_id = roomIdForTile[out_r,out_c];
+      if (out_id == (int)room["id"]) {
+        return null;
+      }
     }
 
     var sill = new Hashtable() {
@@ -365,7 +436,7 @@ public class DunGen {
       {"dir", dir},
       {"door_r", door_r},
       {"door_c", door_c},
-      {"out_id", 0} // temp
+      {"out_id", out_id} // temp
     };
 
     return sill;
@@ -497,11 +568,88 @@ public class DunGen {
     return _cells;
   }
 
-  int[,] CleanDungeon (int[,] _cells) {
+  TileType[,] CleanDungeon (TileType[,] _cells) {
+    _cells = RemoveDeadends(_cells);
+    _cells = FixDoors(_cells);
+    _cells = EmptyBlocks(_cells);
+    return _cells;
+  }
+
+  TileType[,] RemoveDeadends (TileType[,] _cells) {
+    return CollapseTunnels(_cells);
+  }
+
+  TileType[,] CollapseTunnels (TileType[,] _cells) {
+    for (var i = 0; i < n_i; i++) {
+      var r = i*2 + 1;
+      for (var j = 0; j < n_j; j++) {
+        var c = j*2 + 1;
+        var test = _cells[r,c];
+        if (test != TileType.Room && test != TileType.Corridor) {
+          continue;
+        }
+
+        _cells = Collapse(_cells, r, c);
+      }
+    }
 
     return _cells;
   }
 
+  TileType[,] Collapse (TileType[,] _cells, int r, int c) {
+
+    var test = _cells[r,c];
+    if (test == TileType.Corridor || test == TileType.Room) {
+      return _cells;
+    }
+
+    foreach (KeyValuePair<string, Dictionary<string, int[,]>> p in close_end) {
+
+      if (CheckTunnel(_cells, r, c, p.Value)) {
+
+        int[,] closeList = p.Value["close"];
+
+        for (var x = 0; x < closeList.GetLength(0); x++) {
+          var p1 = closeList[x, 0];
+          var p2 = closeList[x, 1];
+
+          _cells[r+p1,c+p2] = TileType.Nothing;
+        }
+
+        int[,] recurseList = p.Value["recurse"];
+        var rr = recurseList[0,0];
+        var cr = recurseList[0,1];
+        _cells = Collapse (_cells, rr, cr);
+      }
+    }
+
+    return _cells;
+  }
+
+  bool CheckTunnel (TileType[,] _cells, int r, int c, Dictionary<string, int[,]> checkDirection) {
+    int[,] list = checkDirection["walled"];
+    for (var x = 0; x < list.GetLength(0); x++) {
+      var p1 = list[x, 0];
+      var p2 = list[x, 1];
+
+      var test = _cells[r+p1,c+p2];
+      if (test == TileType.Corridor || test == TileType.Room) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  TileType[,] FixDoors (TileType[,] _cells) {
+
+    return _cells;
+  }
+
+  TileType[,] EmptyBlocks (TileType[,] _cells) {
+
+    return _cells;
+  }
 
   public IList<T> Shuffle<T>(IList<T> list) {
     int n = list.Count;
