@@ -37,12 +37,12 @@ public class DunGen {
   };
 
   Hashtable defaultOpts = new Hashtable() {
-    {"n_rows", 59 },
-    {"n_cols", 59 },
+    {"n_rows", 39 },
+    {"n_cols", 39 },
     {"dungeon_layout", "None" },
-    {"room_min", 9 },
-    {"room_max", 17 },
-    {"room_layout", "Scattered" },
+    {"room_min", 5 },
+    {"room_max", 11 },
+    {"room_layout", "Packed" },
     {"corridor_layout", "Bent" },
     {"remove_deadends", 100 },
     {"add_stairs", 2 },
@@ -401,9 +401,9 @@ public class DunGen {
     var dirs = TunnelDirections(_cells, last_dir);
 
     foreach (string dir in dirs) {
-      if (OpenTunnel(ref _cells, i, j, last_dir)) {
-        var next_i = i + di[last_dir];
-        var next_j = j + dj[last_dir];
+      if (OpenTunnel(ref _cells, i, j, dir)) {
+        var next_i = i + di[dir];
+        var next_j = j + dj[dir];
 
         _cells = CreateTunnel(_cells, next_i, next_j, last_dir);
       }
@@ -414,11 +414,10 @@ public class DunGen {
 
   List<string> TunnelDirections (TileType[,] _cells, string lastDirection) {
     var dirs = (List<string>)Shuffle(dj_dirs);
-    // var p = 50; // Bent
 
     if (lastDirection != null) {
-      if (Roll.Percent(50)) {
-        dirs.Remove(lastDirection);
+      if (Roll.Percent(corridorLayout)) {
+        dirs.Insert(0, lastDirection);
       }
     }
 
@@ -434,7 +433,8 @@ public class DunGen {
     var mid_c = (this_c + next_c) / 2;
 
     if (SoundTunnel(_cells, mid_r, mid_c, next_r, next_c)) {
-      return DelveTunnel(_cells, this_r, this_c, next_r, next_c);
+      _cells = DelveTunnel(_cells, this_r, this_c, next_r, next_c);
+      return true;
     }
 
     return false;
@@ -471,9 +471,25 @@ public class DunGen {
     return true;
   }
 
-  bool DelveTunnel (TileType[,] _cells, int this_r, int this_c, int next_r, int next_c) {
+  TileType[,] DelveTunnel (TileType[,] _cells, int this_r, int this_c, int next_r, int next_c) {
 
-    return false;
+    var rList = new List<int>() { this_r, next_r };
+    rList.Sort();
+    var r1 = rList[0];
+    var r2 = rList[1];
+    
+    var cList = new List<int>() { this_c, next_c };
+    cList.Sort();
+    var c1 = cList[0];
+    var c2 = cList[1];
+
+    for (var r = r1; r <= r2; r++) {
+      for (var c = c1; c <= c2; c++) {
+        _cells[r,c] = TileType.Corridor;
+      }
+    }
+
+    return _cells;
   }
 
   int[,] EmplaceStairs (int[,] _cells) {
