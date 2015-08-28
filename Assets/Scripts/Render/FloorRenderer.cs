@@ -13,10 +13,12 @@ public class FloorRenderer : BaseBehaviour {
         if (tile == DunGen.TileType.Perimeter 
             || tile == DunGen.TileType.Nothing
             || tile == DunGen.TileType.Blocked) {
+        } else {
           var wallObj = Instantiate(wallPrefab);
           wallObj.transform.parent = transform;
           wallObj.transform.localPosition = new Vector3(c, 0, r);
         }
+
       }
     }
 	}

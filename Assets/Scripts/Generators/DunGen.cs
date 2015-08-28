@@ -63,8 +63,8 @@ public class DunGen {
     {"n_rows", 39 },
     {"n_cols", 39 },
     {"dungeon_layout", "None" },
-    {"room_min", 5 },
-    {"room_max", 11 },
+    {"room_min", 3 },
+    {"room_max", 9 },
     {"room_layout", "Packed" },
     {"corridor_layout", "Bent" },
     {"remove_deadends", 100 },
@@ -119,8 +119,8 @@ public class DunGen {
     cells = InitCells(cells);
     cells = PackRooms(cells);
     cells = OpenRooms(cells, rooms);
-    cells = CreateCorridors(cells);
-    cells = CleanDungeon(cells);
+//    cells = CreateCorridors(cells);
+//    cells = CleanDungeon(cells);
 
     Debug.Log (cells);
 
@@ -328,11 +328,19 @@ public class DunGen {
       var door_c = (int)sill["door_c"];
       var door_cell = _cells[door_r, door_c];
 
+      if (door_cell == TileType.Door) {
+        --i;
+        continue;
+      }
+
       var out_id = (int)sill["out_id"];
       if (out_id > 0) {
-        var key = string.Format("{0},{1}", (int)room["id"], out_id);
+        List<int> keyOrder = new List<int>(){ (int)room["id"], out_id };
+        keyOrder.Sort();
+        var key = string.Format("{0},{1}", keyOrder[0], keyOrder[1]);
         if (roomConnections.ContainsKey(key)) {
           roomConnections[key] += 1;
+          continue;
         } else {
           roomConnections[key] = 1;
         }
@@ -350,6 +358,8 @@ public class DunGen {
 
       _cells[door_r, door_c] = TileType.Door;
       var door = new Hashtable();
+      door["row"] = door_r;
+      door["col"] = door_c;
       if (out_id > 0) {
         door["out_id"] = out_id;
       }
