@@ -27,6 +27,8 @@ public class DunGen {
     { "north", 0 }, { "south", 0 }, {"west", -1 }, {"east", 1 }
   };
 
+  List<string> dj_dirs = new List<string>() { "north", "south", "west", "east" };
+
   Dictionary<string, string> opposite = new Dictionary<string, string>() {
     {"north", "south" },
     
@@ -380,17 +382,98 @@ public class DunGen {
 
   TileType[,] CreateCorridors (TileType[,] _cells) {
 
+    for (var i = 1; i < n_i; i++) {
+      var r = (i * 2) + 1;
+      for (var j = 1; j < n_j; j++) {
+        var c = (j * 2) + 1;
 
+        if (_cells[r, c] == TileType.Corridor) {
+          continue;
+        }
+
+        _cells = CreateTunnel(_cells, i, j, null);
+      }
+    }
     return _cells;
   }
 
-  TileType[,] CreateTunnel (TileType[,] _cells) {
+  TileType[,] CreateTunnel (TileType[,] _cells, int i, int j, string last_dir) {
+    var dirs = TunnelDirections(_cells, last_dir);
+
+    foreach (string dir in dirs) {
+      if (OpenTunnel(ref _cells, i, j, last_dir)) {
+        var next_i = i + di[last_dir];
+        var next_j = j + dj[last_dir];
+
+        _cells = CreateTunnel(_cells, next_i, next_j, last_dir);
+      }
+    }
 
     return _cells;
   }
 
   List<string> TunnelDirections (TileType[,] _cells, string lastDirection) {
+    var dirs = (List<string>)Shuffle(dj_dirs);
+    // var p = 50; // Bent
 
+    if (lastDirection != null) {
+      if (Roll.Percent(50)) {
+        dirs.Remove(lastDirection);
+      }
+    }
+
+    return dirs;
+  }
+
+  bool OpenTunnel (ref TileType[,] _cells, int i, int j, string dir) {
+    var this_r = (i * 2) + 1;
+    var this_c = (j * 2) + 1;
+    var next_r = ((i + di[dir]) * 2) + 1;
+    var next_c = ((j + dj[dir]) * 2) + 1;
+    var mid_r = (this_r + next_r) / 2;
+    var mid_c = (this_c + next_c) / 2;
+
+    if (SoundTunnel(_cells, mid_r, mid_c, next_r, next_c)) {
+      return DelveTunnel(_cells, this_r, this_c, next_r, next_c);
+    }
+
+    return false;
+  }
+
+  bool SoundTunnel (TileType[,] _cells, int mid_r, int mid_c, int next_r, int next_c) {
+
+    if (next_r < 0 || next_r > n_rows) {
+      return false;
+    }
+
+    if (next_c < 0 || next_c > n_cols) {
+      return false;
+    }
+
+    var rList = new List<int>() { mid_r, next_r };
+    rList.Sort();
+    var r1 = rList[0];
+    var r2 = rList[1];
+
+    var cList = new List<int>() { mid_c, next_c };
+    cList.Sort();
+    var c1 = cList[0];
+    var c2 = cList[1];
+
+    for (var r = r1; r <= r2; r++) {
+      for (var c = c1; c <= c2; c++) {
+        if (_cells[r, c] == TileType.Blocked || _cells[r, c] == TileType.Perimeter || _cells[r, c] == TileType.Corridor) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
+  bool DelveTunnel (TileType[,] _cells, int this_r, int this_c, int next_r, int next_c) {
+
+    return false;
   }
 
   int[,] EmplaceStairs (int[,] _cells) {
@@ -403,5 +486,17 @@ public class DunGen {
     return _cells;
   }
 
+
+  public IList<T> Shuffle<T>(IList<T> list) {
+    int n = list.Count;
+    while (n > 1) {
+      n--;
+      int k = Random.Range(0, n + 1);
+      T value = list[k];
+      list[k] = list[n];
+      list[n] = value;
+    }
+    return list;
+  }
 
 }
