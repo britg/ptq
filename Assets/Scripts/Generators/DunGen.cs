@@ -64,7 +64,7 @@ public class DunGen {
     {"n_cols", 39 },
     {"dungeon_layout", "None" },
     {"room_min", 3 },
-    {"room_max", 9 },
+    {"room_max", 11 },
     {"room_layout", "Packed" },
     {"corridor_layout", "Bent" },
     {"remove_deadends", 100 },
@@ -119,8 +119,8 @@ public class DunGen {
     cells = InitCells(cells);
     cells = PackRooms(cells);
     cells = OpenRooms(cells, rooms);
-//    cells = CreateCorridors(cells);
-//    cells = CleanDungeon(cells);
+    cells = CreateCorridors(cells);
+    cells = CleanDungeon(cells);
 
     Debug.Log (cells);
 
@@ -543,7 +543,11 @@ public class DunGen {
 
     for (var r = r1; r <= r2; r++) {
       for (var c = c1; c <= c2; c++) {
-        if (_cells[r, c] == TileType.Blocked || _cells[r, c] == TileType.Perimeter || _cells[r, c] == TileType.Corridor) {
+        if (_cells[r, c] == TileType.Blocked 
+            || _cells[r, c] == TileType.Perimeter 
+            || _cells[r, c] == TileType.Corridor
+//            || _cells[r, c] == TileType.Room
+            ) {
           return false;
         }
       }
@@ -609,7 +613,7 @@ public class DunGen {
   TileType[,] Collapse (TileType[,] _cells, int r, int c) {
 
     var test = _cells[r,c];
-    if (test == TileType.Corridor || test == TileType.Room) {
+    if (test != TileType.Room && test != TileType.Corridor) {
       return _cells;
     }
 
@@ -627,9 +631,13 @@ public class DunGen {
         }
 
         int[,] recurseList = p.Value["recurse"];
-        var rr = recurseList[0,0];
-        var cr = recurseList[0,1];
-        _cells = Collapse (_cells, rr, cr);
+        var rr = r + recurseList[0,0];
+        var cr = c + recurseList[0,1];
+
+        if (_cells.GetLength(0) > rr && _cells.GetLength(1) > cr) {
+          Debug.Log ("Recursing " + rr + "," + cr);
+          _cells = Collapse (_cells, rr, cr);
+        }
       }
     }
 

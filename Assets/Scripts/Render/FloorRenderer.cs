@@ -4,6 +4,9 @@ using System.Collections;
 public class FloorRenderer : BaseBehaviour {
 
   public GameObject wallPrefab;
+  public GameObject doorPrefab;
+  public GameObject roomPrefab;
+  public GameObject corridorPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -13,15 +16,30 @@ public class FloorRenderer : BaseBehaviour {
         if (tile == DunGen.TileType.Perimeter 
             || tile == DunGen.TileType.Nothing
             || tile == DunGen.TileType.Blocked) {
-        } else {
-          var wallObj = Instantiate(wallPrefab);
-          wallObj.transform.parent = transform;
-          wallObj.transform.localPosition = new Vector3(c, 0, r);
+          PlaceObj(wallPrefab, r, c);
         }
+
+        if (tile == DunGen.TileType.Door) {
+          PlaceObj(doorPrefab, r, c);
+        }
+
+//        if (tile == DunGen.TileType.Room) {
+//          PlaceObj(roomPrefab, r, c);
+//        }
+//
+//        if (tile == DunGen.TileType.Corridor) {
+//          PlaceObj(corridorPrefab, r, c);
+//        }
 
       }
     }
 	}
+
+  void PlaceObj (GameObject prefab, int r, int c) {
+    var obj = Instantiate(prefab);
+    obj.transform.parent = transform;
+    obj.transform.localPosition = new Vector3(c, 0, r);
+  }
 	
 	// Update is called once per frame
 	void Update () {
