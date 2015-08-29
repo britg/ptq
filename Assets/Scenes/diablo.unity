@@ -3314,6 +3314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d946023d5b3a342a59d992a7b8f4fdb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 0}
   wallPrefab: {fileID: 126592, guid: 01de477b18bf640e99543b16c940ee81, type: 2}
   doorPrefab: {fileID: 109496, guid: 683531d75026b4430bbcf3cfc6e231b2, type: 2}
   roomPrefab: {fileID: 107814, guid: 07b0700a3e8b24c6ebdda659bf57fda5, type: 2}

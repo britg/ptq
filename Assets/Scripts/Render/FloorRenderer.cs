@@ -35,7 +35,7 @@ public class FloorRenderer : BaseBehaviour {
 
   void ClearAll () {
     foreach (Transform childTransform in transform) {
-      Destory(childTransform);
+      Destroy(childTransform);
     }
   }
 
