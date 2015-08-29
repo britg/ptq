@@ -8,11 +8,28 @@ public class FloorRenderer : BaseBehaviour {
   public GameObject roomPrefab;
   public GameObject corridorPrefab;
 
+  Floor floor {
+    get {
+      return sim.player.currentFloor;
+    }
+  }
+
 	// Use this for initialization
 	void Start () {
-    for (var r = 0; r < sim.tiles.GetLength(0); r++) {
-      for (var c = 0; c < sim.tiles.GetLength(1); c++) {
-        var tile = sim.tiles[r, c];
+    NotificationCenter.AddObserver(this, Constants.OnFloorUpdate);
+    if (floor != null) {
+      RenderFloor();
+    }
+	}
+
+  void OnFloorUpdate () {
+    RenderFloor();
+  }
+
+  void RenderFloor () {
+    for (var r = 0; r < floor.map.GetLength(0); r++) {
+      for (var c = 0; c < floor.map.GetLength(1); c++) {
+        var tile = floor.map[r, c];
         if (tile == DunGen.TileType.Perimeter 
             || tile == DunGen.TileType.Nothing
             || tile == DunGen.TileType.Blocked) {
@@ -23,17 +40,17 @@ public class FloorRenderer : BaseBehaviour {
           PlaceObj(doorPrefab, r, c);
         }
 
-//        if (tile == DunGen.TileType.Room) {
-//          PlaceObj(roomPrefab, r, c);
-//        }
-//
-//        if (tile == DunGen.TileType.Corridor) {
-//          PlaceObj(corridorPrefab, r, c);
-//        }
+        //if (tile == DunGen.TileType.Room) {
+        //  PlaceObj(roomPrefab, r, c);
+        //}
+
+        //if (tile == DunGen.TileType.Corridor) {
+        //  PlaceObj(corridorPrefab, r, c);
+        //}
 
       }
     }
-	}
+  }
 
   void PlaceObj (GameObject prefab, int r, int c) {
     var obj = Instantiate(prefab);

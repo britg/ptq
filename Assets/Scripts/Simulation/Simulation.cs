@@ -7,7 +7,6 @@ public class Simulation {
 
   public ResourceLoader resourceLoader;
   public Player player;
-  public DunGen.TileType[,] tiles;
 
   public void Setup() {
     LoadMap();
@@ -16,8 +15,6 @@ public class Simulation {
   }
 
   void LoadMap () {
-    var dunGen = new DunGen();
-    tiles = dunGen.CreateDungeon();
   }
 
   void LoadResources () {
@@ -27,7 +24,7 @@ public class Simulation {
 
   void SetupPlayer () {
     var playerCreator = new PlayerRepository(this);
-    playerCreator.Create();
+    player = playerCreator.LoadOrCreate();
   }
 
 }

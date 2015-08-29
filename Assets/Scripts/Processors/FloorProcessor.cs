@@ -17,6 +17,11 @@ public class FloorProcessor {
 
     sim.player.currentFloor = Floor.GetFloor(floorNum);
 
+    // Either pull the floor map from persistence
+    // or generate the map.
+    GenerateFloor();
+    NotificationCenter.PostNotification(Constants.OnFloorUpdate);
+
     newEvents = new List<PlayerEvent>();
 
     foreach (var atmTxt in sim.player.currentFloor.entranceEvents) {
@@ -38,6 +43,25 @@ public class FloorProcessor {
     var branch = sim.player.currentFloor.GetBranch(key);
     var branchProcessor = new BranchProcessor(sim, branch);
     newEvents.AddRange(branchProcessor.Start());
+  }
+
+  void GenerateFloor () {
+    var dunGen = new DunGen();
+    sim.player.currentFloor.map = dunGen.CreateDungeon();
+    PlacePlayer();
+    AddStairs();
+  }
+
+  void PlacePlayer () {
+    for (var r = 0; r < sim.player.currentFloor.map.GetLength(0); r++) {
+      for (var c = 0; c < sim.player.currentFloor.map.GetLength(1); c++) {
+
+      }
+    }
+  }
+
+  void AddStairs () {
+    
   }
 
 }

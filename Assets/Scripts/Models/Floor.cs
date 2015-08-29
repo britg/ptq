@@ -82,6 +82,29 @@ public class Floor : JSONResource {
     return string.Format("{0} {1} Floor", floorTemplate.name, NumberUtilities.AddOrdinal(int.Parse(key)));
   }
 
+  /*
+   * Map Stuff
+   */
+
+  public DunGen.TileType[,] map;
+
+  DunGen.TileType[,] _openTiles;
+  public DunGen.TileType[,] openTiles {
+    get {
+      if (_openTiles == null) {
+        
+      }
+      return _openTiles;
+    }
+  }
+
+  public Vector2 stairsUpPos {
+    get {
+      return Vector2.zero;
+    }
+  }
+  public Vector2 stairsDownPos;
+
   // TODO: Refactor to cascade mob chances locally
   public Mob RandomMob () {
     return floorTemplate.RandomMob();

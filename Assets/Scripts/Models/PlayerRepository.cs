@@ -16,9 +16,8 @@ public class PlayerRepository {
     sim = _sim;
   }
 
-  public Player Create () {
+  public Player LoadOrCreate () {
     player = new Player();
-    sim.player = player;
     Bootstrap();
     LoadState();
     return player;
@@ -33,6 +32,8 @@ public class PlayerRepository {
   // TODO: Load from real persistence
   void LoadState () {
     player.currentInitiative = 0;
+
+    // player.currentFloor - currently loaded at InputProcessor->Continue
   }
 
   void BootstrapResources () {
