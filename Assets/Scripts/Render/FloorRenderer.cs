@@ -3,6 +3,7 @@ using System.Collections;
 
 public class FloorRenderer : BaseBehaviour {
 
+  public GameObject playerPrefab;
   public GameObject wallPrefab;
   public GameObject doorPrefab;
   public GameObject roomPrefab;
@@ -27,10 +28,22 @@ public class FloorRenderer : BaseBehaviour {
   }
 
   void RenderFloor () {
+    ClearAll();
+    RenderBaseLayer();
+    RenderPlayer();
+  }
+
+  void ClearAll () {
+    foreach (Transform childTransform in transform) {
+      Destory(childTransform);
+    }
+  }
+
+  void RenderBaseLayer () {
     for (var r = 0; r < floor.map.GetLength(0); r++) {
       for (var c = 0; c < floor.map.GetLength(1); c++) {
         var tile = floor.map[r, c];
-        if (tile == DunGen.TileType.Perimeter 
+        if (tile == DunGen.TileType.Perimeter
             || tile == DunGen.TileType.Nothing
             || tile == DunGen.TileType.Blocked) {
           PlaceObj(wallPrefab, r, c);
@@ -52,14 +65,18 @@ public class FloorRenderer : BaseBehaviour {
     }
   }
 
+  void RenderPlayer () {
+
+  }
+
   void PlaceObj (GameObject prefab, int r, int c) {
     var obj = Instantiate(prefab);
     obj.transform.parent = transform;
     obj.transform.localPosition = new Vector3(c, 0, r);
   }
-	
+
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 }

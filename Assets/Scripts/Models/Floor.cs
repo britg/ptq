@@ -52,7 +52,7 @@ public class Floor : JSONResource {
           _branches[b["key"].Value] = new Branch(b);
         }
       }
-      
+
       return _branches;
     }
   }
@@ -88,13 +88,26 @@ public class Floor : JSONResource {
 
   public DunGen.TileType[,] map;
 
-  DunGen.TileType[,] _openTiles;
-  public DunGen.TileType[,] openTiles {
-    get {
-      if (_openTiles == null) {
-        
+  public Vector2 playerPos;
+
+  List<Vector2> openTiles;
+  public Vector2 RandomOpenTile () {
+    if (openTiles == null) {
+      ScanOpenTiles();
+    }
+
+    return openTiles[Random.Range(0, openTiles.Count -1)];
+  }
+
+  void ScanOpenTiles () {
+    openTiles = new List<Vector2>();
+    for (var r = 0; r < map.GetLength(0); r++) {
+      for (var c = 0; c < map.GetLength(1); c++) {
+        if (map[r,c] == DunGen.TileType.Room
+            || map[r,c] == DunGen.TileType.Corridor) {
+          openTiles.Add(new Vector2(r, c));
+        }
       }
-      return _openTiles;
     }
   }
 

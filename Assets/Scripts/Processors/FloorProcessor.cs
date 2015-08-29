@@ -53,15 +53,12 @@ public class FloorProcessor {
   }
 
   void PlacePlayer () {
-    for (var r = 0; r < sim.player.currentFloor.map.GetLength(0); r++) {
-      for (var c = 0; c < sim.player.currentFloor.map.GetLength(1); c++) {
-
-      }
-    }
+    Vector2 pos = sim.player.currentFloor.RandomOpenTile();
+    sim.player.currentFloor.playerPos = pos;
   }
 
   void AddStairs () {
-    
+
   }
 
 }
