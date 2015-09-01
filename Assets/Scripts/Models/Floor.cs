@@ -88,10 +88,10 @@ public class Floor : JSONResource {
 
   public DunGen.TileType[,] map;
 
-  public Vector2 playerPos;
+  public Vector3 playerPos;
 
-  List<Vector2> openTiles;
-  public Vector2 RandomOpenTile () {
+  List<Vector3> openTiles;
+  public Vector3 RandomOpenTile () {
     if (openTiles == null) {
       ScanOpenTiles();
     }
@@ -100,12 +100,12 @@ public class Floor : JSONResource {
   }
 
   void ScanOpenTiles () {
-    openTiles = new List<Vector2>();
+    openTiles = new List<Vector3>();
     for (var r = 0; r < map.GetLength(0); r++) {
       for (var c = 0; c < map.GetLength(1); c++) {
         if (map[r,c] == DunGen.TileType.Room
             || map[r,c] == DunGen.TileType.Corridor) {
-          openTiles.Add(new Vector2(r, c));
+          openTiles.Add(new Vector3(c, 0, r));
         }
       }
     }

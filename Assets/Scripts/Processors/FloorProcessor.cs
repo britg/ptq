@@ -17,7 +17,7 @@ public class FloorProcessor {
 
     sim.player.currentFloor = Floor.GetFloor(floorNum);
 
-    // Either pull the floor map from persistence
+    // TODO: Either pull the floor map from persistence
     // or generate the map.
     GenerateFloor();
     NotificationCenter.PostNotification(Constants.OnFloorUpdate);
@@ -53,7 +53,7 @@ public class FloorProcessor {
   }
 
   void PlacePlayer () {
-    Vector2 pos = sim.player.currentFloor.RandomOpenTile();
+    Vector3 pos = sim.player.currentFloor.RandomOpenTile();
     sim.player.currentFloor.playerPos = pos;
   }
 

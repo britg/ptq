@@ -61,12 +61,18 @@ public class FloorRenderer : BaseBehaviour {
         //  PlaceObj(corridorPrefab, r, c);
         //}
 
+        // if (tile == DunGen.TileType.Entrance) {
+        //  PlaceObj(corridorPrefab, r, c);
+        // }
+
       }
     }
   }
 
   void RenderPlayer () {
-
+    var playerObj = Instantiate(playerPrefab);
+    playerObj.transform.parent = transform.parent;
+    playerObj.transform.localPosition = floor.playerPos;
   }
 
   void PlaceObj (GameObject prefab, int r, int c) {

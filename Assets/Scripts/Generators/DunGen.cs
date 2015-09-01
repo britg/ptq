@@ -60,6 +60,7 @@ public class DunGen {
     };
 
   Hashtable defaultOpts = new Hashtable() {
+    {"seed", (int)Time.time},
     {"n_rows", 39 },
     {"n_cols", 39 },
     {"dungeon_layout", "None" },
@@ -90,6 +91,8 @@ public class DunGen {
   int last_room_id = 0;
   int[,] roomIdForTile;
   Dictionary<string, int> roomConnections = new Dictionary<string, int>();
+  List<Vector2> cachedDoors = new List<Vector2>();
+  List<Vector2> cachedEntrances = new List<Vector2>();
 
   Hashtable proto;
 
@@ -100,6 +103,8 @@ public class DunGen {
   public TileType[,] CreateDungeon (Hashtable _opts) {
     // TODO: Merge default opts with opts;
     opts = defaultOpts;
+
+    Random.seed = (int)opts["seed"];
 
     n_i = (int)((int)opts["n_rows"] / 2);
     n_j = (int)((int)opts["n_cols"] / 2);
@@ -114,8 +119,9 @@ public class DunGen {
     room_radix = (int)((room_max - room_min) / 2) + 1;
 
     rooms = new Hashtable();
-    cells = new TileType[n_rows+1, n_cols+1];
     roomIdForTile = new int[n_rows+1, n_cols+1];
+    cells = new TileType[n_rows+1, n_cols+1];
+
     cells = InitCells(cells);
     cells = PackRooms(cells);
     cells = OpenRooms(cells, rooms);
@@ -318,8 +324,9 @@ public class DunGen {
   TileType[,] OpenRoom (TileType[,] _cells, Hashtable room) {
 
     var sills = DoorSills(_cells, room);
-    int n_opens = AllocateOpens(_cells, room);
-//    int n_opens = Random.Range (1, 3);
+    // int n_opens = AllocateOpens(_cells, room);
+    // int n_opens = Random.Range (1, 3);
+    int n_opens = 2;
 
     for (var i = 0; i < n_opens; i++) {
       var rand = Random.Range (0, sills.Count-1);
@@ -432,7 +439,7 @@ public class DunGen {
 
     var out_id = 0;
     if (out_cell == TileType.Room) {
-      // get the room id of the cell and 
+      // get the room id of the cell and
       // return null if out is into the same room
       out_id = roomIdForTile[out_r,out_c];
       if (out_id == (int)room["id"]) {
@@ -543,8 +550,8 @@ public class DunGen {
 
     for (var r = r1; r <= r2; r++) {
       for (var c = c1; c <= c2; c++) {
-        if (_cells[r, c] == TileType.Blocked 
-            || _cells[r, c] == TileType.Perimeter 
+        if (_cells[r, c] == TileType.Blocked
+            || _cells[r, c] == TileType.Perimeter
             || _cells[r, c] == TileType.Corridor
 //            || _cells[r, c] == TileType.Room
             ) {
@@ -562,7 +569,7 @@ public class DunGen {
     rList.Sort();
     var r1 = rList[0];
     var r2 = rList[1];
-    
+
     var cList = new List<int>() { this_c, next_c };
     cList.Sort();
     var c1 = cList[0];
@@ -570,12 +577,15 @@ public class DunGen {
 
     for (var r = r1; r <= r2; r++) {
       for (var c = c1; c <= c2; c++) {
-        //if (_cells[r,c] != TileType.Room 
-        //    && _cells[r,c] != TileType.Door
-        //    && _cells[r,c] != TileType.Entrance) {
+        if (_cells[r,c] == TileType.Door) {
+          cachedDoors.Add(new Vector2(c, r));
+        }
 
-          _cells[r,c] = TileType.Corridor;
-        //}
+        if (_cells[r,c] == TileType.Entrance) {
+          cachedEntrances.Add(new Vector2(c, r));
+        }
+
+        _cells[r,c] = TileType.Corridor;
       }
     }
 
@@ -640,7 +650,6 @@ public class DunGen {
         var cr = c + recurseList[0,1];
 
         if (_cells.GetLength(0) > rr && _cells.GetLength(1) > cr) {
-          Debug.Log ("Recursing " + rr + "," + cr);
           _cells = Collapse (_cells, rr, cr);
         }
       }
@@ -665,6 +674,14 @@ public class DunGen {
   }
 
   TileType[,] FixDoors (TileType[,] _cells) {
+
+    foreach (Vector2 doorPos in cachedDoors) {
+      _cells[(int)doorPos.y, (int)doorPos.x] = TileType.Door;
+    }
+
+    foreach (Vector2 entrancePos in cachedEntrances) {
+      _cells[(int)entrancePos.y, (int)entrancePos.x] = TileType.Entrance;
+    }
 
     return _cells;
   }

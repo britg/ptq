@@ -15,6 +15,8 @@ public class Constants {
   public const string OnTakeDamage = "OnTakeDamage";
   public const string OnNewGame = "OnNewGame";
   public const string OnFirstPull = "OnFirstPull";
+
+  public const string OnFloorStart = "OnFloorStart";
   public const string OnFloorUpdate = "OnFloorUpdate";
 
   // Layers
