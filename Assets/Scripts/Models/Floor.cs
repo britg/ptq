@@ -140,7 +140,7 @@ public class Floor : JSONResource {
   }
 
   public RoomTemplate RandomRoomTemplate () {
-    var roomTemplateKey = Roll.Hash(floorTemplate.roomTemplateChances);
+    var roomTemplateKey = tpd.RollMap(floorTemplate.roomTemplateChances);
     return (RoomTemplate)RoomTemplate.cache[roomTemplateKey];
   }
 

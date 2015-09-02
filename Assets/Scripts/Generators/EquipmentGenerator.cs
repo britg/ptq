@@ -50,14 +50,14 @@ public class EquipmentGenerator {
       val *= rarityMultiplier;
 
       // Prefix
-      var prefixRoll = Roll.Percent(e.Rarity.prefixChance);
+      var prefixRoll = tpd.RollPercent(e.Rarity.prefixChance);
       if (prefixRoll) {
         e.Prefix = EquipmentModifier.Prefix();
         ApplyModifier(e, e.Prefix);
       }
 
       // Suffix
-      var suffixRoll = Roll.Percent(e.Rarity.suffixChance);
+      var suffixRoll = tpd.RollPercent(e.Rarity.suffixChance);
       if (suffixRoll) {
         e.Suffix = EquipmentModifier.Suffix();
         ApplyModifier(e, e.Suffix);
@@ -79,7 +79,7 @@ public class EquipmentGenerator {
   }
 
   float RarityMultiplier (Rarity rarity, Stat.Sign sign) {
-    var rarityMult = Roll.Range(rarity.statMultiplierRange);
+    var rarityMult = tpd.RollRange(rarity.statMultiplierRange);
     if (sign == Stat.Sign.Negative) {
       rarityMult = 1f / rarityMult;
     }

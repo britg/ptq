@@ -79,7 +79,7 @@ public class FloorTemplate {
   }
 
   public Mob RandomMob () {
-    var mobKey = Roll.Hash(mobChances);
+    var mobKey = tpd.RollMap(mobChances);
     MobTemplate template = MobTemplate.all[mobKey];
     Mob mob = Mob.FromTemplate(template);
 

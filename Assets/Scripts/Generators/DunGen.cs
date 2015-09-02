@@ -505,7 +505,7 @@ public class DunGen {
     var dirs = (List<string>)Shuffle(dj_dirs);
 
     if (lastDirection != null) {
-      if (Roll.Percent(corridorLayout)) {
+      if (tpd.RollPercent(corridorLayout)) {
         dirs.Insert(0, lastDirection);
       }
     }

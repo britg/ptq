@@ -66,7 +66,7 @@ public class tpd {
    * Randomization / Roll Percent
    */
 
-  public static string RollSet (Hashtable hash) {
+  public static string RollMap (Hashtable hash) {
     float sum = 0f;
     foreach (DictionaryEntry pair in hash) {
       sum += (float)pair.Value;
@@ -87,7 +87,7 @@ public class tpd {
     return chosen;
   }
 
-  public static string RollSet (Dictionary<string, float> dict) {
+  public static string RollMap (Dictionary<string, float> dict) {
     float sum = 0f;
     foreach (KeyValuePair<string, float> pair in dict) {
       sum += (float)pair.Value;

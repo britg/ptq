@@ -25,7 +25,7 @@ public class PlayerCombatProcessor  {
       */
     );
 
-    var chosen = Roll.Hash(chances);
+    var chosen = tpd.RollMap(chances);
 
     if (chosen == basicAttack) {
       newEvents.AddRange(BasicAttack());
@@ -42,13 +42,13 @@ public class PlayerCombatProcessor  {
     HitType hitType = HitType.Hit;
     var damage = AddVariance(player.GetStatValue(Stat.dps));
 
-    if (Roll.Percent(ChanceToMiss())) {
+    if (tpd.RollPercent(ChanceToMiss())) {
       hitType = HitType.Miss;
       damage = 0f;
-    } else if (Roll.Percent(ChanceToGlance ())) {
+    } else if (tpd.RollPercent(ChanceToGlance ())) {
       hitType = HitType.Glance;
       damage *= 0.5f;
-    } else if (Roll.Percent(ChanceToCrit())) {
+    } else if (tpd.RollPercent(ChanceToCrit())) {
       hitType = HitType.Crit;
       damage *= 2f;
     }

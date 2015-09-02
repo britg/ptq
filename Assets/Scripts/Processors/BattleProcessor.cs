@@ -108,7 +108,7 @@ public class BattleProcessor {
   public List<PlayerEvent> Gold () {
     var newEvents = new List<PlayerEvent>();
     // Gold
-    if (Roll.Percent(currentMob.goldChance)) {
+    if (tpd.RollPercent(currentMob.goldChance)) {
       var goldGenerator = new GoldGenerator(sim.player, currentMob);
       var amount = goldGenerator.Mob();
       var ev = PlayerEvent.Info(string.Format("{0} gold", amount));
@@ -127,7 +127,7 @@ public class BattleProcessor {
     var newEvents = new List<PlayerEvent>();
 
     // Chance for loot
-    if (Roll.Percent(currentMob.lootChance)) {
+    if (tpd.RollPercent(currentMob.lootChance)) {
       var equipmentGenerator = new EquipmentGenerator(sim);
       var eq = equipmentGenerator.Generate();
       newEvents.Add(PlayerEvent.Loot(eq));
@@ -139,10 +139,10 @@ public class BattleProcessor {
   public List<PlayerEvent> Consumables () {
     var newEvents = new List<PlayerEvent>();
 
-    if (Roll.Percent(currentMob.consumableChance)) {
+    if (tpd.RollPercent(currentMob.consumableChance)) {
       //if (true) {
       var floor = sim.player.currentFloor;
-      var consumableKey = Roll.Hash(floor.consumableChances);
+      var consumableKey = tpd.RollMap(floor.consumableChances);
       var consumableGenerator = new ConsumableGenerator(sim);
       var consumable = consumableGenerator.Generate(consumableKey);
       var ev = PlayerEvent.Consumable(consumable);

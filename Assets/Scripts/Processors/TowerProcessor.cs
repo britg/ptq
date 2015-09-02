@@ -23,7 +23,7 @@ public class TowerProcessor {
 
     //newEvents.Add(PlayerEvent.Info ("You venture forth..."));
 
-    string content = Roll.Hash(sim.player.currentFloor.content);
+    string content = tpd.RollMap(sim.player.currentFloor.content);
     Debug.Log ("Chose content " + content);
     
     // TODO: Inject atmosphere text randomly

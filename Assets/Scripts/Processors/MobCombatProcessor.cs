@@ -16,7 +16,7 @@ public class MobCombatProcessor {
 
   public List<PlayerEvent> TakeAction () {
     var newEvents = new List<PlayerEvent>();
-    var action = Roll.Hash(mob.combatProfile);
+    var action = tpd.RollMap(mob.combatProfile);
 
     if (action == basicAttack) {
       newEvents.AddRange(BasicAttack());
