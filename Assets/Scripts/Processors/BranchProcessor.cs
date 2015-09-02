@@ -39,6 +39,12 @@ public class BranchProcessor {
       newEvents.AddRange(roomProcessor.CreateAndEnter());
     }
 
+    if (res.thenToEvents) {
+      var floorProcessor = new FloorProcessor(sim);
+      var eventsKey = res.thenTo.Replace("events:", "");
+      newEvents.AddRange(floorProcessor.FloorEvents(eventsKey));
+    }
+
     return newEvents;
   }
 

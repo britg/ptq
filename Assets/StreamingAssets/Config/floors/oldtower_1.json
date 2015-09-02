@@ -3,13 +3,68 @@
   "key": 1,
   "template": "old_tower",
 
-  "entrance_events": [
-    "The massive tower doors slam behind you with a clang.",
-    "You get the feeling you couldn't open them again if you tried...",
-    "branch:tower_door_branch"
+  "events": {
+
+    "_enter" :  [
+      "You wake on the floor of dark room, a chill air blowing your face.",
+      "The sound of rushing wind fills your ears, and you sense the the low pressure void of a sheer drop off close by.",
+      "You quickly roll away from the ledge and scramble to your feet."
+      "There's another body in the room lying on the floor.",
+      "You're not sure if they're alive or dead.",
+      "branch:dead_body_branch"
+    ],
+
+    "after_body": [
+      "test"
+    ]
+
+  },
+
+  "after_move_on": [
+
   ],
 
   "branches": [
+    {
+      "key": "dead_body_branch",
+      "text": "You consider investigating the body...",
+
+      "choices": [
+        {
+          "pull": "right",
+          "key": "move_on",
+          "label": "Move on"
+        },
+
+        {
+          "pull": "left",
+          "key": "investigate",
+          "label": "Investigate",
+        }
+      ],
+
+      "results": [
+        {
+          "key": "move_on",
+          "events": [
+            "You ignore the body and move on."
+          ],
+          "then_to": "events:after_body"
+        },
+
+        {
+          "key": "investigate",
+          "events": [
+            "Dead.",
+            "You pause... there's something eerily familiar about the face.",
+            "... unsettled, you move on.",
+          ],
+          "loot": ["standard"],
+          "then_to": "events:after_body"
+        }
+      ]
+
+    },
     {
       "key": "tower_door_branch",
       "text": "You consider trying the door for a moment...",

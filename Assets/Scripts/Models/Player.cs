@@ -25,7 +25,7 @@ public class Player {
       return (currentRoom != null 
         || currentInteractible != null 
         || currentMob != null
-        || currentEvent.blocksContinue
+        || (currentEvent != null && currentEvent.blocksContinue)
       );
     }
   }

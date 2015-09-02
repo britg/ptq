@@ -36,7 +36,13 @@ public class BranchResult : JSONResource {
 
   public bool thenToRoom {
     get {
-      return thenTo.Substring(0, 5) == "room:";
+      return thenTo.Substring(0, "room:".Length) == "room:";
+    }
+  }
+
+  public bool thenToEvents {
+    get {
+      return thenTo.Substring(0, "events:".Length) == "events:";
     }
   }
 

@@ -61,11 +61,11 @@ public class DunGen {
 
   Hashtable defaultOpts = new Hashtable() {
     {"seed", (int)Time.time},
-    {"n_rows", 39 },
-    {"n_cols", 39 },
+    {"n_rows", 79 },
+    {"n_cols", 79 },
     {"dungeon_layout", "None" },
-    {"room_min", 3 },
-    {"room_max", 11 },
+    {"room_min", 9 },
+    {"room_max", 17 },
     {"room_layout", "Packed" },
     {"corridor_layout", "Bent" },
     {"remove_deadends", 100 },
@@ -104,7 +104,7 @@ public class DunGen {
     // TODO: Merge default opts with opts;
     opts = defaultOpts;
 
-    Random.seed = (int)opts["seed"];
+    //Random.seed = (int)opts["seed"];
 
     n_i = (int)((int)opts["n_rows"] / 2);
     n_j = (int)((int)opts["n_cols"] / 2);
@@ -320,7 +320,7 @@ public class DunGen {
     return _cells;
   }
 
-
+  List<Vector2> doorToRoomCache = new List<Vector2>();
   TileType[,] OpenRoom (TileType[,] _cells, Hashtable room) {
 
     var sills = DoorSills(_cells, room);
@@ -350,6 +350,7 @@ public class DunGen {
           continue;
         } else {
           roomConnections[key] = 1;
+          doorToRoomCache.Add(new Vector2(door_c, door_r));
         }
       }
 
@@ -675,12 +676,25 @@ public class DunGen {
 
   TileType[,] FixDoors (TileType[,] _cells) {
 
+    //doorToRoomCache.AddRange(cachedDoors);
+
     foreach (Vector2 doorPos in cachedDoors) {
       _cells[(int)doorPos.y, (int)doorPos.x] = TileType.Door;
     }
 
     foreach (Vector2 entrancePos in cachedEntrances) {
       _cells[(int)entrancePos.y, (int)entrancePos.x] = TileType.Entrance;
+    }
+
+    for (var r = 0; r < _cells.GetLength(0); r++) {
+      for (var c = 0; c < _cells.GetLength(1); c++) {
+        var test = new Vector2(c, r);
+        if (_cells[r, c] == TileType.Door) {
+          if (!doorToRoomCache.Contains(test)) {
+            //_cells[r, c] = TileType.Nothing;
+          }
+        }
+      }
     }
 
     return _cells;

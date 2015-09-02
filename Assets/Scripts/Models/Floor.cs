@@ -28,17 +28,23 @@ public class Floor : JSONResource {
     }
   }
 
-  List<string> _entranceEvents;
-  public List<string> entranceEvents {
+  Dictionary<string, List<string>> _events;
+  public Dictionary<string, List<string>> events {
     get {
-      if (_entranceEvents == null) {
-        _entranceEvents = new List<string>();
-        var entranceArr = sourceData["entrance_events"].AsArray;
-        foreach (JSONNode ent in entranceArr) {
-          _entranceEvents.Add(ent.Value);
+      if (_events == null) {
+        _events = new Dictionary<string, List<string>>();
+        var eventsNode = (JSONClass)sourceData["events"];
+        foreach (KeyValuePair<string, JSONNode> node in eventsNode) {
+          var k = node.Key;
+          var eventsArr = (JSONArray)node.Value;
+          _events[k] = new List<string>();
+          foreach (JSONNode evNode in eventsArr) {
+            var ev = evNode.Value;
+            _events[k].Add(ev);
+          }
         }
       }
-      return _entranceEvents;
+      return _events;
     }
   }
 

@@ -23,20 +23,30 @@ public class FloorProcessor {
     NotificationCenter.PostNotification(Constants.OnFloorUpdate);
 
     newEvents = new List<PlayerEvent>();
+    newEvents = FloorEvents("_enter");
+    return newEvents;
+  }
 
-    foreach (var atmTxt in sim.player.currentFloor.entranceEvents) {
+  public List<PlayerEvent> FloorEvents (string group) {
+
+    newEvents = new List<PlayerEvent>();
+
+    foreach (var atmTxt in sim.player.currentFloor.events[group]) {
       if (DetectBranch(atmTxt)) {
         ExecuteBranch(atmTxt);
       } else {
         newEvents.Add(PlayerEvent.Story(atmTxt));
       }
     }
+
     return newEvents;
   }
 
   bool DetectBranch (string txt) {
-    Debug.Log("branch is " + txt + " " + txt.Substring(0, 6));
-    return txt.Substring(0, 7) == "branch:";
+    if (txt.Length > "branch:".Length) {
+      return txt.Substring(0, 7) == "branch:";
+    }
+    return false;
   }
 
   void ExecuteBranch (string key) {
