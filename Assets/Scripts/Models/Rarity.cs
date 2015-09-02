@@ -37,7 +37,7 @@ public class Rarity {
     Key = json["key"].Value;
     Name = json["name"].Value;
     Chance = json["chance"].AsFloat;
-    Color = ColorUtilities.HexToColor(json["color"].Value);
+    Color = tpd.HexToColor(json["color"].Value);
 
     var multipliers = json["multiplier"].AsArray;
     statMultiplierRange = new RangeAttribute(multipliers[0].AsFloat,

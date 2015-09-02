@@ -85,7 +85,7 @@ public class Floor : JSONResource {
 
 
   public string Name () {
-    return string.Format("{0} {1} Floor", floorTemplate.name, NumberUtilities.AddOrdinal(int.Parse(key)));
+    return string.Format("{0} {1} Floor", floorTemplate.name, tpd.AddOrdinal(int.Parse(key)));
   }
 
   /*

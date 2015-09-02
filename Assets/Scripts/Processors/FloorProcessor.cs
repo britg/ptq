@@ -43,10 +43,7 @@ public class FloorProcessor {
   }
 
   bool DetectBranch (string txt) {
-    if (txt.Length > "branch:".Length) {
-      return txt.Substring(0, 7) == "branch:";
-    }
-    return false;
+    return tpd.BeginsWith(txt, Constants.branchLabel);
   }
 
   void ExecuteBranch (string key) {

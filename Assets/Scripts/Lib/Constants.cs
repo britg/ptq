@@ -35,4 +35,8 @@ public class Constants {
   public const string interactibleContentKey = "interactible";
   public const string roomContentKey = "room";
 
+  // Flow Labels
+  public const string branchLabel = "branch:";
+  public const string continueLabel = "continue";
+  public const string eventsLabel = "events:";
 }
