@@ -8,7 +8,7 @@
     "_enter" :  [
       "You wake on the floor of dark room, a chill air blowing your face.",
       "The sound of rushing wind fills your ears, and you sense the the low pressure void of a sheer drop off close by.",
-      "You quickly roll away from the ledge and scramble to your feet."
+      "You quickly roll away from the ledge and scramble to your feet.",
       "There's another body in the room lying on the floor.",
       "You're not sure if they're alive or dead.",
       "branch:dead_body_branch"
@@ -19,10 +19,6 @@
     ]
 
   },
-
-  "after_move_on": [
-
-  ],
 
   "branches": [
     {

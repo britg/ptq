@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Color: {r: .5, g: .5, b: .5, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3141051ea726d4008ac54f9c9963c97a, type: 3}
-    m_FontSize: 14
+    m_FontSize: 18
     m_FontStyle: 2
     m_BestFit: 0
     m_MinSize: 28
