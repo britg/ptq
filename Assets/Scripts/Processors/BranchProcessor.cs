@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -42,7 +42,7 @@ public class BranchProcessor {
     if (res.thenToEvents) {
       var envProcessor = new EnvironmentProcessor(sim);
       var eventsKey = res.thenTo.Replace("events:", "");
-      newEvents.AddRange(envProcessor.FloorEvents(eventsKey));
+      newEvents.AddRange(envProcessor.Events(eventsKey));
     }
 
     return newEvents;

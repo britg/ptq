@@ -29,22 +29,22 @@ public class InputProcessor {
 
     List<PlayerEvent> newEvents = new List<PlayerEvent>();
 
-//    if (sim.environment == null) {
-//      NotificationCenter.PostNotification(Constants.OnFirstPull);
-//      var envProcessor = new EnvironmentProcessor(sim);
-//      newEvents.AddRange(envProcessor.EnterEnvironment("tower_top")); // TODO: pull this from some config
-//    }
+    if (!player.currentlyOccupied) {
+      var envProcessor = new EnvironmentProcessor(sim);
+
+      if (player.currentEvent == null) {
+        NotificationCenter.PostNotification(Constants.OnFirstPull);
+        NotificationCenter.PostNotification(Constants.OnEnvironmentUpdate);
+        newEvents.AddRange(envProcessor.Enter());
+      } else {
+        newEvents.AddRange(envProcessor.Explore());
+      }
+    }
 
     if (player.currentChoiceKey != null) {
-      Debug.Log ("Current choice key " + player.currentChoiceKey);
       var branchProcessor = new BranchProcessor(sim, player.currentEvent);
       newEvents.AddRange(branchProcessor.Choose(player.currentChoiceKey));
     }
-
-//    if (player.currentRoom != null) {
-//      var roomProcessor = new RoomProcessor(sim, player.currentRoom);
-//      newEvents.AddRange(roomProcessor.Continue());
-//    }
 
     if (player.currentMob != null) {
       var battleProcessor = new BattleProcessor(sim);
@@ -54,17 +54,6 @@ public class InputProcessor {
     if (player.currentInteractible != null) {
       var interactionProcessor = new InteractionProcessor(sim);
       newEvents.AddRange(interactionProcessor.Continue());
-    }
-
-    if (newEvents.Count > 0) {
-      player.currentEvent = newEvents[newEvents.Count - 1];
-    }
-
-    if (!player.currentlyOccupied) {
-      var envProcessor = new EnvironmentProcessor(sim);
-      newEvents.AddRange(envProcessor.Explore());
-      //var towerProcessor = new TowerProcessor(sim);
-      //newEvents.AddRange(towerProcessor.Continue());
     }
 
     if (newEvents.Count > 0) {

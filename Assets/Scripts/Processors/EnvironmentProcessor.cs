@@ -13,16 +13,13 @@ public class EnvironmentProcessor {
     sim = _sim;
   }
 
-  public List<PlayerEvent> EnterEnvironment (string envName) {
-
-    NotificationCenter.PostNotification(Constants.OnEnvironmentUpdate);
-
+  public List<PlayerEvent> Enter () {
     newEvents = new List<PlayerEvent>();
-    newEvents = FloorEvents("_enter");
+    newEvents = Events(Constants.enterKey);
     return newEvents;
   }
 
-  public List<PlayerEvent> FloorEvents (string group) {
+  public List<PlayerEvent> Events (string group) {
 
     newEvents = new List<PlayerEvent>();
 

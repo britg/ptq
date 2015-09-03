@@ -9,7 +9,10 @@
     "_enter" :  [
       "You wake on the floor of dark room, a chill air blowing on your face.",
       "The sound of rushing wind fills your ears, and you sense the the low pressure void of a sheer drop close by.",
-      "You quickly roll away from the ledge and scramble to your feet.",
+      "branch:look_branch"
+    ],
+
+    "body": [
       "There's another body in the room lying on the floor.",
       "You're not sure if they're alive or dead.",
       "branch:dead_body_branch"
@@ -22,11 +25,9 @@
   },
 
   "branches": [
-
     {
       "key": "look_branch",
-      "text": "You consider looking out the ledge...",
-
+      "text": "You quickly roll away from the ledge and scramble to your feet.",
       "choices": [
         {
           "pull": "right",
@@ -39,9 +40,26 @@
           "key": "look",
           "label": "Look"
         }
+      ],
+
+      "results": [
+        {
+          "key": "move_on",
+          "events": [
+            "You can't stand to look over the ledge"
+          ],
+          "then_to": "events:body"
+        },
+        {
+          "key": "look",
+          "events": [
+            "[Describe the surroundings]"
+          ],
+          "then_to": "events:body"
+        }
       ]
 
-    }
+    },
 
     {
       "key": "dead_body_branch",

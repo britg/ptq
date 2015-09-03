@@ -18,9 +18,6 @@ public class EnvironmentRenderer : BaseBehaviour {
 	// Use this for initialization
 	void Start () {
     NotificationCenter.AddObserver(this, Constants.OnEnvironmentUpdate);
-    if (env != null) {
-      RenderEnvironment();
-    }
 	}
 
   void OnEnvironmentUpdate () {
