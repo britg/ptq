@@ -49,28 +49,28 @@ public class TowerProcessor {
   List<PlayerEvent> RandomStuff () {
     var newEvents = new List<PlayerEvent>();
 
-    string content = tpd.RollMap(sim.player.currentEnv.content);
+    string content = tpd.RollMap(sim.environment.content);
     Debug.Log ("Chose content " + content);
     
     // TODO: Inject atmosphere text randomly
     
     if (content == Constants.mobContentKey) {
       var battleProcessor = new BattleProcessor(sim);
-      var mob = sim.player.currentEnv.RandomMob();
+      var mob = sim.environment.RandomMob();
       newEvents.AddRange(EncounterMob(mob));
       newEvents.AddRange(battleProcessor.StartBattle(mob));
     }
     
     if (content == Constants.interactibleContentKey) {
       var interactionProcessor = new InteractionProcessor(sim);
-      var interactible = sim.player.currentEnv.RandomInteractible(); 
+      var interactible = sim.environment.RandomInteractible(); 
       newEvents.AddRange(interactionProcessor.StartInteraction(interactible));
     }
 
     if (content == Constants.roomContentKey) {
       //var roomProcessor = new RoomProcessor(sim);
       //newEvents.AddRange(roomProcessor.DoorChoice());
-      var roomTemplate = sim.player.currentEnv.RandomRoomTemplate();
+      var roomTemplate = sim.environment.RandomRoomTemplate();
       newEvents.Add(PlayerEvent.PromptChoice(roomTemplate.entranceBranch));
     }
 
@@ -90,7 +90,7 @@ public class TowerProcessor {
   }
   
   PlayerEvent AtmosphereEvent () {
-    return new PlayerEvent(sim.player.currentEnv.RandomAtmosphereText());
+    return new PlayerEvent(sim.environment.RandomAtmosphereText());
   }
 
   List<PlayerEvent> EncounterMob (Mob mob) {

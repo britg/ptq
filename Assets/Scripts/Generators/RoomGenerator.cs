@@ -12,7 +12,7 @@ public class RoomGenerator {
   public RoomGenerator (Simulation _sim, RoomTemplate _roomTemplate) {
     sim = _sim;
     roomTemplate = _roomTemplate;
-    env = sim.player.currentEnv;
+    env = sim.environment;
   }
 
   public Room CreateRoom () {

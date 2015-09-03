@@ -26,7 +26,7 @@ public class EnvironmentProcessor {
 
     newEvents = new List<PlayerEvent>();
 
-    foreach (var atmTxt in sim.player.currentEnv.events[group]) {
+    foreach (var atmTxt in sim.environment.events[group]) {
       if (DetectBranch(atmTxt)) {
         ExecuteBranch(atmTxt);
       } else {
@@ -43,7 +43,7 @@ public class EnvironmentProcessor {
   }
 
   void ExecuteBranch (string key) {
-    var branch = sim.player.currentEnv.GetBranch(key);
+    var branch = sim.environment.GetBranch(key);
     var branchProcessor = new BranchProcessor(sim, branch);
     newEvents.AddRange(branchProcessor.Start());
   }

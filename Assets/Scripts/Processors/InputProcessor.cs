@@ -41,10 +41,10 @@ public class InputProcessor {
       newEvents.AddRange(branchProcessor.Choose(player.currentChoiceKey));
     }
 
-    if (player.currentRoom != null) {
-      var roomProcessor = new RoomProcessor(sim, player.currentRoom);
-      newEvents.AddRange(roomProcessor.Continue());
-    }
+//    if (player.currentRoom != null) {
+//      var roomProcessor = new RoomProcessor(sim, player.currentRoom);
+//      newEvents.AddRange(roomProcessor.Continue());
+//    }
 
     if (player.currentMob != null) {
       var battleProcessor = new BattleProcessor(sim);

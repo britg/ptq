@@ -24,6 +24,5 @@ public class LocationView : BaseBehaviour {
   }
 
   void Display () {
-    text.text = sim.player.LocationName();
   }
 }

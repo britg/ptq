@@ -11,8 +11,6 @@ public class Player {
 
   public Hashtable data;
 
-  public Environment currentEnv;
-  public Room currentRoom;
   public Interactible currentInteractible;
   public Mob currentMob;
   public PlayerEvent currentEvent;
@@ -22,8 +20,7 @@ public class Player {
 
   public bool currentlyOccupied {
     get {
-      return (currentRoom != null 
-        || currentInteractible != null 
+      return (currentInteractible != null 
         || currentMob != null
         || (currentEvent != null && currentEvent.blocksContinue)
       );
@@ -74,11 +71,5 @@ public class Player {
     r.Amount += amount;
     Resources[key] = r;
   }
-
-  public string LocationName () {
-    return string.Format("{0}", currentEnv.Name());
-  }
-
-  
 
 }

@@ -19,10 +19,10 @@ public class RoomProcessor  {
   }
 
   public List<PlayerEvent> CreateAndEnter () {
-    var roomGenerator = new RoomGenerator(sim, roomTemplate);
-    sim.player.currentRoom = roomGenerator.CreateRoom();
+//    var roomGenerator = new RoomGenerator(sim, roomTemplate);
+//    sim.player.currentRoom = roomGenerator.CreateRoom();
     List<PlayerEvent> newEvents = new List<PlayerEvent>();
-    newEvents.Add (PlayerEvent.Info ("[Chosen room template is " + roomTemplate.key));
+//    newEvents.Add (PlayerEvent.Info ("[Chosen room template is " + roomTemplate.key));
     return newEvents;
   }
 
