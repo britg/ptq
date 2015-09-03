@@ -42,6 +42,7 @@ public class FloorProcessor {
     return newEvents;
   }
 
+
   bool DetectBranch (string txt) {
     return tpd.BeginsWith(txt, Constants.branchLabel);
   }
@@ -66,6 +67,14 @@ public class FloorProcessor {
 
   void AddStairs () {
 
+  }
+
+  public List<PlayerEvent> Explore () {
+    var newEvents = new List<PlayerEvent>();
+
+    // Look around the room for stuff
+
+    return newEvents;
   }
 
 }

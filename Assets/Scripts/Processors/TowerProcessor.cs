@@ -23,6 +23,32 @@ public class TowerProcessor {
 
     //newEvents.Add(PlayerEvent.Info ("You venture forth..."));
 
+
+    /*
+     * Hook to have the player move around the floor
+     *
+     *
+     */
+
+    //newEvents.AddRange(RandomStuff());
+
+    newEvents.AddRange(Explore());
+
+    return newEvents;
+  }
+
+  List<PlayerEvent> Explore () {
+    var newEvents = new List<PlayerEvent>();
+
+
+
+    return newEvents;
+  }
+
+
+  List<PlayerEvent> RandomStuff () {
+    var newEvents = new List<PlayerEvent>();
+
     string content = tpd.RollMap(sim.player.currentFloor.content);
     Debug.Log ("Chose content " + content);
     
@@ -49,6 +75,7 @@ public class TowerProcessor {
     }
 
     return newEvents;
+
   }
 
   List<PlayerEvent> EntranceEvents () {

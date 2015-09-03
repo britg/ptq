@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FloorRenderer : BaseBehaviour {
 
-  public GameObject playerPrefab;
+  public GameObject playerObj;
   public GameObject wallPrefab;
   public GameObject doorPrefab;
   public GameObject roomPrefab;
@@ -70,7 +70,6 @@ public class FloorRenderer : BaseBehaviour {
   }
 
   void RenderPlayer () {
-    var playerObj = Instantiate(playerPrefab);
     playerObj.transform.parent = transform.parent;
     playerObj.transform.localPosition = floor.playerPos;
   }

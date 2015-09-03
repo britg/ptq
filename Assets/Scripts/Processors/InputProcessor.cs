@@ -67,8 +67,10 @@ public class InputProcessor {
     }
 
     if (!player.currentlyOccupied) {
-      var towerProcessor = new TowerProcessor(sim);
-      newEvents.AddRange(towerProcessor.Continue());
+      var floorProcessor = new FloorProcessor(sim);
+      newEvents.AddRange(floorProcessor.Explore());
+      //var towerProcessor = new TowerProcessor(sim);
+      //newEvents.AddRange(towerProcessor.Continue());
     }
 
     if (newEvents.Count > 0) {
