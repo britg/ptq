@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.IO;
 using System.Collections;
@@ -23,7 +23,7 @@ public class ResourceLoader {
     EquipmentDesignation.type,
     EquipmentType.type,
     ConsumableTemplate.type,
-    FloorTemplate.type,
+    EnvironmentTemplate.type,
     Floor.type,
     RoomTemplate.type,
     MobTemplate.type,
@@ -117,8 +117,8 @@ public class ResourceLoader {
       case ConsumableTemplate.type:
         JSONResource.Cache<ConsumableTemplate>(config);
         break;
-      case FloorTemplate.type:
-        FloorTemplate.Cache(config);
+      case EnvironmentTemplate.type:
+        EnvironmentTemplate.Cache(config);
         break;
       case Floor.type:
         JSONResource.Cache<Floor>(config);

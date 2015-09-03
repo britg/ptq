@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
@@ -7,14 +7,14 @@ public class Floor : JSONResource {
   public const string type = "Floor";
   public Floor (JSONNode _sourceData) : base(_sourceData) { }
 
-  FloorTemplate _floorTemplate;
-  public FloorTemplate floorTemplate {
+  EnvironmentTemplate _envTemplate;
+  public EnvironmentTemplate envTemplate {
     get {
-      if (_floorTemplate == null) {
+      if (_envTemplate == null) {
         var templateName = sourceData["template"].Value;
-        _floorTemplate = FloorTemplate.all[templateName];
+        _envTemplate = EnvironmentTemplate.all[templateName];
       }
-      return _floorTemplate;
+      return _envTemplate;
     }
   }
 
@@ -65,7 +65,7 @@ public class Floor : JSONResource {
 
   public Dictionary<string, float> consumableChances {
     get {
-      return floorTemplate.consumableChances;
+      return envTemplate.consumableChances;
     }
   }
 
@@ -74,8 +74,8 @@ public class Floor : JSONResource {
   }
 
   void CascadeContent (JSONArray contentJson) {
-    // Cascade content from FloorTemplate
-    _content = floorTemplate.content;
+    // Cascade content from EnvironmentTemplate
+    _content = envTemplate.content;
     foreach (JSONNode item in contentJson) {
       var key = item["key"].Value;
       var chance = item["chance"].AsFloat;
@@ -85,7 +85,7 @@ public class Floor : JSONResource {
 
 
   public string Name () {
-    return string.Format("{0} {1} Floor", floorTemplate.name, tpd.AddOrdinal(int.Parse(key)));
+    return string.Format("{0} {1} Floor", envTemplate.name, tpd.AddOrdinal(int.Parse(key)));
   }
 
   /*
@@ -126,21 +126,21 @@ public class Floor : JSONResource {
 
   // TODO: Refactor to cascade mob chances locally
   public Mob RandomMob () {
-    return floorTemplate.RandomMob();
+    return envTemplate.RandomMob();
   }
 
   // TODO: Refactor to cascade atmosphere locally
   public string RandomAtmosphereText () {
-    return floorTemplate.RandomAtmosphereText();
+    return envTemplate.RandomAtmosphereText();
   }
 
   // TODO: Refactor to cascade interactible chances locally
   public Interactible RandomInteractible () {
-    return floorTemplate.RandomInteractible();
+    return envTemplate.RandomInteractible();
   }
 
   public RoomTemplate RandomRoomTemplate () {
-    var roomTemplateKey = tpd.RollMap(floorTemplate.roomTemplateChances);
+    var roomTemplateKey = tpd.RollMap(envTemplate.roomTemplateChances);
     return (RoomTemplate)RoomTemplate.cache[roomTemplateKey];
   }
 

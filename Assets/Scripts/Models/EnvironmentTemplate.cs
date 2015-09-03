@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
-public class FloorTemplate {
+public class EnvironmentTemplate {
 
-  public const string type = "FloorTemplate";
+  public const string type = "EnvironmentTemplate";
 
   public string name;
   public string key;
@@ -17,19 +17,19 @@ public class FloorTemplate {
   public Dictionary<string, float> consumableChances;
   public Dictionary<string, float> interactibleChances;
 
-  public static Dictionary<string, FloorTemplate> all = new Dictionary<string, FloorTemplate>();
+  public static Dictionary<string, EnvironmentTemplate> all = new Dictionary<string, EnvironmentTemplate>();
 
   public static void Cache (JSONNode json) {
-    var floorTemplate = new FloorTemplate(json);
-    all[floorTemplate.key] = floorTemplate;
-    Debug.Log("Loaded floor template " + floorTemplate.name);
+    var envTemplate = new EnvironmentTemplate(json);
+    all[envTemplate.key] = envTemplate;
+    Debug.Log("Loaded environment template " + envTemplate.name);
   }
 
-  public FloorTemplate () {
+  public EnvironmentTemplate () {
 
   }
 
-  public FloorTemplate (JSONNode json) {
+  public EnvironmentTemplate (JSONNode json) {
 
     name = json["name"].Value;
     key = json["key"].Value;
