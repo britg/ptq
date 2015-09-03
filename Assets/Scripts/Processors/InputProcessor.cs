@@ -29,16 +29,10 @@ public class InputProcessor {
 
     List<PlayerEvent> newEvents = new List<PlayerEvent>();
 
-    if (player.currentEnv == null) {
-      NotificationCenter.PostNotification(Constants.OnFirstPull);
-      var envProcessor = new EnvironmentProcessor(sim);
-      newEvents.AddRange(envProcessor.EnterEnvironment("tower_top")); // TODO: pull this from some config
-    }
-
-//    if (player.currentChoice == Choice.OpenDoor) {
-//      var roomProcessor = new RoomProcessor(sim);
-//      newEvents.AddRange(roomProcessor.OpenDoor());
-//      player.currentChoice = null;
+//    if (sim.environment == null) {
+//      NotificationCenter.PostNotification(Constants.OnFirstPull);
+//      var envProcessor = new EnvironmentProcessor(sim);
+//      newEvents.AddRange(envProcessor.EnterEnvironment("tower_top")); // TODO: pull this from some config
 //    }
 
     if (player.currentChoiceKey != null) {

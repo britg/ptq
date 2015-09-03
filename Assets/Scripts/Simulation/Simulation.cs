@@ -7,14 +7,12 @@ public class Simulation {
 
   public ResourceLoader resourceLoader;
   public Player player;
+  public Environment environment;
 
   public void Setup() {
-    LoadMap();
     LoadResources();
     SetupPlayer();
-  }
-
-  void LoadMap () {
+    SetupEnvironment();
   }
 
   void LoadResources () {
@@ -24,7 +22,25 @@ public class Simulation {
 
   void SetupPlayer () {
     var playerRepo = new PlayerRepository(this);
-    player = playerRepo.LoadOrCreate();
+    if (playerRepo.playerPersisted) {
+      player = playerRepo.Load();
+    } else {
+      var playerGen = new PlayerGenerator(this);
+      player = playerGen.Generate();
+    }
+  }
+
+  void SetupEnvironment () {
+    // TODO: Either pull the floor map from persistence
+    // or generate the map.
+    bool persisted = false;
+    if (persisted) {
+
+    } else {
+      var envName = "tower_top";
+      var envGenerator = new EnvironmentGenerator(this);
+      environment = envGenerator.Generate(envName);
+    }
   }
 
 }

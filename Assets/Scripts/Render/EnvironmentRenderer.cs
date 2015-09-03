@@ -40,9 +40,9 @@ public class EnvironmentRenderer : BaseBehaviour {
   }
 
   void RenderBaseLayer () {
-    for (var r = 0; r < env.map.GetLength(0); r++) {
-      for (var c = 0; c < env.map.GetLength(1); c++) {
-        var tile = env.map[r, c];
+    for (var r = 0; r < env.baseLayer.GetLength(0); r++) {
+      for (var c = 0; c < env.baseLayer.GetLength(1); c++) {
+        var tile = env.baseLayer[r, c];
         if (tile == DunGen.TileType.Perimeter
             || tile == DunGen.TileType.Nothing
             || tile == DunGen.TileType.Blocked) {

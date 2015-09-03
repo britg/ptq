@@ -15,16 +15,6 @@ public class EnvironmentProcessor {
 
   public List<PlayerEvent> EnterEnvironment (string envName) {
 
-    sim.player.currentEnv = Environment.GetEnv(envName);
-
-    // TODO: Either pull the floor map from persistence
-    // or generate the map.
-    bool persisted = false;
-    if (persisted) {
-      LoadEnvironment();
-    } else {
-      GenerateEnvironment();
-    }
     NotificationCenter.PostNotification(Constants.OnEnvironmentUpdate);
 
     newEvents = new List<PlayerEvent>();
@@ -58,30 +48,11 @@ public class EnvironmentProcessor {
     newEvents.AddRange(branchProcessor.Start());
   }
 
-  void LoadEnvironment () {
-
-  }
-
-  void GenerateEnvironment () {
-    var dunGen = new DunGen();
-    sim.player.currentEnv.map = dunGen.CreateDungeon();
-    PlacePlayer();
-    AddStairs();
-  }
-
-  void PlacePlayer () {
-    Vector3 pos = sim.player.currentEnv.RandomOpenTile();
-    sim.player.currentEnv.playerPos = pos;
-  }
-
-  void AddStairs () {
-
-  }
-
   public List<PlayerEvent> Explore () {
     var newEvents = new List<PlayerEvent>();
 
     // Look around the room for stuff
+    newEvents.Add(PlayerEvent.Info("exploring..."));
 
     return newEvents;
   }

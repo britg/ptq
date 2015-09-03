@@ -98,7 +98,7 @@ public class Environment : JSONResource {
    * Map Stuff
    */
 
-  public DunGen.TileType[,] map;
+  public DunGen.TileType[,] baseLayer;
 
   public Vector3 playerPos;
 
@@ -113,10 +113,10 @@ public class Environment : JSONResource {
 
   void ScanOpenTiles () {
     openTiles = new List<Vector3>();
-    for (var r = 0; r < map.GetLength(0); r++) {
-      for (var c = 0; c < map.GetLength(1); c++) {
-        if (map[r,c] == DunGen.TileType.Room
-            || map[r,c] == DunGen.TileType.Corridor) {
+    for (var r = 0; r < baseLayer.GetLength(0); r++) {
+      for (var c = 0; c < baseLayer.GetLength(1); c++) {
+        if (baseLayer[r,c] == DunGen.TileType.Room
+            || baseLayer[r,c] == DunGen.TileType.Corridor) {
           openTiles.Add(new Vector3(c, 0, r));
         }
       }
