@@ -34,6 +34,7 @@ public class PlayerRepository {
     player.currentInitiative = 0;
 
     // player.currentFloor - currently loaded at InputProcessor->Continue
+    // but once persistence happens, it should be loaded from here
   }
 
   void BootstrapResources () {

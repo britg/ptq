@@ -19,7 +19,12 @@ public class FloorProcessor {
 
     // TODO: Either pull the floor map from persistence
     // or generate the map.
-    GenerateFloor();
+    bool persisted = false;
+    if (persisted) {
+      LoadFloor();
+    } else {
+      GenerateFloor();
+    }
     NotificationCenter.PostNotification(Constants.OnFloorUpdate);
 
     newEvents = new List<PlayerEvent>();
@@ -51,6 +56,10 @@ public class FloorProcessor {
     var branch = sim.player.currentFloor.GetBranch(key);
     var branchProcessor = new BranchProcessor(sim, branch);
     newEvents.AddRange(branchProcessor.Start());
+  }
+
+  void LoadFloor () {
+
   }
 
   void GenerateFloor () {

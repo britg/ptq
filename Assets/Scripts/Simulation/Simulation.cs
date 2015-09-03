@@ -23,8 +23,8 @@ public class Simulation {
   }
 
   void SetupPlayer () {
-    var playerCreator = new PlayerRepository(this);
-    player = playerCreator.LoadOrCreate();
+    var playerRepo = new PlayerRepository(this);
+    player = playerRepo.LoadOrCreate();
   }
 
 }
