@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
-public class Floor : JSONResource {
-  public const string type = "Floor";
-  public Floor (JSONNode _sourceData) : base(_sourceData) { }
+public class Environment : JSONResource {
+  public const string type = "Environment";
+  public Environment (JSONNode _sourceData) : base(_sourceData) { }
 
   EnvironmentTemplate _envTemplate;
   public EnvironmentTemplate envTemplate {
@@ -69,8 +69,8 @@ public class Floor : JSONResource {
     }
   }
 
-  public static Floor GetFloor (int num) {
-    return (Floor)cache[num.ToString()];
+  public static Environment GetEnv (string name) {
+    return (Environment)cache[name];
   }
 
   void CascadeContent (JSONArray contentJson) {

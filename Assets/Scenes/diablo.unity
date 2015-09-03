@@ -3154,7 +3154,7 @@ GameObject:
   - 4: {fileID: 680567851}
   - 114: {fileID: 680567852}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3180,7 +3180,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 680567850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d946023d5b3a342a59d992a7b8f4fdb8, type: 3}
+  m_Script: {fileID: 11500000, guid: 4295ecf8e883c47a980473f7c002dba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerObj: {fileID: 2055449944}

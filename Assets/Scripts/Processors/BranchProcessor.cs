@@ -40,9 +40,9 @@ public class BranchProcessor {
     }
 
     if (res.thenToEvents) {
-      var floorProcessor = new FloorProcessor(sim);
+      var envProcessor = new EnvironmentProcessor(sim);
       var eventsKey = res.thenTo.Replace("events:", "");
-      newEvents.AddRange(floorProcessor.FloorEvents(eventsKey));
+      newEvents.AddRange(envProcessor.FloorEvents(eventsKey));
     }
 
     return newEvents;

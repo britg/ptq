@@ -1,31 +1,31 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using SimpleJSON;
 
-public class FloorProcessor {
+public class EnvironmentProcessor {
 
   Simulation sim;
   List<PlayerEvent> newEvents;
 
-  public FloorProcessor (Simulation _sim) {
+  public EnvironmentProcessor (Simulation _sim) {
     sim = _sim;
   }
 
-  public List<PlayerEvent> EnterFloor (int floorNum) {
+  public List<PlayerEvent> EnterEnvironment (string envName) {
 
-    sim.player.currentFloor = Floor.GetFloor(floorNum);
+    sim.player.currentEnv = Environment.GetEnv(envName);
 
     // TODO: Either pull the floor map from persistence
     // or generate the map.
     bool persisted = false;
     if (persisted) {
-      LoadFloor();
+      LoadEnvironment();
     } else {
-      GenerateFloor();
+      GenerateEnvironment();
     }
-    NotificationCenter.PostNotification(Constants.OnFloorUpdate);
+    NotificationCenter.PostNotification(Constants.OnEnvironmentUpdate);
 
     newEvents = new List<PlayerEvent>();
     newEvents = FloorEvents("_enter");
@@ -36,7 +36,7 @@ public class FloorProcessor {
 
     newEvents = new List<PlayerEvent>();
 
-    foreach (var atmTxt in sim.player.currentFloor.events[group]) {
+    foreach (var atmTxt in sim.player.currentEnv.events[group]) {
       if (DetectBranch(atmTxt)) {
         ExecuteBranch(atmTxt);
       } else {
@@ -53,25 +53,25 @@ public class FloorProcessor {
   }
 
   void ExecuteBranch (string key) {
-    var branch = sim.player.currentFloor.GetBranch(key);
+    var branch = sim.player.currentEnv.GetBranch(key);
     var branchProcessor = new BranchProcessor(sim, branch);
     newEvents.AddRange(branchProcessor.Start());
   }
 
-  void LoadFloor () {
+  void LoadEnvironment () {
 
   }
 
-  void GenerateFloor () {
+  void GenerateEnvironment () {
     var dunGen = new DunGen();
-    sim.player.currentFloor.map = dunGen.CreateDungeon();
+    sim.player.currentEnv.map = dunGen.CreateDungeon();
     PlacePlayer();
     AddStairs();
   }
 
   void PlacePlayer () {
-    Vector3 pos = sim.player.currentFloor.RandomOpenTile();
-    sim.player.currentFloor.playerPos = pos;
+    Vector3 pos = sim.player.currentEnv.RandomOpenTile();
+    sim.player.currentEnv.playerPos = pos;
   }
 
   void AddStairs () {

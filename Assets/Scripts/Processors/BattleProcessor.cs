@@ -141,8 +141,8 @@ public class BattleProcessor {
 
     if (tpd.RollPercent(currentMob.consumableChance)) {
       //if (true) {
-      var floor = sim.player.currentFloor;
-      var consumableKey = tpd.RollMap(floor.consumableChances);
+      var env = sim.player.currentEnv;
+      var consumableKey = tpd.RollMap(env.consumableChances);
       var consumableGenerator = new ConsumableGenerator(sim);
       var consumable = consumableGenerator.Generate(consumableKey);
       var ev = PlayerEvent.Consumable(consumable);

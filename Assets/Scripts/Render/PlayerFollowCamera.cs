@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PlayerFollowCamera : MonoBehaviour {
@@ -7,10 +7,10 @@ public class PlayerFollowCamera : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-    NotificationCenter.AddObserver(this, Constants.OnFloorUpdate);
+    NotificationCenter.AddObserver(this, Constants.OnEnvironmentUpdate);
 	}
 
-  void OnFloorUpdate () {
+  void OnEnvironmentUpdate () {
     
   }
 	

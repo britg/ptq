@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
@@ -11,7 +11,7 @@ public class Player {
 
   public Hashtable data;
 
-  public Floor currentFloor;
+  public Environment currentEnv;
   public Room currentRoom;
   public Interactible currentInteractible;
   public Mob currentMob;
@@ -76,7 +76,7 @@ public class Player {
   }
 
   public string LocationName () {
-    return string.Format("{0}", currentFloor.Name());
+    return string.Format("{0}", currentEnv.Name());
   }
 
   

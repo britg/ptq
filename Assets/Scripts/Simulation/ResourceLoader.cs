@@ -24,7 +24,7 @@ public class ResourceLoader {
     EquipmentType.type,
     ConsumableTemplate.type,
     EnvironmentTemplate.type,
-    Floor.type,
+    Environment.type,
     RoomTemplate.type,
     MobTemplate.type,
     Simulation.type
@@ -120,8 +120,8 @@ public class ResourceLoader {
       case EnvironmentTemplate.type:
         EnvironmentTemplate.Cache(config);
         break;
-      case Floor.type:
-        JSONResource.Cache<Floor>(config);
+      case Environment.type:
+        JSONResource.Cache<Environment>(config);
         break;
       case RoomTemplate.type:
         JSONResource.Cache<RoomTemplate>(config);

@@ -29,10 +29,10 @@ public class InputProcessor {
 
     List<PlayerEvent> newEvents = new List<PlayerEvent>();
 
-    if (player.currentFloor == null) {
+    if (player.currentEnv == null) {
       NotificationCenter.PostNotification(Constants.OnFirstPull);
-      var floorProcessor = new FloorProcessor(sim);
-      newEvents.AddRange(floorProcessor.EnterFloor(1));
+      var envProcessor = new EnvironmentProcessor(sim);
+      newEvents.AddRange(envProcessor.EnterEnvironment("tower_top")); // TODO: pull this from some config
     }
 
 //    if (player.currentChoice == Choice.OpenDoor) {
@@ -67,8 +67,8 @@ public class InputProcessor {
     }
 
     if (!player.currentlyOccupied) {
-      var floorProcessor = new FloorProcessor(sim);
-      newEvents.AddRange(floorProcessor.Explore());
+      var envProcessor = new EnvironmentProcessor(sim);
+      newEvents.AddRange(envProcessor.Explore());
       //var towerProcessor = new TowerProcessor(sim);
       //newEvents.AddRange(towerProcessor.Continue());
     }

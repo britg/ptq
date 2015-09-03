@@ -13,7 +13,7 @@ public class Trigger {
   public const string resourceAmountKey = "resourceAmount";
 
   public enum Type {
-    NewFloor,
+    NewEnvironment,
     PlayerStatChange,
     PlayerResourceChange
   }

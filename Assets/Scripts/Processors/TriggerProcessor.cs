@@ -12,8 +12,8 @@ public class TriggerProcessor {
   }
 
   public void Process () {
-    if (trigger.type == Trigger.Type.NewFloor) {
-      ChangeFloor();
+    if (trigger.type == Trigger.Type.NewEnvironment) {
+      ChangeEnvironment();
     }
 
     if (trigger.type == Trigger.Type.PlayerStatChange) {
@@ -26,7 +26,7 @@ public class TriggerProcessor {
 
   }
 
-  void ChangeFloor () {
+  void ChangeEnvironment () {
     //TODO: update player's floor and all associatd
     //stuff
 //    sim.player.tower.floorNum += 1;

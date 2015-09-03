@@ -16,8 +16,8 @@ public class Constants {
   public const string OnNewGame = "OnNewGame";
   public const string OnFirstPull = "OnFirstPull";
 
-  public const string OnFloorStart = "OnFloorStart";
-  public const string OnFloorUpdate = "OnFloorUpdate";
+  public const string OnEnvironmentStart = "OnEnvironmentStart";
+  public const string OnEnvironmentUpdate = "OnEnvironmentUpdate";
 
   // Layers
   public const string GroundLayer = "Ground";

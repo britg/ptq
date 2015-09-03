@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FloorGenerator : MonoBehaviour {
+public class EnvironmentGenerator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

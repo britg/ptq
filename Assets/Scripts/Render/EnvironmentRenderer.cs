@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class FloorRenderer : BaseBehaviour {
+public class EnvironmentRenderer : BaseBehaviour {
 
   public GameObject playerObj;
   public GameObject wallPrefab;
@@ -9,25 +9,25 @@ public class FloorRenderer : BaseBehaviour {
   public GameObject roomPrefab;
   public GameObject corridorPrefab;
 
-  Floor floor {
+  Environment env {
     get {
-      return sim.player.currentFloor;
+      return sim.player.currentEnv;
     }
   }
 
 	// Use this for initialization
 	void Start () {
-    NotificationCenter.AddObserver(this, Constants.OnFloorUpdate);
-    if (floor != null) {
-      RenderFloor();
+    NotificationCenter.AddObserver(this, Constants.OnEnvironmentUpdate);
+    if (env != null) {
+      RenderEnvironment();
     }
 	}
 
-  void OnFloorUpdate () {
-    RenderFloor();
+  void OnEnvironmentUpdate () {
+    RenderEnvironment();
   }
 
-  void RenderFloor () {
+  void RenderEnvironment () {
     ClearAll();
     RenderBaseLayer();
     RenderPlayer();
@@ -40,9 +40,9 @@ public class FloorRenderer : BaseBehaviour {
   }
 
   void RenderBaseLayer () {
-    for (var r = 0; r < floor.map.GetLength(0); r++) {
-      for (var c = 0; c < floor.map.GetLength(1); c++) {
-        var tile = floor.map[r, c];
+    for (var r = 0; r < env.map.GetLength(0); r++) {
+      for (var c = 0; c < env.map.GetLength(1); c++) {
+        var tile = env.map[r, c];
         if (tile == DunGen.TileType.Perimeter
             || tile == DunGen.TileType.Nothing
             || tile == DunGen.TileType.Blocked) {
@@ -71,7 +71,7 @@ public class FloorRenderer : BaseBehaviour {
 
   void RenderPlayer () {
     playerObj.transform.parent = transform.parent;
-    playerObj.transform.localPosition = floor.playerPos;
+    playerObj.transform.localPosition = env.playerPos;
   }
 
   void PlaceObj (GameObject prefab, int r, int c) {

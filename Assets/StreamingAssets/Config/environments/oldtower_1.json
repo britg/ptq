@@ -1,6 +1,6 @@
 {
-  "type": "Floor",
-  "key": 1,
+  "type": "Environment",
+  "key": "tower_top",
   "template": "old_tower",
 
   "events": {
