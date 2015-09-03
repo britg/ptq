@@ -7,6 +7,12 @@ public class Environment : JSONResource {
   public const string type = "Environment";
   public Environment (JSONNode _sourceData) : base(_sourceData) { }
 
+  public string name {
+    get {
+      return sourceData["name"].Value;
+    }
+  }
+
   EnvironmentTemplate _envTemplate;
   public EnvironmentTemplate envTemplate {
     get {
@@ -85,7 +91,7 @@ public class Environment : JSONResource {
 
 
   public string Name () {
-    return string.Format("{0} {1} Floor", envTemplate.name, tpd.AddOrdinal(int.Parse(key)));
+    return string.Format("{0}", name);
   }
 
   /*

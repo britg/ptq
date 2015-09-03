@@ -1,6 +1,7 @@
 {
   "type": "Environment",
   "key": "tower_top",
+  "name": "The Tower Top",
   "template": "old_tower",
 
   "events": {
@@ -80,8 +81,8 @@
           "then_to": "events:after_body"
         }
       ]
-
     },
+
     {
       "key": "tower_door_branch",
       "text": "You consider trying the door for a moment...",

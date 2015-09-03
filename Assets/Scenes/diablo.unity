@@ -87,52 +87,6 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &14776070
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 54086744}
-    m_Modifications:
-    - target: {fileID: 455316, guid: 782b72cc653a2403f95f40d86ae2834e, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 455316, guid: 782b72cc653a2403f95f40d86ae2834e, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 455316, guid: 782b72cc653a2403f95f40d86ae2834e, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 455316, guid: 782b72cc653a2403f95f40d86ae2834e, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 455316, guid: 782b72cc653a2403f95f40d86ae2834e, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 455316, guid: 782b72cc653a2403f95f40d86ae2834e, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 455316, guid: 782b72cc653a2403f95f40d86ae2834e, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 455316, guid: 782b72cc653a2403f95f40d86ae2834e, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 182304, guid: 782b72cc653a2403f95f40d86ae2834e, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 782b72cc653a2403f95f40d86ae2834e, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &48728618
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +236,6 @@ Transform:
   m_Children:
   - {fileID: 264092903}
   - {fileID: 680567851}
-  - {fileID: 565193421}
   - {fileID: 2055449945}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -2837,10 +2790,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 547946764}
---- !u!4 &565193421 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 455316, guid: 782b72cc653a2403f95f40d86ae2834e, type: 2}
-  m_PrefabInternal: {fileID: 14776070}
 --- !u!1 &583835433
 GameObject:
   m_ObjectHideFlags: 0
