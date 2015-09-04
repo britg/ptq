@@ -7,6 +7,11 @@ public class Environment : JSONResource {
   public const string type = "Environment";
   public Environment (JSONNode _sourceData) : base(_sourceData) { }
 
+
+  public static Environment GetEnv (string name) {
+    return (Environment)cache[name];
+  }
+
   public string name {
     get {
       return sourceData["name"].Value;
@@ -75,8 +80,9 @@ public class Environment : JSONResource {
     }
   }
 
-  public static Environment GetEnv (string name) {
-    return (Environment)cache[name];
+  public Branch GetBranch (string placeholderKey) {
+    var branchKey = placeholderKey.Replace(Constants.branchLabel, "");
+    return branches[branchKey];
   }
 
   void CascadeContent (JSONArray contentJson) {
@@ -99,19 +105,14 @@ public class Environment : JSONResource {
    */
 
   public DunGen.TileType[,] baseLayer;
+  public Hashtable activeLayer;
+  public List<Vector3> openTiles;
 
-  public Vector3 playerPos;
-
-  List<Vector3> openTiles;
   public Vector3 RandomOpenTile () {
-    if (openTiles == null) {
-      ScanOpenTiles();
-    }
-
     return openTiles[Random.Range(0, openTiles.Count -1)];
   }
 
-  void ScanOpenTiles () {
+  public void ScanOpenTiles () {
     openTiles = new List<Vector3>();
     for (var r = 0; r < baseLayer.GetLength(0); r++) {
       for (var c = 0; c < baseLayer.GetLength(1); c++) {
@@ -123,35 +124,4 @@ public class Environment : JSONResource {
     }
   }
 
-  public Vector2 stairsUpPos {
-    get {
-      return Vector2.zero;
-    }
-  }
-  public Vector2 stairsDownPos;
-
-  // TODO: Refactor to cascade mob chances locally
-  public Mob RandomMob () {
-    return envTemplate.RandomMob();
-  }
-
-  // TODO: Refactor to cascade atmosphere locally
-  public string RandomAtmosphereText () {
-    return envTemplate.RandomAtmosphereText();
-  }
-
-  // TODO: Refactor to cascade interactible chances locally
-  public Interactible RandomInteractible () {
-    return envTemplate.RandomInteractible();
-  }
-
-  public RoomTemplate RandomRoomTemplate () {
-    var roomTemplateKey = tpd.RollMap(envTemplate.roomTemplateChances);
-    return (RoomTemplate)RoomTemplate.cache[roomTemplateKey];
-  }
-
-  public Branch GetBranch (string placeholderKey) {
-    var branchKey = placeholderKey.Replace("branch:", "");
-    return branches[branchKey];
-  }
 }

@@ -3137,6 +3137,8 @@ MonoBehaviour:
   doorPrefab: {fileID: 109496, guid: 683531d75026b4430bbcf3cfc6e231b2, type: 2}
   roomPrefab: {fileID: 107814, guid: 07b0700a3e8b24c6ebdda659bf57fda5, type: 2}
   corridorPrefab: {fileID: 135102, guid: b9e114edb75704c4fa47ed5859c3625d, type: 2}
+  mobPrefab: {fileID: 135102, guid: d2d5e41dbf17743b49bf1168d656cf99, type: 2}
+  interactiblePrefab: {fileID: 135102, guid: 617512f52bbb045ab8ab3e45e8bb3cfc, type: 2}
 --- !u!1 &682796088 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 121840, guid: 7daa4cc462352457cb730bed215b486f, type: 2}
@@ -7939,7 +7941,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 403198, guid: 234f36b2f5799422794098f498d16072, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 234f36b2f5799422794098f498d16072, type: 2}

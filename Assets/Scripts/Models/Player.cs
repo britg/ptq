@@ -5,6 +5,8 @@ using SimpleJSON;
 
 public class Player {
 
+  public Vector3 position;
+
   public Dictionary<string, Resource> Resources { get; set; }
   public Dictionary<string, Stat> Stats { get; set; }
   public Dictionary<string, Slot> Slots { get; set; }

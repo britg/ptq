@@ -8,6 +8,8 @@ public class Mob {
   public string name;
   public int level;
 
+  public Vector3 position;
+
   public Dictionary<string, Stat> Stats { get; set; }
   public Hashtable combatProfile;
   public float currentInitiative;

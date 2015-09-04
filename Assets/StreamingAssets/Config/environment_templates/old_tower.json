@@ -12,17 +12,20 @@
 	"room_count": [5, 10],
 
 	"content": [
+
+		{
+			"key": "nothing",
+			"chance": 100
+		},
+
 		{
 			"key": "mob",
-			"chance": 100
+			"chance": 1
 		},
+
 		{
 			"key": "interactible",
-			"chance": 100
-		},
-		{
-			"key": "room",
-			"chance": 25
+			"chance": 1
 		}
 	],
 

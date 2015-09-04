@@ -31,6 +31,7 @@ public class Constants {
   public const string c_LeaveDoor = "leave_door";
 
   // Content
+  public const string nothingContentKey = "nothing";
   public const string mobContentKey = "mob";
   public const string interactibleContentKey = "interactible";
   public const string roomContentKey = "room";

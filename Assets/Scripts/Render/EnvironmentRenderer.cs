@@ -8,6 +8,9 @@ public class EnvironmentRenderer : BaseBehaviour {
   public GameObject doorPrefab;
   public GameObject roomPrefab;
   public GameObject corridorPrefab;
+  public GameObject mobPrefab;
+  public GameObject interactiblePrefab;
+
 
   Environment env {
     get {
@@ -27,6 +30,7 @@ public class EnvironmentRenderer : BaseBehaviour {
   void RenderEnvironment () {
     ClearAll();
     RenderBaseLayer();
+    RenderActiveLayer();
     RenderPlayer();
   }
 
@@ -66,9 +70,23 @@ public class EnvironmentRenderer : BaseBehaviour {
     }
   }
 
+  void RenderActiveLayer () {
+    foreach (DictionaryEntry e in env.activeLayer) {
+      Vector3 pos = (Vector3)e.Key;
+
+      // tmp implementation
+      string thing = (string)e.Value;
+      if (thing == Constants.mobContentKey) {
+        PlaceObj(mobPrefab, (int)pos.z, (int)pos.x);
+      } else if (thing == Constants.interactibleContentKey) {
+        PlaceObj(interactiblePrefab, (int)pos.z, (int)pos.x);
+      }
+    }
+  }
+
   void RenderPlayer () {
     playerObj.transform.parent = transform.parent;
-    playerObj.transform.localPosition = env.playerPos;
+    playerObj.transform.localPosition = sim.player.position;
   }
 
   void PlaceObj (GameObject prefab, int r, int c) {
