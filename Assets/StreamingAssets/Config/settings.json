@@ -1,0 +1,7 @@
+{
+  "type": "Setting",
+  "key": "main",
+
+  "branch_indicator": "branch:",
+  "start_env": "dev"
+}

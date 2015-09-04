@@ -12,6 +12,7 @@ public class EnvironmentGenerator {
   }
 
   public Environment Generate (string name) {
+    Debug.Log ("Accessing env " + name.GetType());
     env = Environment.GetEnv(name);
 
     GenerateBaseLayer();
