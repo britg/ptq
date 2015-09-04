@@ -11,7 +11,7 @@ public class Constants {
   public const string OnEnterPendingSelection = "OnEnterPendingSelection";
   public const string OnWorldSelection = "OnWorldSelection";
   public const string OnUpdateEvents = "OnUpdateEvents";
-  public const string OnUpdateStats = "OnUpdateStats";
+  public const string OnUpdateAttribute = "OnUpdateStats";
   public const string OnTakeDamage = "OnTakeDamage";
   public const string OnNewGame = "OnNewGame";
   public const string OnFirstPull = "OnFirstPull";
@@ -44,7 +44,10 @@ public class Constants {
   public const string eventsLabel = "events:";
 
   // Attributes
+  public const string goldAttr = "gold";
   public const string levelAttr = "level";
   public const string currentHpAttr = "current_hp";
-  public const string speedAttr = "current_hp";
+  public const string speedAttr = "speed";
+  public const string dpsAttr = "dps";
+  public const string critAttr = "crit";
 }

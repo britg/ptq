@@ -37,7 +37,7 @@ public class ConsumableActionProcessor {
       PickUp();
     }
 
-    NotificationCenter.PostNotification(Constants.OnUpdateStats);
+    NotificationCenter.PostNotification(Constants.OnUpdateAttribute);
     NotificationCenter.PostNotification(Constants.OnUpdateEvents);
   }
 

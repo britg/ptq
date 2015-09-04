@@ -19,7 +19,7 @@ public class InitiativeProcessor {
   }
 
   public string NextMove () {
-    float playerSpd = player.GetStatValue(Stat.spd);
+    float playerSpd = player.speed;
 
     if (playerSpd == 0f) {
       Debug.Log("Player speed is 0!!!");

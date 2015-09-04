@@ -9,17 +9,6 @@ public class StatView : BaseBehaviour {
   public string suffix = "";
   public bool includeMax = false;
 
-  Stat _stat;
-  Stat stat {
-    get {
-      if (_stat == null) {
-        Debug.Log ("Attempting to load stat " + statKey);
-        _stat = sim.player.Stats[statKey];
-      }
-      return _stat;
-    }
-  }
-
   Text _text;
   Text text {
     get {
@@ -34,7 +23,7 @@ public class StatView : BaseBehaviour {
   // Use this for initialization
   void Start () {
     Display();
-    NotificationCenter.AddObserver(this, Constants.OnUpdateStats);
+    NotificationCenter.AddObserver(this, Constants.OnUpdateAttribute);
 	}
 	
 	// Update is called once per frame
@@ -46,14 +35,7 @@ public class StatView : BaseBehaviour {
   }
 
   void Display () {
-    var val = sim.player.GetStatValue(statKey);
-    string txt = "";
-
-    if (includeMax) {
-      txt = string.Format("{0:0}/{1}", val, stat.max);
-    } else {
-      txt = string.Format("{0:0}", val);
-    }
-    text.text = string.Format("{0}{1}{2}", prefix, txt, suffix);
+    var stat = sim.player.attributes[statKey];
+    text.text = string.Format("{0}{1}{2}", prefix, stat, suffix);
   }
 }

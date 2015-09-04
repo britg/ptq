@@ -13,7 +13,7 @@ public class GoldView : BaseBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-    var goldAmount = (int)sim.player.Resources[Resource.Gold].Amount;
+    var goldAmount = (int)sim.player.gold;
     text.text = string.Format("{0}g", goldAmount);
 	}
 }

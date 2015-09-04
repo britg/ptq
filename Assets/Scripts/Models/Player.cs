@@ -17,7 +17,13 @@ public class Player {
   }
 
   public void ChangeAttribute (string key, float delta) {
+    attributes[key] += delta;
+  }
 
+  public int gold {
+    get {
+      return (int)attributes[Constants.goldAttr];
+    }
   }
 
   public int level {
@@ -35,6 +41,18 @@ public class Player {
   public int speed {
     get {
       return (int)attributes[Constants.speedAttr];
+    }
+  }
+
+  public float dps {
+    get {
+      return (float)attributes[Constants.dpsAttr];
+    }
+  }
+
+  public float crit {
+    get {
+      return (float)attributes[Constants.critAttr];
     }
   }
 

@@ -7,17 +7,6 @@ public class ResourceView : BaseBehaviour {
   public string resourceKey;
   public string prefix = "";
   public string suffix = "";
-
-  Resource _resource;
-  Resource resource {
-    get {
-      if (_resource == null) {
-        Debug.Log ("Attempting to load stat " + resourceKey);
-        _resource = sim.player.Resources[resourceKey];
-      }
-      return _resource;
-    }
-  }
   
   Text _text;
   Text text {
@@ -33,7 +22,7 @@ public class ResourceView : BaseBehaviour {
   // Use this for initialization
   void Start () {
     Display();
-    NotificationCenter.AddObserver(this, Constants.OnUpdateStats);
+    NotificationCenter.AddObserver(this, Constants.OnUpdateAttribute);
   }
   
   // Update is called once per frame
@@ -45,7 +34,7 @@ public class ResourceView : BaseBehaviour {
   }
   
   void Display () {
-    var res = sim.player.Resources[resourceKey];
-    text.text = string.Format("{0}{1}{2}", prefix, res.Amount, suffix);
+    var res = sim.player.attributes[resourceKey];
+    text.text = string.Format("{0}{1}{2}", prefix, res, suffix);
   }
 }

@@ -40,7 +40,7 @@ public class PlayerCombatProcessor  {
 
     // Calc damage
     HitType hitType = HitType.Hit;
-    var damage = AddVariance(player.GetStatValue(Stat.dps));
+    var damage = AddVariance(player.dps);
 
     if (tpd.RollPercent(ChanceToMiss())) {
       hitType = HitType.Miss;
@@ -70,7 +70,7 @@ public class PlayerCombatProcessor  {
    * Compare speeds
    */
   float ChanceToMiss () {
-    var playerSpd = player.Stats[Stat.spd].current;
+    var playerSpd = player.speed;
     var mobSpd = mob.Stats[Stat.spd].current;
 
     float baseChance = 10f;
@@ -80,7 +80,7 @@ public class PlayerCombatProcessor  {
   }
 
   float ChanceToGlance () {
-    var playerSpd = player.Stats[Stat.spd].current;
+    var playerSpd = player.speed;
     var mobSpd = mob.Stats[Stat.spd].current;
 
     float baseChance = 20f;
@@ -90,7 +90,7 @@ public class PlayerCombatProcessor  {
   }
 
   float ChanceToCrit () {
-    var playerCrit = player.Stats[Stat.crit].current;
+    var playerCrit = player.crit;
     // TODO: do some other stuff?
 
     return playerCrit;

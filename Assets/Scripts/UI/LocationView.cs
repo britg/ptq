@@ -11,7 +11,7 @@ public class LocationView : BaseBehaviour {
     text = GetComponent<Text>();
     Display();
 
-    NotificationCenter.AddObserver(this, Constants.OnUpdateStats);
+    NotificationCenter.AddObserver(this, Constants.OnUpdateAttribute);
 	}
 	
 	// Update is called once per frame

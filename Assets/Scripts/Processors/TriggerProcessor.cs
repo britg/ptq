@@ -33,24 +33,20 @@ public class TriggerProcessor {
   }
 
   void ChangePlayerStat () {
-    var statKey = (string)trigger.data[Trigger.statKey];
+    var attrKey = (string)trigger.data[Trigger.statKey];
     var amount = (float)trigger.data[Trigger.statChangeAmountKey];
 
-    sim.player.ChangeStat(statKey, amount);
+    sim.player.ChangeAttribute(attrKey, amount);
 
-    if (statKey == Stat.hp && amount < 0) {
-      NotificationCenter.PostNotification(Constants.OnTakeDamage);
-    }
-
-    NotificationCenter.PostNotification(Constants.OnUpdateStats);
+    NotificationCenter.PostNotification(Constants.OnUpdateAttribute);
   }
 
   void ChangePlayerResource () {
     var resourceKey = (string)trigger.data[Trigger.resourceKey];
     int resourceAmount = (int)trigger.data[Trigger.resourceAmountKey];
 
-    sim.player.ChangeResource(resourceKey, resourceAmount);
+    sim.player.ChangeAttribute(resourceKey, resourceAmount);
 
-    NotificationCenter.PostNotification(Constants.OnUpdateStats);
+    NotificationCenter.PostNotification(Constants.OnUpdateAttribute);
   }
 }
