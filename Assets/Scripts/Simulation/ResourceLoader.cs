@@ -27,7 +27,9 @@ public class ResourceLoader {
     Environment.type,
     RoomTemplate.type,
     MobTemplate.type,
-    Simulation.type
+
+
+    Setting.type
   };
 
 
@@ -96,6 +98,9 @@ public class ResourceLoader {
 
     var type = config["type"].Value;
     switch (type) {
+      case Setting.type:
+        JSONResource.Cache<Setting>(config);
+        break;
       case ResourceType.type:
         ResourceType.Cache(config);
         break;
@@ -129,9 +134,6 @@ public class ResourceLoader {
       case MobTemplate.type:
         MobTemplate.Cache(config);
         break;
-      case Simulation.type:
-        LoadSelf(config);
-      break;
       case Name.type:
         Name.Cache(config);
         break;

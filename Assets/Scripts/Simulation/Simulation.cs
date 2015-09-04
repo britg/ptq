@@ -38,7 +38,7 @@ public class Simulation {
     if (persisted) {
 
     } else {
-      var envName = "tower_top";
+      var envName = "dev";
       var envGenerator = new EnvironmentGenerator(this);
       environment = envGenerator.Generate(envName);
     }
