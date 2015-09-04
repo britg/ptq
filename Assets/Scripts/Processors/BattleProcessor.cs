@@ -74,8 +74,7 @@ public class BattleProcessor {
   }
 
   bool PlayerAlive () {
-    var hp = sim.player.GetStat(Stat.hp);
-    return hp.current > 0f;
+    return sim.player.currentHp > 0f;
   }
 
   bool MobAlive () {

@@ -42,4 +42,9 @@ public class Constants {
   public const string branchLabel = "branch:";
   public const string continueLabel = "continue";
   public const string eventsLabel = "events:";
+
+  // Attributes
+  public const string levelAttr = "level";
+  public const string currentHpAttr = "current_hp";
+  public const string speedAttr = "current_hp";
 }

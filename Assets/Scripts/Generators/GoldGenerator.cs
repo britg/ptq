@@ -6,12 +6,10 @@ public class GoldGenerator {
   Player player;
   Mob mob;
   Interactible interactible;
-  int playerLvl;
 
   public GoldGenerator (Player _player, Mob _mob) {
     player = _player;
     mob = _mob;
-    playerLvl = (int)player.GetStatValue(Stat.lvl);
   }
 
   public GoldGenerator (Player _player, Interactible _interactible) {
@@ -20,11 +18,11 @@ public class GoldGenerator {
   }
 
   public int Interactible () {
-    return interactible.level * Random.Range(1, playerLvl);
+    return interactible.level * Random.Range(1, player.level);
   }
 
   public int Mob () {
-    return mob.level * Random.Range(1, playerLvl);
+    return mob.level * Random.Range(1, player.level);
   }
 	
 }

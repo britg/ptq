@@ -48,7 +48,7 @@ public class ConsumableActionProcessor {
 
   void Consume () {
     foreach (KeyValuePair<string, float> statEffect in consumable.statEffects) {
-      sim.player.ChangeStat(statEffect.Key, statEffect.Value);
+      sim.player.ChangeAttribute(statEffect.Key, statEffect.Value);
     }
 
     ev.Content = consumable.usedName;

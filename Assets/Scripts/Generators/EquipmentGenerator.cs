@@ -68,9 +68,8 @@ public class EquipmentGenerator {
   }
 
   float BaseStatValue (string statKey) {
-    float lvl = sim.player.GetStatValue(Stat.lvl);
     // TODO: Somehow get base values.
-    float val = Random.Range(lvl, lvl + 1f);
+    float val = Random.Range((float)sim.player.level, (float)sim.player.level + 1f);
     return val;
   }
 

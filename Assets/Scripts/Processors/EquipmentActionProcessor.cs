@@ -40,6 +40,7 @@ public class EquipmentActionProcessor {
   }
 
   public void Equip (PlayerEvent ev) {
+/*
     Debug.Log ("Loot processor is equipping " + eq.Name);
     SlotType slotType = eq.SlotType;
     Slot playerSlot = sim.player.Slots[slotType.Key];
@@ -50,8 +51,10 @@ public class EquipmentActionProcessor {
     AddNewEquipment(eq);
 
     NotificationCenter.PostNotification(Constants.OnUpdateStats);
+*/
   }
 
+/*
   void SubtractPrevEquipment (Equipment prev) {
     if (prev == null) {
       return;
@@ -71,4 +74,5 @@ public class EquipmentActionProcessor {
       playerStat.Change(stat.current);
     }
   }
+*/
 }
