@@ -2,19 +2,31 @@
   "type": "Setting",
   "key": "main",
 
-  "branch_indicator": "branch:",
   "start_env": "dev",
 
-  "player_stats": [
-    {
-      "key": "ap",
-      "values": [0, 100, 100]
-    },
+  "attributes": [
+    "gold",
+    "current_hp",
+    "max_hp",
+    "current_ap",
+    "max_ap",
+    "attack",
+    "defense",
+    "speed",
+    "crit",
+    "sight"
+  ],
 
-    {
-      "key": "crit",
-      "values": [0, 100, 5]
-    }
-
-  ]
+  "player_start_attributes": {
+    "gold": 0,
+    "current_hp": 100,
+    "max_hp": 100,
+    "current_ap": 100,
+    "max_ap": 100,
+    "attack": 20,
+    "defense": 10,
+    "speed": 20,
+    "crit": 5,
+    "sight": 5
+  }
 }

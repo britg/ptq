@@ -28,7 +28,6 @@ public class ResourceLoader {
     RoomTemplate.type,
     MobTemplate.type,
 
-
     Setting.type
   };
 

@@ -11,7 +11,7 @@ public class Player {
   public Dictionary<string, Stat> Stats { get; set; }
   public Dictionary<string, Slot> Slots { get; set; }
 
-  public Hashtable data;
+  public Dictionary<string, float> attributes;
 
   public Interactible currentInteractible;
   public Mob currentMob;
