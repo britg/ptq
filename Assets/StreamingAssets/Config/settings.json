@@ -3,5 +3,18 @@
   "key": "main",
 
   "branch_indicator": "branch:",
-  "start_env": "dev"
+  "start_env": "dev",
+
+  "player_stats": [
+    {
+      "key": "ap",
+      "values": [0, 100, 100]
+    },
+
+    {
+      "key": "crit",
+      "values": [0, 100, 5]
+    }
+
+  ]
 }

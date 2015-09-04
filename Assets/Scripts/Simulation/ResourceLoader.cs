@@ -15,7 +15,7 @@ public class ResourceLoader {
     Rarity.type,
     ResourceType.type,
     QuestType.type,
-    StatType.type,
+    StatTemplate.type,
     SlotType.type,
     Name.type,
 
@@ -107,8 +107,8 @@ public class ResourceLoader {
       case QuestType.type:
         QuestType.Cache(config);
         break;
-      case StatType.type:
-        StatType.Cache(config);
+      case StatTemplate.type:
+        JSONResource.Cache<StatTemplate>(config);
         break;
       case SlotType.type:
         SlotType.Cache(config);

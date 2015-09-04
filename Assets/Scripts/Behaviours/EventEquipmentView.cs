@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
@@ -62,7 +62,7 @@ public class EventEquipmentView : EventView {
       }
 
       // TODO: Calc diff and show diffs instead of absolute value
-      str += string.Format("{0}{1:0.0} {2} ", pol, stat.current, stat.Key);
+      str += string.Format("{0}{1:0.0} {2} ", pol, stat.current, stat.key);
     }
 
     return str;

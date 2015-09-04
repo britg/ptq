@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Stat {
@@ -27,44 +27,35 @@ public class Stat {
     return Sign.Positive;
   }
 
+  public string key { get; set; }
+  public StatTemplate template { get; set; }
 
-  public string Key { get; set; }
-
-  public StatType Type { get; set; }
-
-  // Need to refactor to min/max/current!
   public float min;
   public float max;
   public float current;
 
-  //public float Min { get; set; }
-  //public float Max { get; set; }
-  //public float Base { get; set; }
-  //public float CurrentChange { get; set; }
-  //public float Value { get; set; }
-
   public string Abbr {
     get {
-      return Type.Abbr;
+      return template.abbr;
     }
   }
 
   public Stat (string statKey) {
-    Key = statKey;
-    Type = StatType.all[statKey];
+    key = statKey;
+    template = (StatTemplate)StatTemplate.cache[statKey];
   }
 
   public Stat (string statKey, float _min, float _max, float _current) {
-    Key = statKey;
-    Type = StatType.all[statKey];
+    key = statKey;
+    template = (StatTemplate)StatTemplate.cache[statKey];
     min = _min;
     max = _max;
     current = _current;
   }
 
   public Stat (string statKey, float value) {
-    Key = statKey;
-    Type = StatType.all[statKey];
+    key = statKey;
+    template = (StatTemplate)StatTemplate.cache[statKey];
     current = value;
     min = 0;
     max = current;

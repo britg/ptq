@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -59,7 +59,7 @@ public class EquipmentActionProcessor {
 
     foreach (KeyValuePair<string, Stat> pair in prev.Stats) {
       var stat = pair.Value;
-      var playerStat = sim.player.GetStat(stat.Key);
+      var playerStat = sim.player.GetStat(stat.key);
       playerStat.Change(-stat.current);
     }
   }
@@ -67,7 +67,7 @@ public class EquipmentActionProcessor {
   void AddNewEquipment (Equipment eq) {
     foreach (KeyValuePair<string, Stat> pair in eq.Stats) {
       var stat = pair.Value;
-      var playerStat = sim.player.GetStat(stat.Key);
+      var playerStat = sim.player.GetStat(stat.key);
       playerStat.Change(stat.current);
     }
   }

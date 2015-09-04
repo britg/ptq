@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -37,9 +37,9 @@ public class EquipmentGenerator {
   void AssignAttributes (Equipment e) {
 
     // Get base stat from equipment designation
-    foreach (KeyValuePair<string, StatType> pair in e.Designation.BaseStats) {
+    foreach (KeyValuePair<string, StatTemplate> pair in e.Designation.BaseStats) {
       var statKey = pair.Key;
-      var statType = pair.Value;
+      var statTemplate = pair.Value;
 
       float val = BaseStatValue(statKey);
 
@@ -63,7 +63,7 @@ public class EquipmentGenerator {
         ApplyModifier(e, e.Suffix);
       }
 
-      e.Stats[statType.Key] = new Stat(statType.Key, val);
+      e.Stats[statTemplate.key] = new Stat(statTemplate.key, val);
     }
   }
 
