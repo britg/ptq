@@ -92,7 +92,7 @@ public class EnvironmentRenderer : BaseBehaviour {
   void PlaceObj (GameObject prefab, int r, int c) {
     var obj = Instantiate(prefab);
     obj.transform.parent = transform;
-    obj.transform.localPosition = new Vector3(c, 0, r);
+    obj.transform.localPosition = new Vector3(c, obj.transform.localPosition.y, r);
   }
 
 	// Update is called once per frame

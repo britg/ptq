@@ -20,7 +20,8 @@ public class PlayerEvent {
     Choice,
     PlayerBasicAttack,
     MobBasicAttack,
-    Story
+    Story,
+    Movement
   }
 
   public string Id { get; set; }

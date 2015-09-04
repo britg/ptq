@@ -38,9 +38,7 @@ public class Simulation {
     if (persisted) {
 
     } else {
-      var envName = Setting.Get("start_env").ToString();
-      Debug.Log ("env name is " + envName);
-//      envName = "dev";
+      var envName = Setting.Get(Constants.startEnvKey).ToString();
       var envGenerator = new EnvironmentGenerator(this);
       environment = envGenerator.Generate(envName);
     }

@@ -37,6 +37,7 @@ public class Constants {
   public const string roomContentKey = "room";
 
   // Flow Labels
+  public const string startEnvKey = "start_env";
   public const string enterKey = "_enter";
   public const string branchLabel = "branch:";
   public const string continueLabel = "continue";
