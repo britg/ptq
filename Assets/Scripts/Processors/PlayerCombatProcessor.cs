@@ -54,7 +54,7 @@ public class PlayerCombatProcessor  {
     }
 
     // TODO: Adjust value up and down for def
-    mob.ChangeStat(Stat.hp, -damage);
+    //mob.ChangeStat(Stat.hp, -damage);
 
     var ev = new PlayerEvent();
     ev.type = PlayerEvent.Type.PlayerBasicAttack;
@@ -71,7 +71,8 @@ public class PlayerCombatProcessor  {
    */
   float ChanceToMiss () {
     var playerSpd = player.speed;
-    var mobSpd = mob.Stats[Stat.spd].current;
+    //var mobSpd = mob.Stats[Stat.spd].current;
+    var mobSpd = 10f;
 
     float baseChance = 10f;
     var diff = playerSpd - mobSpd;
@@ -81,7 +82,8 @@ public class PlayerCombatProcessor  {
 
   float ChanceToGlance () {
     var playerSpd = player.speed;
-    var mobSpd = mob.Stats[Stat.spd].current;
+    //var mobSpd = mob.Stats[Stat.spd].current;
+    var mobSpd = 10f;
 
     float baseChance = 20f;
     var diff = playerSpd - mobSpd;

@@ -26,7 +26,8 @@ public class InitiativeProcessor {
       return mobIdent;
     }
 
-    float mobSpd = mob.GetStatValue(Stat.spd);
+    //float mobSpd = mob.GetStatValue(Stat.spd);
+    float mobSpd = 10f;
 
     player.currentInitiative += playerSpd;
     mob.currentInitiative += mobSpd;

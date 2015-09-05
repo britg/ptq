@@ -94,8 +94,6 @@ public class DunGen {
   List<Vector2> cachedDoors = new List<Vector2>();
   List<Vector2> cachedEntrances = new List<Vector2>();
 
-  //Hashtable proto;
-
   public TileType[,] CreateDungeon () {
     return CreateDungeon(defaultOpts);
   }

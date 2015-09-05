@@ -13,22 +13,12 @@ public class Equipment {
   public EquipmentModifier Prefix;
   public EquipmentModifier Suffix;
 
-  public Dictionary<string, Stat> Stats = new Dictionary<string, Stat>();
+  public Dictionary<string, float> attributes;
 
   public EquipmentDesignation Designation {
     get {
       return Type.Designation;
     }
-  }
-
-
-  public float StatValue (string key) {
-    if (!Stats.ContainsKey(key)) {
-      return 0f;
-    }
-
-    var stat = Stats[key];
-    return stat.current;
   }
 
 }

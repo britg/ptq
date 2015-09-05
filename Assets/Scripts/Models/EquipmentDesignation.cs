@@ -9,7 +9,6 @@ public class EquipmentDesignation {
 
   public string Key { get; set; }
   public string Name { get; set; }
-  public Dictionary<string, StatTemplate> BaseStats { get; set; }
 
   public static Dictionary<string, EquipmentDesignation> all = new Dictionary<string, EquipmentDesignation>();
 
@@ -22,12 +21,6 @@ public class EquipmentDesignation {
   public EquipmentDesignation (JSONNode json) {
     Key = json["key"].Value;
     Name = json["name"].Value;
-
-    BaseStats = new Dictionary<string, StatTemplate>();
-    foreach (JSONNode item in json["base_stats"].AsArray) {
-      var statKey = item.Value;
-      Debug.Log ("Attempting to load base stat " + statKey);
-      BaseStats[statKey] = (StatTemplate)StatTemplate.cache[statKey];
-    }
+    
   }
 }

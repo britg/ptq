@@ -54,16 +54,6 @@ public class EventEquipmentView : EventView {
 
   string StatsString () {
     string str = "";
-    foreach (KeyValuePair<string, Stat> p in eq.Stats) {
-      var stat = p.Value;
-      var pol = "+";
-      if (stat.current < 0f) {
-        pol = "-";
-      }
-
-      // TODO: Calc diff and show diffs instead of absolute value
-      str += string.Format("{0}{1:0.0} {2} ", pol, stat.current, stat.key);
-    }
 
     return str;
   }

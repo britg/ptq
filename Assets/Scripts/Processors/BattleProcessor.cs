@@ -78,9 +78,9 @@ public class BattleProcessor {
   }
 
   bool MobAlive () {
-    var hp = currentMob.GetStatValue(Stat.hp);
-    Debug.Log("mob's hp is " + hp);
-    return hp > 0f;
+    return true;
+    //Debug.Log("mob's hp is " + hp);
+    //return hp > 0f;
   }
 
   public List<PlayerEvent> MobDeath () {
@@ -156,7 +156,7 @@ public class BattleProcessor {
     var amount = experienceProcessor.ExperienceGain();
     var ev = PlayerEvent.Info(string.Format("+{0} experience", amount));
     var trigger = new Trigger(Trigger.Type.PlayerStatChange);
-    trigger.data[Trigger.statKey] = Stat.xp;
+    //trigger.data[Trigger.statKey] = Stat.xp;
     trigger.data[Trigger.statChangeAmountKey] = amount;
     ev.Triggers.Add(trigger);
 
