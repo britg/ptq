@@ -5,8 +5,9 @@
   "start_env": "dev",
 
   "attributes": [
-    "level"
     "gold",
+    "exp",
+    "level",
     "current_hp",
     "max_hp",
     "current_ap",
@@ -14,13 +15,16 @@
     "attack",
     "defense",
     "speed",
+    "dps",
     "crit",
-    "sight"
+    "sight",
+    "initiative"
   ],
 
   "player_start_attributes": {
-    "level": 1,
     "gold": 0,
+    "exp": 0,
+    "level": 1,
     "current_hp": 100,
     "max_hp": 100,
     "current_ap": 100,
@@ -28,7 +32,9 @@
     "attack": 20,
     "defense": 10,
     "speed": 20,
+    "dps": 0,
     "crit": 5,
-    "sight": 5
+    "sight": 5,
+    "initiative": 0
   }
 }

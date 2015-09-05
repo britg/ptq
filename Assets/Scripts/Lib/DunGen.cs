@@ -309,7 +309,6 @@ public class DunGen {
   TileType[,] OpenRooms (TileType[,] _cells, Hashtable _rooms) {
 
     foreach (DictionaryEntry entry in _rooms) {
-      var room_id = (int)entry.Key;
       var room = (Hashtable)entry.Value;
 
       _cells = OpenRoom(_cells, room);

@@ -44,10 +44,19 @@ public class Constants {
   public const string eventsLabel = "events:";
 
   // Attributes
-  public const string goldAttr = "gold";
+  
+  public const string expAttr = "exp";
   public const string levelAttr = "level";
+  public const string goldAttr = "gold";
   public const string currentHpAttr = "current_hp";
+  public const string maxHpAttr = "max_hp";
+  public const string currentApAttr = "current_ap";
+  public const string maxApAttr = "max_ap";
+  public const string attackAttr = "attack";
+  public const string defenseAttr = "defense";
   public const string speedAttr = "speed";
   public const string dpsAttr = "dps";
   public const string critAttr = "crit";
+  public const string sightAttr = "sight";
+  public const string initiativeAttr = "initiative";
 }
