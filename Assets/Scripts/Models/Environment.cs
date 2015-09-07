@@ -70,6 +70,19 @@ public class Environment : JSONResource {
     }
   }
 
+  Dictionary<string, float> _roomTemplateChances;
+  public Dictionary<string, float> roomTemplateChances {
+    get {
+
+      if (_roomTemplateChances == null) {
+        // TODO: cascade from environment template
+        _roomTemplateChances = new Dictionary<string, float>() { { "standard", 100f } };
+      }
+
+      return _roomTemplateChances;
+    }
+  }
+
   public Branch GetBranch (string placeholderKey) {
     var branchKey = placeholderKey.Replace(Constants.branchLabel, "");
     return branches[branchKey];
