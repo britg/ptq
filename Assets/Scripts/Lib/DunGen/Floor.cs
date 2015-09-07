@@ -156,9 +156,6 @@ namespace DunGen {
             continue;
           }
 
-        //  Hashtable proto = new Hashtable() {
-        //  {"i", i }, {"j", j }
-        //};
           var roomFootprint = new RoomFootprint();
           roomFootprint.row = i;
           roomFootprint.col = j;
