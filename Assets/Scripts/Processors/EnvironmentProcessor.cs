@@ -51,6 +51,7 @@ public class EnvironmentProcessor {
     // Look around the room for stuff
     newEvents.Add(PlayerEvent.Info("You venture forth..."));
 
+
     // scan visible range for anything of interest
       // if something in interest walk towards the closest thing
       // decide whether to interact or skip

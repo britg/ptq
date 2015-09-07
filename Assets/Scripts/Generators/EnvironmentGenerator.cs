@@ -24,8 +24,7 @@ public class EnvironmentGenerator {
   }
 
   void GenerateBaseLayer () {
-    var floor = new DunGen.Floor();
-    env.baseLayer = floor.Generate();
+    env.floor = DunGen.Floor.Create();
     env.ScanOpenTiles();
   }
 

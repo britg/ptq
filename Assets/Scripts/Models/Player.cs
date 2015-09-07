@@ -9,13 +9,12 @@ public class Player : AttributeBase {
 
   public Player () {
     Slots = new Dictionary<string, Slot>();
-    encounteredMobKeys = new List<string>();
   }
 
+  public Vector3 currentTarget;
   public Interactible currentInteractible;
   public Mob currentMob;
   public PlayerEvent currentEvent;
-  public List<string> encounteredMobKeys;
   public float currentInitiative;
   public string lastBattleMove;
 

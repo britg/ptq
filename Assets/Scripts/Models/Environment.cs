@@ -104,7 +104,7 @@ public class Environment : JSONResource {
    * Map Stuff
    */
 
-  public DunGen.TileType[,] baseLayer;
+  public DunGen.Floor floor;
   public Hashtable activeLayer;
   public List<Vector3> openTiles;
 
@@ -114,10 +114,10 @@ public class Environment : JSONResource {
 
   public void ScanOpenTiles () {
     openTiles = new List<Vector3>();
-    for (var r = 0; r < baseLayer.GetLength(0); r++) {
-      for (var c = 0; c < baseLayer.GetLength(1); c++) {
-        if (baseLayer[r,c] == DunGen.TileType.Room
-            || baseLayer[r,c] == DunGen.TileType.Corridor) {
+    for (var r = 0; r < floor.tiles.GetLength(0); r++) {
+      for (var c = 0; c < floor.tiles.GetLength(1); c++) {
+        if (floor.tiles[r,c] == DunGen.TileType.Room
+            || floor.tiles[r,c] == DunGen.TileType.Corridor) {
           openTiles.Add(new Vector3(c, 0, r));
         }
       }
