@@ -4,6 +4,10 @@
   "name": "The Tower Top",
   "template": "old_tower",
 
+  "room_templates": [
+
+  ],
+
   "events": {
 
     "_enter" :  [
@@ -143,6 +147,4 @@
     }
   ],
 
-  "content": [
-  ]
 }

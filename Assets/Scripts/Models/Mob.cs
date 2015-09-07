@@ -8,7 +8,6 @@ public class Mob : AttributeBase {
   public string name;
 
   public Hashtable combatProfile;
-  public float currentInitiative;
   public float consumableChance;
   public float lootChance;
   public float goldChance;

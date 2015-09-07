@@ -29,16 +29,6 @@ public class Environment : JSONResource {
     }
   }
 
-  Dictionary<string, float> _content;
-  public Dictionary<string, float> content {
-    get {
-      if (_content == null) {
-        CascadeContent(sourceData["content"].AsArray);
-      }
-      return _content;
-    }
-  }
-
   Dictionary<string, List<string>> _events;
   public Dictionary<string, List<string>> events {
     get {
@@ -85,17 +75,6 @@ public class Environment : JSONResource {
     return branches[branchKey];
   }
 
-  void CascadeContent (JSONArray contentJson) {
-    // Cascade content from EnvironmentTemplate
-    _content = envTemplate.content;
-    foreach (JSONNode item in contentJson) {
-      var key = item["key"].Value;
-      var chance = item["chance"].AsFloat;
-      _content[key] = chance;
-    }
-  }
-
-
   public string Name () {
     return string.Format("{0}", name);
   }
@@ -105,23 +84,7 @@ public class Environment : JSONResource {
    */
 
   public DunGen.Floor floor;
-  public Hashtable activeLayer;
-  public List<Vector3> openTiles;
-
-  public Vector3 RandomOpenTile () {
-    return openTiles[Random.Range(0, openTiles.Count -1)];
-  }
-
-  public void ScanOpenTiles () {
-    openTiles = new List<Vector3>();
-    for (var r = 0; r < floor.tiles.GetLength(0); r++) {
-      for (var c = 0; c < floor.tiles.GetLength(1); c++) {
-        if (floor.tiles[r,c] == DunGen.TileType.Room
-            || floor.tiles[r,c] == DunGen.TileType.Corridor) {
-          openTiles.Add(new Vector3(c, 0, r));
-        }
-      }
-    }
-  }
+  public List<Room> rooms;
+  public List<Hallway> hallways;
 
 }

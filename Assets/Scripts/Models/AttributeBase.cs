@@ -93,6 +93,9 @@ public abstract class AttributeBase {
     get {
       return (float)attributes[Constants.initiativeAttr];
     }
+    set {
+      attributes[Constants.initiativeAttr] = value;
+    }
   }
 
 }

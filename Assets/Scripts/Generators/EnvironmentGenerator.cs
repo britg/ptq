@@ -12,53 +12,59 @@ public class EnvironmentGenerator {
   }
 
   public Environment Generate (string name) {
-    Debug.Log ("Accessing env " + name.GetType());
     env = Environment.GetEnv(name);
 
-    GenerateBaseLayer();
-    GenerateActiveLayer();
+    GenerateFloor();
+    PopulateRooms();
     PlacePlayer();
     AddStairs();
 
     return env;
   }
 
-  void GenerateBaseLayer () {
+  void GenerateFloor () {
     env.floor = DunGen.Floor.Create();
-    env.ScanOpenTiles();
   }
 
-  void GenerateActiveLayer () {
-    env.activeLayer = new Hashtable();
+  void PopulateRooms () {
 
-    int i = 0;
-    List<int> toRemove = new List<int>();
-    foreach(var pos in env.openTiles) {
-      string contentKey = tpd.RollMap(env.content);
-      if (contentKey == Constants.nothingContentKey) {
-        continue;
-      }
-
-      if (contentKey == Constants.mobContentKey) {
-        env.activeLayer[pos] = contentKey; // TODO: actually generate the mob here?
-        toRemove.Add(i);
-      } else if (contentKey == Constants.interactibleContentKey) {
-        env.activeLayer[pos] = contentKey; // TODO: actually generate the mob here?
-        toRemove.Add(i);
-      }
-
-      ++i;
+    foreach (DunGen.Room roomBase in env.floor.rooms) {
+      PopulateRoom(roomBase);
     }
+    //env.activeLayer = new Hashtable();
 
-    foreach (int j in toRemove) {
-      env.openTiles.RemoveAt(j);
-    }
+    //int i = 0;
+    //List<int> toRemove = new List<int>();
+    //foreach(var pos in env.openTiles) {
+    //  string contentKey = tpd.RollMap(env.content);
+    //  if (contentKey == Constants.nothingContentKey) {
+    //    continue;
+    //  }
+
+    //  if (contentKey == Constants.mobContentKey) {
+    //    env.activeLayer[pos] = contentKey; // TODO: actually generate the mob here?
+    //    toRemove.Add(i);
+    //  } else if (contentKey == Constants.interactibleContentKey) {
+    //    env.activeLayer[pos] = contentKey; // TODO: actually generate the mob here?
+    //    toRemove.Add(i);
+    //  }
+
+    //  ++i;
+    //}
+
+    //foreach (int j in toRemove) {
+    //  env.openTiles.RemoveAt(j);
+    //}
+  }
+
+  void PopulateRoom (DunGen.Room roomBase) {
+
   }
 
 
   void PlacePlayer () {
-    Vector3 pos = env.RandomOpenTile();
-    sim.player.position = pos;
+    //Vector3 pos = env.RandomOpenTile();
+    //sim.player.position = pos;
   }
 
   void AddStairs () {

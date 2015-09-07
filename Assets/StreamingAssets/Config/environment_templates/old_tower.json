@@ -11,22 +11,7 @@
 
 	"room_count": [5, 10],
 
-	"content": [
-
-		{
-			"key": "nothing",
-			"chance": 100
-		},
-
-		{
-			"key": "mob",
-			"chance": 1
-		},
-
-		{
-			"key": "interactible",
-			"chance": 1
-		}
+	"room_templates": [
 	],
 
 	"mobs": [

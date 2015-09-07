@@ -71,17 +71,17 @@ public class EnvironmentRenderer : BaseBehaviour {
   }
 
   void RenderActiveLayer () {
-    foreach (DictionaryEntry e in env.activeLayer) {
-      Vector3 pos = (Vector3)e.Key;
+    //foreach (DictionaryEntry e in env.activeLayer) {
+    //  Vector3 pos = (Vector3)e.Key;
 
-      // tmp implementation
-      string thing = (string)e.Value;
-      if (thing == Constants.mobContentKey) {
-        PlaceObj(mobPrefab, (int)pos.z, (int)pos.x);
-      } else if (thing == Constants.interactibleContentKey) {
-        PlaceObj(interactiblePrefab, (int)pos.z, (int)pos.x);
-      }
-    }
+    //  // tmp implementation
+    //  string thing = (string)e.Value;
+    //  if (thing == Constants.mobContentKey) {
+    //    PlaceObj(mobPrefab, (int)pos.z, (int)pos.x);
+    //  } else if (thing == Constants.interactibleContentKey) {
+    //    PlaceObj(interactiblePrefab, (int)pos.z, (int)pos.x);
+    //  }
+    //}
   }
 
   void RenderPlayer () {

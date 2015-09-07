@@ -12,6 +12,7 @@ public class Room {
   public Type type;
   public RoomTemplate roomTemplate;
   public Dictionary<string, float> content;
+  public DunGen.Room baseLayer;
 
   public Room () {
 

@@ -5,17 +5,23 @@ using SimpleJSON;
 
 public class Player : AttributeBase {
 
+  public enum Purpose {
+    Explore,
+    HeadToTarget,
+    Flee
+  }
+
   public Dictionary<string, Slot> Slots { get; set; }
 
   public Player () {
     Slots = new Dictionary<string, Slot>();
   }
 
+  public Purpose purpose = Purpose.Explore;
   public Vector3 currentTarget;
   public Interactible currentInteractible;
   public Mob currentMob;
   public PlayerEvent currentEvent;
-  public float currentInitiative;
   public string lastBattleMove;
 
   public bool currentlyOccupied {

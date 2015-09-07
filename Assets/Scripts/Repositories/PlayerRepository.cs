@@ -22,7 +22,7 @@ public class PlayerRepository {
 
   // TODO: Load from real persistence
   void LoadState () {
-    player.currentInitiative = 0;
+    player.initiative = 0;
 
     // player.currentFloor - currently loaded at InputProcessor->Continue
     // but once persistence happens, it should be loaded from here

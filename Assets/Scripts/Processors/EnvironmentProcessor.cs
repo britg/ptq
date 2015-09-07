@@ -48,14 +48,13 @@ public class EnvironmentProcessor {
   public List<PlayerEvent> Explore () {
     var newEvents = new List<PlayerEvent>();
 
-    // Look around the room for stuff
+    // If in a room, continue exploring the room
     newEvents.Add(PlayerEvent.Info("You venture forth..."));
 
 
-    // scan visible range for anything of interest
-      // if something in interest walk towards the closest thing
-      // decide whether to interact or skip
-      
+    // If nothing is found, just pick a direction or use the last
+    // direction you were going.
+
 
     return newEvents;
   }

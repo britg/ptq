@@ -33,6 +33,23 @@ public class RoomTemplate : JSONResource {
     }
   }
 
+  Dictionary<string, float> _content;
+  public Dictionary<string, float> content {
+    get {
+      if (_content == null) {
+        _content = new Dictionary<string, float>();
+        var contentJson = sourceData["content"].AsArray;
+        foreach (JSONNode item in contentJson) {
+          var contentType = item["key"].Value;
+          var chance = item["chance"].AsFloat;
+          _content[contentType] = chance;
+        }
+      }
+      
+      return _content;
+    }
+  }
+
   //public RoomTemplate (JSONNode json) {
   //  key = json["key"].Value;
   //  contentOverrides = new Dictionary<string, float>();
@@ -47,17 +64,5 @@ public class RoomTemplate : JSONResource {
   //  entranceBranch = new Branch(json["entrance_branch"]);
 
   //}
-
-  public Dictionary<string, float> CascadeContent (Dictionary<string, float> content) {
-    // Cascade content from Floor
-    var final = content;
-    foreach (KeyValuePair<string, float> ov in contentOverrides) {
-      var key = ov.Key;
-      var chance = ov.Value;
-      final[key] = chance;
-    }
-
-    return final;
-  }
 
 }

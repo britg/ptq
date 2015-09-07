@@ -2,8 +2,23 @@
 	"type": "RoomTemplate",
 	"key": "standard",
 
-	"content": [
-	],
+  "content": [
+
+    {
+      "key": "nothing",
+      "chance": 100
+    },
+
+    {
+      "key": "mob",
+      "chance": 1
+    },
+
+    {
+      "key": "interactible",
+      "chance": 1
+    }
+  ],
 
   "entrance_branch": {
     "key": "room_door_branch",

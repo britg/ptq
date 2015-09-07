@@ -23,8 +23,8 @@ public class BattleProcessor {
 
     sim.player.currentMob = mob;
     sim.player.lastBattleMove = null;
-    sim.player.currentInitiative = 0f;
-    mob.currentInitiative = 0f;
+    sim.player.initiative = 0f;
+    mob.initiative = 0f;
 
     newEvents.Add(new PlayerEvent("! [" + mob.name + "]"));
     newEvents.AddRange(Continue());

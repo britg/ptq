@@ -5,8 +5,6 @@ using System.Collections.Generic;
 namespace DunGen {
   public class Floor {
 
-    int corridorLayout = 50;
-
     Dictionary<MapDirection, int> di = new Dictionary<MapDirection, int>() {
       { MapDirection.North, -1 },
       { MapDirection.South, 1 },
