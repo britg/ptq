@@ -43,6 +43,10 @@ public class RoomGenerator {
     // convert MobTemplate to a JSONResource
     // pick a random mob template available to this room
     // create a MobGenerator that takes a template, returns a mob
+
+    var mobTemplate = MobTemplate.Get<MobTemplate>("rat");
+    var mobGenerator = new MobGenerator(mobTemplate);
+    var mob = mobGenerator.Generate();
   }
 
 }
