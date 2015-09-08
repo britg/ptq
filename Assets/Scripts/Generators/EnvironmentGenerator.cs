@@ -12,7 +12,7 @@ public class EnvironmentGenerator {
   }
 
   public Environment Generate (string name) {
-    env = Environment.GetEnv(name);
+    env = Environment.Get<Environment>(name);
 
     GenerateFloor();
     PopulateRooms();
@@ -36,15 +36,19 @@ public class EnvironmentGenerator {
   void PopulateRoom (DunGen.Room roomBase) {
     // pick a room template from the floor;
     var roomTemplateKey = tpd.RollMap(env.roomTemplateChances);
-    var roomTemplate = (RoomTemplate)JSONResource.cache[roomTemplateKey];
-    var roomGenerator = new RoomGenerator(sim, roomTemplate, roomBase);
+    var roomTemplate = JSONResource.Get<RoomTemplate>(roomTemplateKey);
+    var roomGenerator = new RoomGenerator(env, roomTemplate, roomBase);
     env.rooms.Add(roomGenerator.CreateRoom());
   } 
 
 
   void PlacePlayer () {
-    //Vector3 pos = env.RandomOpenTile();
-    //sim.player.position = pos;
+    var randRoom = tpd.RollList<Room>(env.rooms);
+    var randomTile = randRoom.RandomOpenTile();
+
+    sim.player.position = randomTile.position;
+    randomTile.Occupy(Constants.playerContentKey, sim.player.id);
+    sim.room = randRoom;
   }
 
   void AddStairs () {

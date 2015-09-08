@@ -6,16 +6,14 @@ public class Constants {
   public const float SecondsPerHour = 3600f;
 
   // Notifications
-  public const string OnTavernCreated = "OnTavernCreated";
-  public const string OnAdventurerCreated = "OnAdventurerCreated";
-  public const string OnEnterPendingSelection = "OnEnterPendingSelection";
-  public const string OnWorldSelection = "OnWorldSelection";
+  public const string OnUpdateFeed = "OnUpdateFeed";
   public const string OnUpdateEvents = "OnUpdateEvents";
   public const string OnUpdateAttribute = "OnUpdateStats";
   public const string OnTakeDamage = "OnTakeDamage";
   public const string OnNewGame = "OnNewGame";
   public const string OnFirstPull = "OnFirstPull";
 
+  public const string OnRenderEvents = "OnRenderEvents";
   public const string OnEnvironmentStart = "OnEnvironmentStart";
   public const string OnEnvironmentUpdate = "OnEnvironmentUpdate";
 
@@ -31,6 +29,7 @@ public class Constants {
   public const string c_LeaveDoor = "leave_door";
 
   // Content
+  public const string playerContentKey = "player";
   public const string nothingContentKey = "nothing";
   public const string mobContentKey = "mob";
   public const string interactibleContentKey = "interactible";

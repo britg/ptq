@@ -112,7 +112,7 @@ public class BattleProcessor {
       var amount = goldGenerator.Mob();
       var ev = PlayerEvent.Info(string.Format("{0} gold", amount));
       var trigger = new Trigger(Trigger.Type.PlayerResourceChange);
-      trigger.data[Trigger.resourceKey] = Resource.Gold;
+      trigger.data[Trigger.resourceKey] = Constants.goldAttr;
       trigger.data[Trigger.resourceAmountKey] = amount;
 
       ev.Triggers.Add(trigger);

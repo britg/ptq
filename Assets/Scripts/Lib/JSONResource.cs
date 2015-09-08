@@ -15,6 +15,10 @@ public class JSONResource {
     Debug.Log("cached an instance of " + resource + " " + resource.key);
   }
 
+  public static T Get<T>(string localKey) where T : JSONResource {
+    var globalKey = typeof(T).ToString();
+    return (T)cache[string.Format("{0}-{1}", globalKey, localKey)];
+  }
 
   public JSONNode sourceData {
     get; set;
@@ -24,7 +28,7 @@ public class JSONResource {
   public string key {
     get {
       if (_key == null) {
-        _key = sourceData["key"].Value;
+        _key = string.Format("{0}-{1}", sourceData["type"].Value, sourceData["key"].Value);
       }
       return _key;
     }

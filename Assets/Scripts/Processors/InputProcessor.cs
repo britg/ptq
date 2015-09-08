@@ -25,9 +25,9 @@ public class InputProcessor {
     sim = _sim;
   }
 
-  public List<PlayerEvent> Continue () {
+  public void Continue () {
 
-    List<PlayerEvent> newEvents = new List<PlayerEvent>();
+    sim.newEvents = new List<PlayerEvent>();
 
     if (!player.currentlyOccupied) {
       var envProcessor = new EnvironmentProcessor(sim);
@@ -35,32 +35,33 @@ public class InputProcessor {
       if (player.currentEvent == null) {
         NotificationCenter.PostNotification(Constants.OnFirstPull);
         NotificationCenter.PostNotification(Constants.OnEnvironmentUpdate);
-        newEvents.AddRange(envProcessor.Enter());
+        sim.newEvents.AddRange(envProcessor.Enter());
       } else {
-        newEvents.AddRange(envProcessor.Explore());
+        sim.newEvents.AddRange(envProcessor.Explore());
       }
     }
 
     if (player.currentChoiceKey != null) {
       var branchProcessor = new BranchProcessor(sim, player.currentEvent);
-      newEvents.AddRange(branchProcessor.Choose(player.currentChoiceKey));
+      sim.newEvents.AddRange(branchProcessor.Choose(player.currentChoiceKey));
     }
 
     if (player.currentMob != null) {
       var battleProcessor = new BattleProcessor(sim);
-      newEvents.AddRange(battleProcessor.Continue());
+      sim.newEvents.AddRange(battleProcessor.Continue());
     }
     
     if (player.currentInteractible != null) {
       var interactionProcessor = new InteractionProcessor(sim);
-      newEvents.AddRange(interactionProcessor.Continue());
+      sim.newEvents.AddRange(interactionProcessor.Continue());
     }
 
-    if (newEvents.Count > 0) {
-      player.currentEvent = newEvents[newEvents.Count - 1];
+    if (sim.newEvents.Count > 0) {
+      player.currentEvent = sim.newEvents[sim.newEvents.Count - 1];
     }
 
-    return newEvents;
+    NotificationCenter.PostNotification(Constants.OnRenderEvents);
+
   }
 
   public void TriggerEvent (PlayerEvent ev) {

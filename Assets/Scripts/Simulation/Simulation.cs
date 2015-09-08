@@ -8,7 +8,10 @@ public class Simulation {
   public ResourceLoader resourceLoader;
   public Player player;
   public Environment environment;
+  public Room room;
+
   public List<PlayerEvent> recentEvents;
+  public List<PlayerEvent> newEvents;
 
   public void Setup() {
     LoadResources();

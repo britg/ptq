@@ -71,6 +71,9 @@ public class EnvironmentRenderer : BaseBehaviour {
   }
 
   void RenderActiveLayer () {
+    foreach (Room room in env.rooms) {
+      RenderRoom(room);
+    }
     //foreach (DictionaryEntry e in env.activeLayer) {
     //  Vector3 pos = (Vector3)e.Key;
 
@@ -84,15 +87,36 @@ public class EnvironmentRenderer : BaseBehaviour {
     //}
   }
 
+  void RenderRoom (Room room) {
+    foreach (Tile tile in room.tiles) {
+      RenderTile(tile);
+    }
+  }
+
+  void RenderTile (Tile tile) {
+    if (!tile.occupied) {
+      return;
+    }
+
+    if (tile.contentType == Constants.mobContentKey) {
+      var mob = MobRepository.Find(tile.contentId);
+      PlaceObj(mobPrefab, mob.position);
+    }
+  }
+
   void RenderPlayer () {
     playerObj.transform.parent = transform.parent;
     playerObj.transform.localPosition = sim.player.position;
   }
 
   void PlaceObj (GameObject prefab, int r, int c) {
+    PlaceObj(prefab, new Vector3(c, prefab.transform.localPosition.y, r));
+  }
+
+  void PlaceObj (GameObject prefab, Vector3 pos) {
     var obj = Instantiate(prefab);
     obj.transform.parent = transform;
-    obj.transform.localPosition = new Vector3(c, obj.transform.localPosition.y, r);
+    obj.transform.localPosition = pos;
   }
 
 	// Update is called once per frame

@@ -33,12 +33,6 @@ public class BranchProcessor {
       return newEvents;
     }
 
-    if (res.thenToRoom) {
-      var roomTemplateKey = res.thenTo.Replace("room:", "");
-      var roomProcessor = new RoomProcessor(sim, roomTemplateKey);
-      newEvents.AddRange(roomProcessor.CreateAndEnter());
-    }
-
     if (res.thenToEvents) {
       var envProcessor = new EnvironmentProcessor(sim);
       var eventsKey = res.thenTo.Replace("events:", "");

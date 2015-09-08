@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public abstract class AttributeBase {
 
+  public string id;
+
   public Vector3 position;
   public Dictionary<string, float> attributes;
 

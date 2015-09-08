@@ -4,24 +4,31 @@ using System.Collections.Generic;
 
 public class Room {
 
-  public enum Type {
-    Standard
-  }
-
   public string key;
-  public Type type;
   public RoomTemplate roomTemplate;
   public Dictionary<string, float> content;
   public DunGen.Room baseLayer;
+  public List<Tile> tiles;
 
-  public Room () {
-
+  public Room (DunGen.Room _baseLayer) {
+    baseLayer = _baseLayer;
+    InitTiles();
   }
 
-  public Room (Type _type) {
-    type = _type;
+  void InitTiles () {
+    tiles = new List<Tile>();
+    foreach (Vector3 position in baseLayer.tiles) {
+      var tile = new Tile(position);
+      tiles.Add(tile);
+    }
   }
 
-
+  public Tile RandomOpenTile () {
+    var test = tpd.RollList<Tile>(tiles);
+    if (test.occupied) {
+      return RandomOpenTile();
+    }
+    return test;
+  }
 
 }
