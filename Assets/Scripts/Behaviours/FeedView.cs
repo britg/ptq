@@ -31,6 +31,7 @@ public class FeedView : BaseBehaviour {
     pullAnchorTitle = pullAnchor.transform.Find("Title").GetComponent<Text>();
     pullAnchorTitle.text = pullAnchorDefaultText;
     NotificationCenter.AddObserver(this, Constants.OnUpdateEvents);
+    NotificationCenter.AddObserver(this, Constants.OnUpdateFeed);
 	}
 
 	// Update is called once per frame
@@ -42,14 +43,17 @@ public class FeedView : BaseBehaviour {
     refreshFinishedHandler = handler;
     pullAnchorTitle.text = pullAnchorWorkingText;
     CullOldEvents();
-    Invoke("DoRefresh", refreshDelay);
+    ProcessGame();
   }
 
-  void DoRefresh () {
+  void ProcessGame () {
     var inputProcessor = new InputProcessor(sim);
-    List<PlayerEvent> newEvents = inputProcessor.Continue();
+    inputProcessor.Continue();
+  }
+
+  public void OnUpdateFeed () {
     List<GameObject> eventObjs = new List<GameObject>();
-    foreach (var playerEvent in newEvents) {
+    foreach (var playerEvent in sim.newEvents) {
       eventObjs.Add(CreatePlayerEventView(playerEvent));
     }
     DisplayNewEvents(eventObjs);

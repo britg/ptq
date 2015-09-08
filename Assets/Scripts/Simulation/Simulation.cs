@@ -11,6 +11,7 @@ public class Simulation {
   public Room room;
 
   public List<PlayerEvent> recentEvents;
+  public List<PlayerEvent> newEvents;
 
   public void Setup() {
     LoadResources();

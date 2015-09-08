@@ -14,13 +14,13 @@ public class PlayerEvent {
 
   public enum Type {
     Info,
+    Story,
     Equipment,
     Consumable,
     Transition,
     Choice,
     PlayerBasicAttack,
     MobBasicAttack,
-    Story,
     Movement
   }
 
@@ -58,6 +58,12 @@ public class PlayerEvent {
   public bool blocksContinue {
     get {
       return type == Type.Choice;
+    }
+  }
+
+  public bool endsTurn {
+    get {
+      return (type != Type.Info && type != Type.Story);
     }
   }
 
@@ -117,6 +123,13 @@ public class PlayerEvent {
     // TODO: Implement using branch stuff
     var ev = PromptChoice(branch.text, branch.firstChoice, branch.secondChoice);
     ev.data[PlayerEvent.branchKey] = branch;
+    return ev;
+  }
+
+  public static PlayerEvent Movement (Vector3 delta) {
+    var ev = new PlayerEvent();
+    ev.type = Type.Movement;
+    ev.data["delta"] = delta;
     return ev;
   }
 

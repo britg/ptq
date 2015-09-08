@@ -51,6 +51,11 @@ public class EnvironmentProcessor {
     // If in a room, continue exploring the room
     newEvents.Add(PlayerEvent.Info("You venture forth..."));
 
+    if (sim.room != null) {
+      var roomProcessor = new RoomProcessor(sim, sim.room);
+      newEvents.AddRange(roomProcessor.Explore());
+    }
+
 
     // If nothing is found, just pick a direction or use the last
     // direction you were going.
