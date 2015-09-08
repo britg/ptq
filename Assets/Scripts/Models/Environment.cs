@@ -17,8 +17,8 @@ public class Environment : JSONResource {
   public EnvironmentTemplate envTemplate {
     get {
       if (_envTemplate == null) {
-        var templateName = sourceData["template"].Value;
-        _envTemplate = EnvironmentTemplate.all[templateName];
+        var templateKey = sourceData["template"].Value;
+        _envTemplate = EnvironmentTemplate.Get<EnvironmentTemplate>(templateKey);
       }
       return _envTemplate;
     }
@@ -61,7 +61,7 @@ public class Environment : JSONResource {
 
   public Dictionary<string, float> consumableChances {
     get {
-      return envTemplate.consumableChances;
+      return new Dictionary<string, float>();
     }
   }
 
@@ -75,6 +75,17 @@ public class Environment : JSONResource {
       }
 
       return _roomTemplateChances;
+    }
+  }
+
+  Dictionary<string, float> _mobChances;
+  public Dictionary<string, float> mobChances {
+    get {
+      if (_mobChances == null) {
+        // TODO: Cascade from environment template
+        _mobChances = envTemplate.mobChances;
+      }
+      return _mobChances;
     }
   }
 

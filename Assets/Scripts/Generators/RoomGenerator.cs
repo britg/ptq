@@ -3,16 +3,14 @@ using System.Collections;
 
 public class RoomGenerator {
 
-  Simulation sim;
   RoomTemplate roomTemplate;
   Environment env;
   DunGen.Room roomBase;
   Room room;
 
-  public RoomGenerator (Simulation _sim, RoomTemplate _roomTemplate, DunGen.Room _roomBase) {
-    sim = _sim;
+  public RoomGenerator (Environment _env, RoomTemplate _roomTemplate, DunGen.Room _roomBase) {
     roomTemplate = _roomTemplate;
-    env = sim.environment;
+    env = _env;
     roomBase = _roomBase;
   }
 
@@ -43,10 +41,17 @@ public class RoomGenerator {
     // convert MobTemplate to a JSONResource
     // pick a random mob template available to this room
     // create a MobGenerator that takes a template, returns a mob
+    var mobKey = tpd.RollMap(env.mobChances);
 
-    var mobTemplate = MobTemplate.Get<MobTemplate>("rat");
+    var mobTemplate = MobTemplate.Get<MobTemplate>(mobKey);
     var mobGenerator = new MobGenerator(mobTemplate);
     var mob = mobGenerator.Generate();
+    var randomTile = room.RandomOpenTile();
+
+    mob.position = randomTile.position;
+
+    MobRepository.Save(mob);
+    randomTile.Occupy(Constants.mobContentKey, mob.id);
   }
 
 }

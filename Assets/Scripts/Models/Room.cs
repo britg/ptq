@@ -23,4 +23,12 @@ public class Room {
     }
   }
 
+  public Tile RandomOpenTile () {
+    var test = tpd.RollList<Tile>(tiles);
+    if (test.occupied) {
+      return RandomOpenTile();
+    }
+    return test;
+  }
+
 }

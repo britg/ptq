@@ -24,4 +24,9 @@ public class Tile {
     contentId = null;
   }
 
+  public void Occupy (string type, string id) {
+    contentType = type;
+    contentId = id;
+  }
+
 }

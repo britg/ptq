@@ -12,6 +12,7 @@ public class MobGenerator {
 
   public Mob Generate () {
     mob = new Mob();
+    mob.id = System.Guid.NewGuid().ToString();
     mob.template = mobTemplate;
     mob.name = mobTemplate.name;
 

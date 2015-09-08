@@ -13,10 +13,7 @@ public class ResourceLoader {
   List<string> parseOrder = new List<string>() {
     // Tier 1
     Rarity.type,
-    ResourceType.type,
-    QuestType.type,
     SlotType.type,
-    Name.type,
 
     // Tier 2
     EquipmentDesignation.type,
@@ -99,12 +96,6 @@ public class ResourceLoader {
       case Setting.type:
         JSONResource.Cache<Setting>(config);
         break;
-      case ResourceType.type:
-        ResourceType.Cache(config);
-        break;
-      case QuestType.type:
-        QuestType.Cache(config);
-        break;
       case SlotType.type:
         SlotType.Cache(config);
         break;
@@ -118,7 +109,7 @@ public class ResourceLoader {
         JSONResource.Cache<ConsumableTemplate>(config);
         break;
       case EnvironmentTemplate.type:
-        EnvironmentTemplate.Cache(config);
+        JSONResource.Cache<EnvironmentTemplate>(config);
         break;
       case Environment.type:
         JSONResource.Cache<Environment>(config);
@@ -128,9 +119,6 @@ public class ResourceLoader {
         break;
       case MobTemplate.type:
         JSONResource.Cache<MobTemplate>(config);
-        break;
-      case Name.type:
-        Name.Cache(config);
         break;
       case Rarity.type:
         Rarity.Cache(config);

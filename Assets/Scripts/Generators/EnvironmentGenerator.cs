@@ -37,16 +37,16 @@ public class EnvironmentGenerator {
     // pick a room template from the floor;
     var roomTemplateKey = tpd.RollMap(env.roomTemplateChances);
     var roomTemplate = JSONResource.Get<RoomTemplate>(roomTemplateKey);
-    var roomGenerator = new RoomGenerator(sim, roomTemplate, roomBase);
+    var roomGenerator = new RoomGenerator(env, roomTemplate, roomBase);
     env.rooms.Add(roomGenerator.CreateRoom());
   } 
 
 
   void PlacePlayer () {
     var randRoom = tpd.RollList<Room>(env.rooms);
-    var randomTile = tpd.RollList<Vector3>(randRoom.baseLayer.tiles);
-    //Vector3 pos = env.RandomOpenTile();
-    //sim.player.position = pos;
+    var randomTile = randRoom.RandomOpenTile();
+
+    sim.player.position = randomTile.position;
   }
 
   void AddStairs () {

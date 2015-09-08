@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Mob : AttributeBase {
 
+  public string id;
+
   public MobTemplate template;
   public string name;
 
