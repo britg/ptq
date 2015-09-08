@@ -1,0 +1,27 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class Tile {
+
+  public int row;
+  public int col;
+  public Vector3 position;
+
+  public string contentType;
+  public string contentId;
+
+  public bool occupied {
+    get {
+      return contentType != null;
+    }
+  }
+
+  public Tile (Vector3 _position) {
+    position = _position;
+    row = (int)position.z;
+    col = (int)position.x;
+    contentType = null;
+    contentId = null;
+  }
+
+}

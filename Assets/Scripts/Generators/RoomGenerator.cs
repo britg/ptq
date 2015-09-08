@@ -7,6 +7,7 @@ public class RoomGenerator {
   RoomTemplate roomTemplate;
   Environment env;
   DunGen.Room roomBase;
+  Room room;
 
   public RoomGenerator (Simulation _sim, RoomTemplate _roomTemplate, DunGen.Room _roomBase) {
     sim = _sim;
@@ -16,10 +17,9 @@ public class RoomGenerator {
   }
 
   public Room CreateRoom () {
-    var room = new Room();
+    room = new Room(roomBase);
     room.roomTemplate = roomTemplate;
     room.content = roomTemplate.content;
-    room.baseLayer = roomBase;
 
     GenerateContent();
 
@@ -27,7 +27,22 @@ public class RoomGenerator {
   }
 
   void GenerateContent () {
-    
+    foreach (Tile tile in room.tiles) {
+      if (!tile.occupied) {
+        var contentKey = tpd.RollMap(room.content);
+
+        if (contentKey == Constants.mobContentKey) {
+          GenerateMob(tile);
+        }
+
+      }
+    }
+  }
+
+  void GenerateMob (Tile tile) {
+    // convert MobTemplate to a JSONResource
+    // pick a random mob template available to this room
+    // create a MobGenerator that takes a template, returns a mob
   }
 
 }

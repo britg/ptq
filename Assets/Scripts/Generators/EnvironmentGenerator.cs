@@ -43,6 +43,8 @@ public class EnvironmentGenerator {
 
 
   void PlacePlayer () {
+    var randRoom = tpd.RollList<Room>(env.rooms);
+    var randomTile = tpd.RollList<Vector3>(randRoom.baseLayer.tiles);
     //Vector3 pos = env.RandomOpenTile();
     //sim.player.position = pos;
   }

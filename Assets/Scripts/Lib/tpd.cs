@@ -117,6 +117,10 @@ public class tpd {
     return Random.Range(range.min, range.max);
   }
 
+  public static T RollList<T> (List<T> list) {
+    return list[Random.Range(0, list.Count -1)];
+  }
+
   /*
    * Colors
    */
