@@ -4,9 +4,7 @@
 	"name": "Rat of Unusual Size",
   "level": 1,
 
-  "consumable_chance": 50,
-  "loot_chance": 20,
-  "gold_chance": 20,
+  "loot_table": "default",
 
   "stats": [
     {
@@ -32,5 +30,20 @@
   		"key": "basic",
   		"chance": 100
   	}
+  ],
+
+  "drops": [
+    {
+      "key": "consumable",
+      "chance": 50,
+    },
+    {
+      "key": "loot",
+      "chance": 20,
+    },
+    {
+      "key": "gold",
+      "chance": 20
+    }
   ]
 }

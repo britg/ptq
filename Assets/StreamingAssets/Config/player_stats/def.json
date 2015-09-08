@@ -1,7 +1,0 @@
-{
-  "type": "PlayerStat",
-  "stat_key": "def",
-  "current":  10,
-  "min": -1000,
-  "max": 1000
-}

@@ -23,7 +23,7 @@ public class PlayerGenerator {
   }
 
   void GenerateStats () {
-    var startAtts = (JSONClass)Setting.instance.sourceData["player_start_attributes"];
+    var startAtts = (JSONClass)Setting.instance.playerStartAttributes;
     player.attributes = new Dictionary<string, float>();
     foreach (KeyValuePair<string, JSONNode> e in startAtts) {
       player.attributes[e.Key] = e.Value.AsFloat;

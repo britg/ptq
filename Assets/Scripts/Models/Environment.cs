@@ -7,11 +7,6 @@ public class Environment : JSONResource {
   public const string type = "Environment";
   public Environment (JSONNode _sourceData) : base(_sourceData) { }
 
-
-  public static Environment GetEnv (string name) {
-    return (Environment)cache[name];
-  }
-
   public string name {
     get {
       return sourceData["name"].Value;

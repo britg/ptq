@@ -73,29 +73,4 @@ public class EnvironmentTemplate {
     }
   }
 
-  public string RandomAtmosphereText () {
-    int rand = Random.Range(0, atmosphereText.Count - 1);
-    return atmosphereText[rand];
-  }
-
-  public Mob RandomMob () {
-    var mobKey = tpd.RollMap(mobChances);
-    MobTemplate template = MobTemplate.all[mobKey];
-    Mob mob = Mob.FromTemplate(template);
-
-    return mob;
-  }
-
-  public Interactible RandomInteractible () {
-    var interactible = new Interactible();
-    interactible.name = "skeletal remains";
-    return interactible;
-
-    /*  This should be refactored to InteractibleTemplate
-
-    var interactibleKey = Roll.Hash(interactibleChances);
-    Interactible interactible = 
-    */
-  }
-
 }

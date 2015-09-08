@@ -11,7 +11,7 @@ public class Setting : JSONResource {
   public static Setting instance {
     get {
       if (_instance == null) {
-        _instance = (Setting)JSONResource.cache["main"];
+        _instance = Setting.Get<Setting>("main");
       }
       return _instance;
     }
@@ -19,6 +19,12 @@ public class Setting : JSONResource {
 
   public static object Get (string key) {
     return instance.sourceData[key].Value;
+  }
+
+  public JSONClass playerStartAttributes {
+    get {
+      return (JSONClass)sourceData["player_start_attributes"];
+    }
   }
 
 }

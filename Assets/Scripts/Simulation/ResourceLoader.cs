@@ -127,7 +127,7 @@ public class ResourceLoader {
         JSONResource.Cache<RoomTemplate>(config);
         break;
       case MobTemplate.type:
-        MobTemplate.Cache(config);
+        JSONResource.Cache<MobTemplate>(config);
         break;
       case Name.type:
         Name.Cache(config);

@@ -10,7 +10,8 @@ public class Room {
   public DunGen.Room baseLayer;
   public List<Tile> tiles;
 
-  public Room (DunGen.Room baseLayer) {
+  public Room (DunGen.Room _baseLayer) {
+    baseLayer = _baseLayer;
     InitTiles();
   }
 
