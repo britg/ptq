@@ -16,6 +16,8 @@ public class PlayerGenerator {
 
   public Player Generate () {
     player = new Player();
+    player.id = System.Guid.NewGuid().ToString();
+
     GenerateStats();
     BootstrapAllSlots();
 

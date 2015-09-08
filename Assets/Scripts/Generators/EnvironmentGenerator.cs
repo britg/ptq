@@ -47,6 +47,8 @@ public class EnvironmentGenerator {
     var randomTile = randRoom.RandomOpenTile();
 
     sim.player.position = randomTile.position;
+    randomTile.Occupy(Constants.playerContentKey, sim.player.id);
+    sim.room = randRoom;
   }
 
   void AddStairs () {
