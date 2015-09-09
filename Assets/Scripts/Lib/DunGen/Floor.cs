@@ -56,21 +56,6 @@ namespace DunGen {
       }}
     };
 
-  //  static Hashtable defaultOpts = new Hashtable() {
-  //  {"seed", (int)Time.time},
-  //  {"n_rows", 79 },
-  //  {"n_cols", 79 },
-  //  {"dungeon_layout", "None" },
-  //  {"room_min", 9 },
-  //  {"room_max", 17 },
-  //  {"room_layout", "Packed" },
-  //  {"corridor_change_chance", 50 },
-  //  {"remove_deadends", 100 },
-  //  {"add_stairs", 2 },
-  //  {"map_style", "Standard" },
-  //  {"cell_size",  18 }
-  //};
-
     public TileType[,] tiles;
     public List<Room> rooms;
 

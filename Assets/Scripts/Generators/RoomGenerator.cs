@@ -31,6 +31,8 @@ public class RoomGenerator {
 
         if (contentKey == Constants.mobContentKey) {
           GenerateMob(tile);
+        } else if (contentKey == Constants.interactibleContentKey) {
+          GenerateInteractible(tile);
         }
 
       }
@@ -38,12 +40,9 @@ public class RoomGenerator {
   }
 
   void GenerateMob (Tile tile) {
-    // convert MobTemplate to a JSONResource
-    // pick a random mob template available to this room
-    // create a MobGenerator that takes a template, returns a mob
-    var mobKey = tpd.RollMap(env.mobChances);
+    var mobTemplateKey = tpd.RollMap(env.mobChances);
 
-    var mobTemplate = MobTemplate.Get<MobTemplate>(mobKey);
+    var mobTemplate = MobTemplate.Get<MobTemplate>(mobTemplateKey);
     var mobGenerator = new MobGenerator(mobTemplate);
     var mob = mobGenerator.Generate();
     var randomTile = room.RandomOpenTile();
@@ -52,6 +51,10 @@ public class RoomGenerator {
 
     MobRepository.Save(mob);
     randomTile.Occupy(Constants.mobContentKey, mob.id);
+  }
+
+  void GenerateInteractible (Tile tile) {
+    var interactibleTemplateKey = tpd.RollMap(env.interactibleChances);
   }
 
 }

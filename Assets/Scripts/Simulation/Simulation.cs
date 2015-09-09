@@ -13,6 +13,8 @@ public class Simulation {
   public List<PlayerEvent> recentEvents;
   public List<PlayerEvent> newEvents;
 
+  public List<string> discoveredCache;
+
   public void Setup() {
     LoadResources();
     SetupPlayer();

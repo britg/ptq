@@ -16,7 +16,8 @@ public class RoomProcessor  {
   public List<PlayerEvent> Explore () {
     List<PlayerEvent> newEvents = new List<PlayerEvent>();
 
-    // Look for nearest stairs
+
+    // TODO: Look for nearest stairs
     // Look for nearest interactible
     // Look for nearest mob
     // Look for nearest door
@@ -29,6 +30,20 @@ public class RoomProcessor  {
     newEvents.Add (PlayerEvent.Info ("[done moving]"));
 
     return newEvents;
+  }
+
+  Tile DiscoverNewContent (string type = null) {
+    Tile nearest = null;
+    float dist = Mathf.Infinity;
+    foreach (var tile in room.tiles) {
+      if (type == null || tile.contentType == type) {
+        if (Vector3.Distance(tile.position, sim.player.position) < dist) {
+          nearest = tile;
+        }
+      }
+    }
+
+    return nearest;
   }
 
 }

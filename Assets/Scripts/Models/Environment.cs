@@ -89,6 +89,17 @@ public class Environment : JSONResource {
     }
   }
 
+  Dictionary<string, float> _interactibleChances;
+  public Dictionary<string, float> interactibleChances {
+    get {
+      if (_interactibleChances == null) {
+        // TODO: Cascade from environment template
+        _interactibleChances = envTemplate.interactibleChances;
+      }
+      return _interactibleChances;
+    }
+  }
+
   public Branch GetBranch (string placeholderKey) {
     var branchKey = placeholderKey.Replace(Constants.branchLabel, "");
     return branches[branchKey];

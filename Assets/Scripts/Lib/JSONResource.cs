@@ -38,5 +38,17 @@ public class JSONResource {
     sourceData = _sourceData;
   }
 
+  public void ExtractChances (string sourceDataKey, ref Dictionary<string, float> dict) {
+    var arr = sourceData[sourceDataKey].AsArray;
+    ExtractChances(arr, ref dict);
+  }
+
+  public void ExtractChances (JSONArray arr, ref Dictionary<string, float> dict) {
+    foreach (JSONNode node in arr) {
+      var key = node["key"].Value;
+      var chance = node["chance"].AsFloat;
+      dict[key] = chance;
+    }
+  }
 
 }
