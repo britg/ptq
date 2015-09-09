@@ -20,10 +20,10 @@ public class EnvironmentTemplate : JSONResource {
   Dictionary<string, float> _interactibleChances;
   public Dictionary<string, float> interactibleChances {
     get {
-      if (_mobChances == null) {
-        ExtractChances("interactibles", ref _mobChances);
+      if (_interactibleChances == null) {
+        ExtractChances("interactibles", ref _interactibleChances);
       }
-      return _mobChances;
+      return _interactibleChances;
     }
   }
 

@@ -42,7 +42,7 @@ public class RoomGenerator {
   void GenerateMob (Tile tile) {
     var mobTemplateKey = tpd.RollMap(env.mobChances);
 
-    var mobTemplate = MobTemplate.Get<MobTemplate>(mobTemplateKey);
+    var mobTemplate = JSONResource.Get<MobTemplate>(mobTemplateKey);
     var mobGenerator = new MobGenerator(mobTemplate);
     var mob = mobGenerator.Generate();
     var randomTile = room.RandomOpenTile();
@@ -55,6 +55,13 @@ public class RoomGenerator {
 
   void GenerateInteractible (Tile tile) {
     var interactibleTemplateKey = tpd.RollMap(env.interactibleChances);
+    var interactibleTemplate = JSONResource.Get<InteractibleTemplate>(interactibleTemplateKey);
+    var interactibleGenerator = new InteractibleGenerator(interactibleTemplate);
+    var interactible = interactibleGenerator.Generate();
+    var randomTile = room.RandomOpenTile();
+    interactible.position = randomTile.position;
+
+    randomTile.Occupy(Constants.interactibleContentKey, interactible.id);
   }
 
 }

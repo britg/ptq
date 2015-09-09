@@ -44,6 +44,9 @@ public class JSONResource {
   }
 
   public void ExtractChances (JSONArray arr, ref Dictionary<string, float> dict) {
+    if (dict == null) {
+      dict = new Dictionary<string, float>();
+    }
     foreach (JSONNode node in arr) {
       var key = node["key"].Value;
       var chance = node["chance"].AsFloat;
