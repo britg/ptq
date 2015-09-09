@@ -54,7 +54,9 @@ public class FeedView : BaseBehaviour {
   public void OnUpdateFeed () {
     List<GameObject> eventObjs = new List<GameObject>();
     foreach (var playerEvent in sim.newEvents) {
-      eventObjs.Add(CreatePlayerEventView(playerEvent));
+      if (playerEvent.isFeedEvent) {
+        eventObjs.Add(CreatePlayerEventView(playerEvent));
+      }
     }
     DisplayNewEvents(eventObjs);
     EndRefresh();
@@ -86,7 +88,6 @@ public class FeedView : BaseBehaviour {
     } else if (playerEvent.type == PlayerEvent.Type.Consumable) {
       prefab = eventConsumablePrefab;
     }
-
 
     eventObj = (GameObject)Instantiate(prefab);
     eventObj.GetComponent<EventView>().playerEvent = playerEvent;

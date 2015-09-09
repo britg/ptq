@@ -35,6 +35,9 @@ public class StatView : BaseBehaviour {
   }
 
   void Display () {
+    if (!sim.player.attributes.ContainsKey(statKey)) {
+      return;
+    }
     var stat = sim.player.attributes[statKey];
     text.text = string.Format("{0}{1}{2}", prefix, stat, suffix);
   }

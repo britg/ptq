@@ -15,7 +15,18 @@ public class RoomProcessor  {
 
   public List<PlayerEvent> Explore () {
     List<PlayerEvent> newEvents = new List<PlayerEvent>();
-    newEvents.Add (PlayerEvent.Info ("[Continue in the room]"));
+
+    // Look for nearest stairs
+    // Look for nearest interactible
+    // Look for nearest mob
+    // Look for nearest door
+
+    newEvents.Add (PlayerEvent.Info ("[starting to move]"));
+    newEvents.Add(PlayerEvent.Movement(Vector3.forward));
+    newEvents.Add(PlayerEvent.Movement(Vector3.right));
+    newEvents.Add(PlayerEvent.Movement(Vector3.back));
+    newEvents.Add(PlayerEvent.Movement(Vector3.left));
+    newEvents.Add (PlayerEvent.Info ("[done moving]"));
 
     return newEvents;
   }

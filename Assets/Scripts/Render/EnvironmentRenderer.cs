@@ -100,7 +100,7 @@ public class EnvironmentRenderer : BaseBehaviour {
 
     if (tile.contentType == Constants.mobContentKey) {
       var mob = MobRepository.Find(tile.contentId);
-      PlaceObj(mobPrefab, mob.position);
+      PlaceObj(mobPrefab, mob.position, tile.contentId);
     }
   }
 
@@ -114,7 +114,12 @@ public class EnvironmentRenderer : BaseBehaviour {
   }
 
   void PlaceObj (GameObject prefab, Vector3 pos) {
+    PlaceObj(prefab, pos, prefab.name);
+  }
+
+  void PlaceObj (GameObject prefab, Vector3 pos, string id) {
     var obj = Instantiate(prefab);
+    obj.name = id;
     obj.transform.parent = transform;
     obj.transform.localPosition = pos;
   }

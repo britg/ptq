@@ -11,6 +11,10 @@ public class PlayerEvent {
   public const string damageKey = "damage";
   public const string hitTypeKey = "hitType";
   public const string branchKey = "branchKey";
+  public const string movementDeltaKey = "delta";
+  public const string moverKey = "mover";
+  public const string moverIdKey = "mover";
+
 
   public enum Type {
     Info,
@@ -64,6 +68,12 @@ public class PlayerEvent {
   public bool endsTurn {
     get {
       return (type != Type.Info && type != Type.Story);
+    }
+  }
+
+  public bool isFeedEvent {
+    get {
+      return (type != Type.Movement);
     }
   }
 
@@ -129,7 +139,17 @@ public class PlayerEvent {
   public static PlayerEvent Movement (Vector3 delta) {
     var ev = new PlayerEvent();
     ev.type = Type.Movement;
-    ev.data["delta"] = delta;
+    ev.data[moverKey] = Constants.playerContentKey;
+    ev.data[movementDeltaKey] = delta;
+    return ev;
+  }
+
+  public static PlayerEvent Movement (Vector3 delta, string mobId) {
+    var ev = new PlayerEvent();
+    ev.type = Type.Movement;
+    ev.data[moverKey] = Constants.mobContentKey;
+    ev.data[moverIdKey] = mobId;
+    ev.data[movementDeltaKey] = delta;
     return ev;
   }
 

@@ -26,7 +26,7 @@ public class InputProcessor {
   }
 
   public void Continue () {
-
+    Debug.Log("Continuing...");
     sim.newEvents = new List<PlayerEvent>();
 
     if (!player.currentlyOccupied) {
