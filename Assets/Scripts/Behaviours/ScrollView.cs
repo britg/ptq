@@ -77,8 +77,7 @@ public class ScrollView : BaseBehaviour, IEndDragHandler {
   }
 
   void InitiateRefresh () {
-    var inputProcessor = new InputProcessor(sim);
-    if (!inputProcessor.canContinue) {
+    if (!sim.canContinue) {
       pullTriggerText.text = "You must make a choice to continue...";
       return;
     }

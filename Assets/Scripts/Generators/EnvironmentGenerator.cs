@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -48,7 +48,7 @@ public class EnvironmentGenerator {
 
     sim.player.position = randomTile.position;
     randomTile.Occupy(Constants.playerContentKey, sim.player.id);
-    sim.room = randRoom;
+    sim.currentRoom = randRoom;
   }
 
   void AddStairs () {

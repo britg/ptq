@@ -48,7 +48,7 @@ public class FeedView : BaseBehaviour {
 
   void ProcessGame () {
     var inputProcessor = new InputProcessor(sim);
-    inputProcessor.Continue();
+    inputProcessor.TriggerContinue();
   }
 
   public void OnUpdateFeed () {

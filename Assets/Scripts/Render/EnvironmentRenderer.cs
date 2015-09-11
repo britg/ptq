@@ -14,7 +14,7 @@ public class EnvironmentRenderer : BaseBehaviour {
 
   Environment env {
     get {
-      return sim.environment;
+      return sim.currentEnvironment;
     }
   }
 

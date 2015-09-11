@@ -14,6 +14,9 @@ public class Constants {
   public const string OnFirstPull = "OnFirstPull";
 
   public const string OnRenderEvents = "OnRenderEvents";
+  public const string OnRenderEventsDone = "OnRenderEventsDone";
+  public const string OnTurnChange = "OnTurnChange";
+  public const string OnRequireInput = "OnRequireInput";
   public const string OnEnvironmentStart = "OnEnvironmentStart";
   public const string OnEnvironmentUpdate = "OnEnvironmentUpdate";
 

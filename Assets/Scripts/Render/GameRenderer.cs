@@ -12,7 +12,6 @@ public class GameRenderer : BaseBehaviour {
   }
 
   void OnRenderEvents () {
-    Debug.Log("On render events...");
     currentIndex = 0;
     NextEvent();
   }
@@ -65,7 +64,7 @@ public class GameRenderer : BaseBehaviour {
   }
 
   void NotifyDone () {
-    NotificationCenter.PostNotification(Constants.OnUpdateFeed);
+    NotificationCenter.PostNotification(Constants.OnRenderEventsDone);
   }
 
 }

@@ -140,7 +140,7 @@ public class BattleProcessor {
 
     if (tpd.RollPercent(currentMob.consumableChance)) {
       //if (true) {
-      var env = sim.environment;
+      var env = sim.currentEnvironment;
       var consumableKey = tpd.RollMap(env.consumableChances);
       var consumableGenerator = new ConsumableGenerator(sim);
       var consumable = consumableGenerator.Generate(consumableKey);

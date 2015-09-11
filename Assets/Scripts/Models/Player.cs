@@ -5,6 +5,8 @@ using SimpleJSON;
 
 public class Player : AttributeBase {
 
+  public string name = "Argent";
+
   public enum Purpose {
     Explore,
     HeadToTarget,
@@ -23,24 +25,5 @@ public class Player : AttributeBase {
   public Mob currentMob;
   public PlayerEvent currentEvent;
   public string lastBattleMove;
-
-  public bool currentlyOccupied {
-    get {
-      return (currentInteractible != null 
-        || currentMob != null
-        || (currentEvent != null && currentEvent.blocksContinue)
-      );
-    }
-  }
-
-  public string currentChoiceKey {
-    get {
-      if (currentEvent == null || currentEvent.type != PlayerEvent.Type.Choice) {
-        return null;
-      } else {
-        return currentEvent.chosenKey;
-      }
-    }
-  }
 
 }

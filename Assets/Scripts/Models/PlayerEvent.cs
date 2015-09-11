@@ -120,7 +120,7 @@ public class PlayerEvent {
     return ev;
   }
 
-  private static PlayerEvent PromptChoice (string text, Choice firstChoice, Choice secondChoice) {
+  public static PlayerEvent PromptChoice (string text, Choice firstChoice, Choice secondChoice) {
     PlayerEvent ev = new PlayerEvent(text);
     ev.type = Type.Choice;
     ev.firstChoice = firstChoice;

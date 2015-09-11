@@ -12,24 +12,14 @@ public class InputProcessor {
     }
   }
 
-  public bool canContinue {
-    get {
-      if (player.currentEvent == null) {
-        return true;
-      }
-      return player.currentEvent.conditionsSatisfied;
-    }
-  }
-
   public InputProcessor (Simulation _sim) {
     sim = _sim;
   }
 
-  public void Continue () {
+  public void TriggerContinue () {
     Debug.Log("Continuing...");
-    sim.newEvents = new List<PlayerEvent>();
 
-    if (!player.currentlyOccupied) {
+    if (sim.shouldExplore) {
       var envProcessor = new EnvironmentProcessor(sim);
 
       if (player.currentEvent == null) {
@@ -39,28 +29,23 @@ public class InputProcessor {
       } else {
         sim.newEvents.AddRange(envProcessor.Explore());
       }
-    }
+    } else {
 
-    if (player.currentChoiceKey != null) {
-      var branchProcessor = new BranchProcessor(sim, player.currentEvent);
-      sim.newEvents.AddRange(branchProcessor.Choose(player.currentChoiceKey));
-    }
+//      if (player.currentChoiceKey != null) {
+//        var branchProcessor = new BranchProcessor(sim, player.currentEvent);
+//        sim.newEvents.AddRange(branchProcessor.Choose(player.currentChoiceKey));
+//      }
 
-    if (player.currentMob != null) {
-      var battleProcessor = new BattleProcessor(sim);
-      sim.newEvents.AddRange(battleProcessor.Continue());
+      if (player.currentMob != null) {
+        var battleProcessor = new BattleProcessor(sim);
+        sim.newEvents.AddRange(battleProcessor.Continue());
+      }
+      
+      if (player.currentInteractible != null) {
+        var interactionProcessor = new InteractionProcessor(sim);
+        sim.newEvents.AddRange(interactionProcessor.Continue());
+      }
     }
-    
-    if (player.currentInteractible != null) {
-      var interactionProcessor = new InteractionProcessor(sim);
-      sim.newEvents.AddRange(interactionProcessor.Continue());
-    }
-
-    if (sim.newEvents.Count > 0) {
-      player.currentEvent = sim.newEvents[sim.newEvents.Count - 1];
-    }
-
-    NotificationCenter.PostNotification(Constants.OnRenderEvents);
 
   }
 

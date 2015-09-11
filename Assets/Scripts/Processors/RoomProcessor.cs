@@ -16,27 +16,34 @@ public class RoomProcessor  {
   public List<PlayerEvent> Explore () {
     List<PlayerEvent> newEvents = new List<PlayerEvent>();
 
+    var targetTile = DiscoverNearestNewContent();
+
+    if (targetTile.contentType == Constants.interactibleContentKey) {
+      sim.player.currentTarget = targetTile.position;
+    }
 
     // TODO: Look for nearest stairs
     // Look for nearest interactible
     // Look for nearest mob
     // Look for nearest door
 
-    newEvents.Add (PlayerEvent.Info ("[starting to move]"));
     newEvents.Add(PlayerEvent.Movement(Vector3.forward));
-    newEvents.Add(PlayerEvent.Movement(Vector3.right));
-    newEvents.Add(PlayerEvent.Movement(Vector3.back));
-    newEvents.Add(PlayerEvent.Movement(Vector3.left));
-    newEvents.Add (PlayerEvent.Info ("[done moving]"));
 
     return newEvents;
   }
 
-  Tile DiscoverNewContent (string type = null) {
+  Tile DiscoverNearestNewContent (string type = null) {
     Tile nearest = null;
     float dist = Mathf.Infinity;
     foreach (var tile in room.tiles) {
-      if (type == null || tile.contentType == type) {
+      bool anything = (type == null && tile.contentType != null);
+      bool matches = (type != null && tile.contentType == type);
+      if (anything || matches) {
+
+        if (sim.discoveredCache.Contains(tile.contentId)) {
+          continue;
+        }
+
         if (Vector3.Distance(tile.position, sim.player.position) < dist) {
           nearest = tile;
         }
@@ -44,6 +51,18 @@ public class RoomProcessor  {
     }
 
     return nearest;
+  }
+
+  List<PlayerEvent> MobTilePrompt (Tile targetTile) {
+    var promptEvents = new List<PlayerEvent>();
+
+    var mob = MobRepository.Find(targetTile.contentId);
+    var prompt = string.Format("You notice [{0}] before it notices you...", mob.name);
+    promptEvents.Add(PlayerEvent.PromptChoice(prompt,
+                                              Choice.SwipeLeft("attack", "Attack"),
+                                              Choice.SwipeRight("ignore", "Ignore")));
+
+    return promptEvents;
   }
 
 }

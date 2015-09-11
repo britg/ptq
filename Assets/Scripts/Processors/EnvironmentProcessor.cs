@@ -23,7 +23,7 @@ public class EnvironmentProcessor {
 
     newEvents = new List<PlayerEvent>();
 
-    foreach (var atmTxt in sim.environment.events[group]) {
+    foreach (var atmTxt in sim.currentEnvironment.events[group]) {
       if (DetectBranch(atmTxt)) {
         ExecuteBranch(atmTxt);
       } else {
@@ -40,7 +40,7 @@ public class EnvironmentProcessor {
   }
 
   void ExecuteBranch (string key) {
-    var branch = sim.environment.GetBranch(key);
+    var branch = sim.currentEnvironment.GetBranch(key);
     var branchProcessor = new BranchProcessor(sim, branch);
     newEvents.AddRange(branchProcessor.Start());
   }
@@ -48,11 +48,8 @@ public class EnvironmentProcessor {
   public List<PlayerEvent> Explore () {
     var newEvents = new List<PlayerEvent>();
 
-    // If in a room, continue exploring the room
-    newEvents.Add(PlayerEvent.Info("You venture forth..."));
-
-    if (sim.room != null) {
-      var roomProcessor = new RoomProcessor(sim, sim.room);
+    if (sim.currentRoom != null) {
+      var roomProcessor = new RoomProcessor(sim, sim.currentRoom);
       newEvents.AddRange(roomProcessor.Explore());
     }
 
