@@ -18,8 +18,12 @@ public class RoomProcessor  {
 
     var targetTile = DiscoverNearestNewContent();
 
+    if (targetTile == null) {
+      // look for the nearest door and go to it
+    }
+
     if (targetTile.contentType == Constants.interactibleContentKey) {
-      sim.player.currentTarget = targetTile.position;
+      sim.player.currentDestination = targetTile.position;
     }
 
     // TODO: Look for nearest stairs

@@ -7,6 +7,7 @@ public class Constants {
 
   // Notifications
   public const string OnUpdateFeed = "OnUpdateFeed";
+  public const string OnUpdateFeedDone = "OnUpdateFeedDone";
   public const string OnUpdateEvents = "OnUpdateEvents";
   public const string OnUpdateAttribute = "OnUpdateStats";
   public const string OnTakeDamage = "OnTakeDamage";

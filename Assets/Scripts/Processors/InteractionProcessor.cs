@@ -12,13 +12,13 @@ public class InteractionProcessor {
 
   public List<PlayerEvent> StartInteraction (Interactible interactible) {
     var newEvents = new List<PlayerEvent>();
-    sim.player.currentInteractible = interactible;
+    sim.currentInteractible = interactible;
 
     newEvents.Add (PlayerEvent.Info ("[DEV] You find " + interactible.name + " and must make a choice about it."));
 
     // DEV
     newEvents.Add (PlayerEvent.Info ("[DEV] ending interaction...."));
-    sim.player.currentInteractible = null;
+    sim.currentInteractible = null;
 
     return newEvents;
   }

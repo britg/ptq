@@ -20,10 +20,7 @@ public class Player : AttributeBase {
   }
 
   public Purpose purpose = Purpose.Explore;
-  public Vector3 currentTarget;
-  public Interactible currentInteractible;
-  public Mob currentMob;
-  public PlayerEvent currentEvent;
+  public Vector3 currentDestination;
   public string lastBattleMove;
 
 }

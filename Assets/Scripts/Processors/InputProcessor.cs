@@ -17,36 +17,9 @@ public class InputProcessor {
   }
 
   public void TriggerContinue () {
-    Debug.Log("Continuing...");
-
-    if (sim.shouldExplore) {
-      var envProcessor = new EnvironmentProcessor(sim);
-
-      if (player.currentEvent == null) {
-        NotificationCenter.PostNotification(Constants.OnFirstPull);
-        NotificationCenter.PostNotification(Constants.OnEnvironmentUpdate);
-        sim.newEvents.AddRange(envProcessor.Enter());
-      } else {
-        sim.newEvents.AddRange(envProcessor.Explore());
-      }
-    } else {
-
-//      if (player.currentChoiceKey != null) {
-//        var branchProcessor = new BranchProcessor(sim, player.currentEvent);
-//        sim.newEvents.AddRange(branchProcessor.Choose(player.currentChoiceKey));
-//      }
-
-      if (player.currentMob != null) {
-        var battleProcessor = new BattleProcessor(sim);
-        sim.newEvents.AddRange(battleProcessor.Continue());
-      }
-      
-      if (player.currentInteractible != null) {
-        var interactionProcessor = new InteractionProcessor(sim);
-        sim.newEvents.AddRange(interactionProcessor.Continue());
-      }
-    }
-
+    Debug.Log("Trigger continue");
+    var turnProcessor = new TurnProcessor(sim);
+    turnProcessor.TakeTurn();
   }
 
   public void TriggerEvent (PlayerEvent ev) {

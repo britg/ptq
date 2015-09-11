@@ -43,7 +43,8 @@ public class FeedView : BaseBehaviour {
     refreshFinishedHandler = handler;
     pullAnchorTitle.text = pullAnchorWorkingText;
     CullOldEvents();
-    ProcessGame();
+    Invoke ("ProcessGame", 0.3f);
+//    ProcessGame();
   }
 
   void ProcessGame () {
@@ -63,6 +64,7 @@ public class FeedView : BaseBehaviour {
   }
 
   void EndRefresh () {
+    NotificationCenter.PostNotification(Constants.OnUpdateFeedDone);
     pullAnchorTitle.text = pullAnchorDefaultText;
     refreshFinishedHandler();
   }

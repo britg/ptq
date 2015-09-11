@@ -6,7 +6,9 @@ public class Simulation {
   public const string type = "Simulation";
 
   public ResourceLoader resourceLoader;
+
   public Player player;
+  public Turn.Type currentTurn;
   public Environment currentEnvironment;
   public Room currentRoom;
   public Mob currentMob;
@@ -17,6 +19,12 @@ public class Simulation {
 
   public List<string> discoveredCache;
 
+  public bool newGame {
+    get {
+      return currentEvent == null;
+    }
+  }
+
   public PlayerEvent currentEvent {
     get {
       if (newEvents.Count > 0) {
@@ -25,6 +33,15 @@ public class Simulation {
 
       if (recentEvents.Count > 0) {
         return recentEvents[recentEvents.Count - 1];
+      }
+      return null;
+    }
+  }
+
+  public string currentChoiceKey {
+    get {
+      if (currentEvent != null) {
+        return currentEvent.chosenKey;
       }
       return null;
     }
@@ -52,6 +69,7 @@ public class Simulation {
     LoadResources();
     LoadDiscoveredCache();
     LoadEvents();
+    LoadTurn();
     SetupPlayer();
     SetupEnvironment();
   }
@@ -71,6 +89,11 @@ public class Simulation {
     newEvents = new List<PlayerEvent>();
 
     // TODO: Load some events from persistence
+  }
+
+  void LoadTurn () {
+    currentTurn = Turn.Type.Player;
+    // TODO remember and load from persistence
   }
 
   void SetupPlayer () {
@@ -94,6 +117,11 @@ public class Simulation {
       var envGenerator = new EnvironmentGenerator(this);
       currentEnvironment = envGenerator.Generate(envName);
     }
+  }
+
+  public void FlushNewEvents () {
+    recentEvents.AddRange(newEvents);
+    newEvents = new List<PlayerEvent>();
   }
 
 }

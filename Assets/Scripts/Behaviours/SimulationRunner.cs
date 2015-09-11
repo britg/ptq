@@ -13,9 +13,11 @@ public class SimulationRunner : MonoBehaviour {
   }
 
   void Start () {
-//    var floorProcessor = new FloorProcessor(sim);
-//    floorProcessor.EnterFloor(1);
-//     NotificationCenter.PostNotification(Constants.OnFloorUpdate);
+    NotificationCenter.AddObserver(this, Constants.OnUpdateFeedDone);
+  }
+
+  void OnUpdateFeedDone () {
+    sim.FlushNewEvents();
   }
 
 }

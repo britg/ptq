@@ -10,7 +10,7 @@ public class BattleProcessor {
 
   Mob currentMob {
     get {
-      return sim.player.currentMob;
+      return sim.currentMob;
     }
   }
 
@@ -21,7 +21,7 @@ public class BattleProcessor {
   public List<PlayerEvent> StartBattle (Mob mob) {
     var newEvents = new List<PlayerEvent>();
 
-    sim.player.currentMob = mob;
+    sim.currentMob = mob;
     sim.player.lastBattleMove = null;
     sim.player.initiative = 0f;
     mob.initiative = 0f;
@@ -100,7 +100,7 @@ public class BattleProcessor {
 
 //    newEvents.AddRange(AfterBattleChoices());
 
-    sim.player.currentMob = null;
+    sim.currentMob = null;
     return newEvents;
   }
 

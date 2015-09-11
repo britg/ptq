@@ -65,6 +65,7 @@ public class GameRenderer : BaseBehaviour {
 
   void NotifyDone () {
     NotificationCenter.PostNotification(Constants.OnRenderEventsDone);
+    NotificationCenter.PostNotification(Constants.OnUpdateFeed);
   }
 
 }

@@ -11,7 +11,7 @@
   "events": {
 
     "_enter" :  [
-      "You wake on the floor of dark room, a chill air blowing on your face.",
+      "Argent wakes on the floor of dark room, a chill air blowing on his face.",
       "The sound of rushing wind fills your ears, and you sense the the low pressure void of a sheer drop close by.",
       "branch:look_branch"
     ],
