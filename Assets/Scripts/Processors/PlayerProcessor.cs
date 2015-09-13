@@ -19,10 +19,7 @@ public class PlayerProcessor {
     }
 
     if (sim.shouldExplore) {
-      if (sim.currentEvent == null) {
-      } else {
-        sim.newEvents.AddRange(envProcessor.Explore());
-      }
+      sim.newEvents.AddRange(envProcessor.Explore());
     } else {
 
       if (sim.currentChoiceKey != null) {
