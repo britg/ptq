@@ -119,6 +119,10 @@ public class Simulation {
     }
   }
 
+  public void AddEvent (PlayerEvent ev) {
+
+  }
+
   public void FlushNewEvents () {
     recentEvents.AddRange(newEvents);
     newEvents = new List<PlayerEvent>();

@@ -13,9 +13,7 @@ public class PlayerProcessor {
     var envProcessor = new EnvironmentProcessor(sim);
 
     if (sim.newGame) {
-      NotificationCenter.PostNotification(Constants.OnFirstPull);
-      NotificationCenter.PostNotification(Constants.OnEnvironmentUpdate);
-      sim.newEvents.AddRange(envProcessor.Enter());
+      StartNewGame();
     }
 
     if (sim.shouldExplore) {
@@ -37,5 +35,13 @@ public class PlayerProcessor {
         sim.newEvents.AddRange(interactionProcessor.Continue());
       }
     }
+  }
+
+  void StartNewGame () {
+    var envProcessor = new EnvironmentProcessor(sim);
+
+    NotificationCenter.PostNotification(Constants.OnFirstPull);
+    NotificationCenter.PostNotification(Constants.OnEnvironmentUpdate);
+    envProcessor.Enter();
   }
 }

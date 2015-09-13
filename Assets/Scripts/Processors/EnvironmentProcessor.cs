@@ -13,25 +13,19 @@ public class EnvironmentProcessor {
     sim = _sim;
   }
 
-  public List<PlayerEvent> Enter () {
-    newEvents = new List<PlayerEvent>();
-    newEvents = Events(Constants.enterKey);
-    return newEvents;
+  public void Enter () {
+    Events(Constants.enterKey);
   }
 
-  public List<PlayerEvent> Events (string group) {
-
-    newEvents = new List<PlayerEvent>();
+  public void Events (string group) {
 
     foreach (var atmTxt in sim.currentEnvironment.events[group]) {
       if (DetectBranch(atmTxt)) {
         ExecuteBranch(atmTxt);
       } else {
-        newEvents.Add(PlayerEvent.Story(atmTxt));
+        sim.AddEvent(PlayerEvent.Story(atmTxt));
       }
     }
-
-    return newEvents;
   }
 
 

@@ -36,7 +36,7 @@ public class BranchProcessor {
     if (res.thenToEvents) {
       var envProcessor = new EnvironmentProcessor(sim);
       var eventsKey = res.thenTo.Replace("events:", "");
-      newEvents.AddRange(envProcessor.Events(eventsKey));
+      envProcessor.Events(eventsKey);
     }
 
     return newEvents;
