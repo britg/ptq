@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
-public class PlayerRepository {
+public class PlayerStore {
 
   Simulation sim;
   Player player;
 
-  public PlayerRepository (Simulation _sim) {
+  public PlayerStore (Simulation _sim) {
     sim = _sim;
   }
 

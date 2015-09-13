@@ -49,7 +49,7 @@ public class RoomGenerator {
 
     mob.position = randomTile.position;
 
-    MobRepository.Save(mob);
+    MobStore.Save(mob);
     randomTile.Occupy(Constants.mobContentKey, mob.id);
   }
 

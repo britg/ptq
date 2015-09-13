@@ -97,7 +97,7 @@ public class Simulation {
   }
 
   void SetupPlayer () {
-    var playerRepo = new PlayerRepository(this);
+    var playerRepo = new PlayerStore(this);
     if (playerRepo.playerPersisted) {
       player = playerRepo.Load();
     } else {

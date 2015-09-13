@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class InteractibleRepository : Repository {
+public class InteractibleStore : Store {
   static Dictionary<string, Interactible> repo = new Dictionary<string, Interactible>();
 
   public static Interactible Find (string id) {

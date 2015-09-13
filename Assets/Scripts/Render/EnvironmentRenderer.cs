@@ -99,7 +99,7 @@ public class EnvironmentRenderer : BaseBehaviour {
     }
 
     if (tile.contentType == Constants.mobContentKey) {
-      var mob = MobRepository.Find(tile.contentId);
+      var mob = MobStore.Find(tile.contentId);
       PlaceObj(mobPrefab, mob.position, tile.contentId);
     }
   }

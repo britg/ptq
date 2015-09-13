@@ -60,7 +60,7 @@ public class RoomProcessor  {
   List<PlayerEvent> MobTilePrompt (Tile targetTile) {
     var promptEvents = new List<PlayerEvent>();
 
-    var mob = MobRepository.Find(targetTile.contentId);
+    var mob = MobStore.Find(targetTile.contentId);
     var prompt = string.Format("You notice [{0}] before it notices you...", mob.name);
     promptEvents.Add(PlayerEvent.PromptChoice(prompt,
                                               Choice.SwipeLeft("attack", "Attack"),

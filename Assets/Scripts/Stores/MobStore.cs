@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class MobRepository : Repository {
+public class MobStore : Store {
 
   static Dictionary<string, Mob> repo = new Dictionary<string, Mob>();
 
