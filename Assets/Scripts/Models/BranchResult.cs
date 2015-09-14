@@ -36,13 +36,19 @@ public class BranchResult : JSONResource {
 
   public bool thenToRoom {
     get {
-      return thenTo.Substring(0, "room:".Length) == "room:";
+      return tpd.BeginsWith(thenTo, "room:");
     }
   }
 
   public bool thenToEvents {
     get {
-      return thenTo.Substring(0, "events:".Length) == "events:";
+      return tpd.BeginsWith(thenTo, "events:");
+    }
+  }
+
+  public bool thenToPromptPull {
+    get {
+      return thenTo == "prompt_pull";
     }
   }
 

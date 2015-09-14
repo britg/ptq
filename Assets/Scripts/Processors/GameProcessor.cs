@@ -10,6 +10,7 @@ public class GameProcessor {
   }
 
   public void TakeTurn () {
-    sim.newEvents.Add(PlayerEvent.Info("enemy turn..."));
+    sim.AddEvent(PlayerEvent.Info("enemy turn..."));
+    sim.EndGameTurn();
   }
 }

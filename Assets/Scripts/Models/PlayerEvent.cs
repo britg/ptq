@@ -59,7 +59,7 @@ public class PlayerEvent {
     }
   }
 
-  public bool blocksContinue {
+  public bool requiresInput {
     get {
       return type == Type.Choice;
     }

@@ -28,7 +28,8 @@ public class JSONResource {
   public string key {
     get {
       if (_key == null) {
-        _key = string.Format("{0}-{1}", sourceData["type"].Value, sourceData["key"].Value);
+//        _key = string.Format("{0}-{1}", sourceData["type"].Value, sourceData["key"].Value);
+        _key = string.Format("{0}-{1}", GetType().ToString(), sourceData["key"].Value);
       }
       return _key;
     }

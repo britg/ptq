@@ -6,29 +6,27 @@ public class MobCombatProcessor {
 
   public const string basicAttack = "basic";
 
+  Simulation sim;
   Player player;
   Mob mob;
 
-  public MobCombatProcessor (Player _player, Mob _mob) {
-    player = _player;
-    mob = _mob;
+  public MobCombatProcessor (Simulation _sim) {
+    sim = _sim;
+    player = sim.player;
+    mob = sim.currentMob;
   }
 
-  public List<PlayerEvent> TakeAction () {
-    var newEvents = new List<PlayerEvent>();
+  public void TakeAction () {
     var action = tpd.RollMap(mob.combatProfile);
 
     if (action == basicAttack) {
-      newEvents.AddRange(BasicAttack());
+      BasicAttack();
     }
     
-    return newEvents;
   }
 
-  List<PlayerEvent> BasicAttack () {
+  void BasicAttack () {
     
-    var newEvents = new List<PlayerEvent>();
-
     // Calc damage
     // TODO: Miss chance?
     // TODO: Crit chance
@@ -47,7 +45,6 @@ public class MobCombatProcessor {
 
     ev.Triggers.Add(trigger);
 
-    newEvents.Add(ev);
-    return newEvents;
+    sim.AddEvent(ev);
   }
 }

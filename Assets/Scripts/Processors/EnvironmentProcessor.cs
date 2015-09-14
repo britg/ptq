@@ -7,7 +7,6 @@ using SimpleJSON;
 public class EnvironmentProcessor {
 
   Simulation sim;
-  List<PlayerEvent> newEvents;
 
   public EnvironmentProcessor (Simulation _sim) {
     sim = _sim;
@@ -35,24 +34,20 @@ public class EnvironmentProcessor {
 
   void ExecuteBranch (string key) {
     var branch = sim.currentEnvironment.GetBranch(key);
-    var branchProcessor = new BranchProcessor(sim, branch);
-    newEvents.AddRange(branchProcessor.Start());
+    sim.currentBranch = branch;
+    var branchProcessor = new BranchProcessor(sim);
+    branchProcessor.Start();
   }
 
-  public List<PlayerEvent> Explore () {
-    var newEvents = new List<PlayerEvent>();
+  public void Explore () {
 
     if (sim.currentRoom != null) {
       var roomProcessor = new RoomProcessor(sim, sim.currentRoom);
-      newEvents.AddRange(roomProcessor.Explore());
+      roomProcessor.Explore();
     }
-
 
     // If nothing is found, just pick a direction or use the last
     // direction you were going.
-
-
-    return newEvents;
   }
 
 }

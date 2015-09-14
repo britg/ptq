@@ -89,7 +89,7 @@
           "events": [
             "You ignore the body and move on."
           ],
-          "then_to": "events:after_body"
+          "then_to": "prompt_pull"
         },
 
         {
@@ -100,7 +100,7 @@
             "... unsettled, you move on.",
           ],
           "loot": ["standard"],
-          "then_to": "events:after_body"
+          "then_to": "prompt_pull"
         }
       ]
     },

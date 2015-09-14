@@ -23,9 +23,12 @@ public class TurnProcessor {
       gameProcessor.TakeTurn();
     }
 
-    Change();
+    if (sim.promptPull) {
+      NotificationCenter.PostNotification(Constants.OnRenderEvents);
+      return;
+    }
 
-    if (sim.canContinue && turnCount < maxTurnCount) {
+    if (sim.idle && turnCount < maxTurnCount) {
       TakeTurn();
     } else {
       NotificationCenter.PostNotification(Constants.OnRenderEvents);

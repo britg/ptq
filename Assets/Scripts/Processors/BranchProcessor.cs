@@ -7,30 +7,26 @@ public class BranchProcessor {
   Simulation sim;
   Branch branch;
 
-  public BranchProcessor (Simulation _sim, Branch _branch) {
+  public BranchProcessor (Simulation _sim) {
     sim = _sim;
-    branch = _branch;
+    branch = sim.currentBranch;
   }
 
-  public BranchProcessor (Simulation _sim, PlayerEvent ev) {
-    sim = _sim;
-    branch = (Branch)ev.data[PlayerEvent.branchKey];
-  }
-
-  public List<PlayerEvent> Start () {
+  public void Start () {
     var ev = PlayerEvent.PromptChoice(branch);
-    return new List<PlayerEvent>() { ev };
+    sim.AddEvent(ev);
   }
 
-  public List<PlayerEvent> Choose (string choiceKey) {
-    var newEvents = new List<PlayerEvent>();
-    var res = branch.results[choiceKey];
+  public void Choose (string choiceKey) {
+    var fullChoiceKey = "BranchResult-" + choiceKey;
+    var res = branch.results[fullChoiceKey];
     foreach (string evTxt in res.events) {
-      newEvents.Add(PlayerEvent.Story(evTxt));
+      sim.AddEvent(PlayerEvent.Story(evTxt));
     }
 
     if (res.thenToContinue) {
-      return newEvents;
+      sim.currentBranch = null;
+      return;
     }
 
     if (res.thenToEvents) {
@@ -39,7 +35,10 @@ public class BranchProcessor {
       envProcessor.Events(eventsKey);
     }
 
-    return newEvents;
+    if (res.thenToPromptPull) {
+      sim.promptPull = true;
+      return;
+    }
   }
 
 }

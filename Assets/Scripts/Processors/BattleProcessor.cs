@@ -18,58 +18,49 @@ public class BattleProcessor {
     sim = _sim;
   }
 
-  public List<PlayerEvent> StartBattle (Mob mob) {
-    var newEvents = new List<PlayerEvent>();
+  public void StartBattle (Mob mob) {
 
     sim.currentMob = mob;
     sim.player.lastBattleMove = null;
     sim.player.initiative = 0f;
     mob.initiative = 0f;
 
-    newEvents.Add(new PlayerEvent("! [" + mob.name + "]"));
-    newEvents.AddRange(Continue());
-
-    return newEvents;
+    sim.AddEvent(PlayerEvent.Info("! [" + mob.name + "]"));
+    Continue();
   }
 
-  public List<PlayerEvent> Continue () {
-    var newEvents = new List<PlayerEvent>();
+  public void Continue () {
 
     if (!PlayerAlive()) {
       // hand player dead situation
     }
 
     if (!MobAlive()) {
-      newEvents.AddRange(MobDeath());
-      newEvents.AddRange(Victory());
-      return newEvents;
+      MobDeath();
+      Victory();
     }
 
     var initiativeProcessor = new InitiativeProcessor(sim.player, currentMob);
     string nextMove = initiativeProcessor.NextMove();
 
     if (nextMove == InitiativeProcessor.playerIdent) {
-      var playerCombatProcessor = new PlayerCombatProcessor(sim.player, currentMob);
-      var events = playerCombatProcessor.TakeAction();
-      newEvents.AddRange(events);
+      var playerCombatProcessor = new PlayerCombatProcessor(sim);
+      playerCombatProcessor.TakeAction();
     } else {
-      var mobCombatProcessor = new MobCombatProcessor(sim.player, currentMob);
-      var events = mobCombatProcessor.TakeAction();
-      newEvents.AddRange(events);
+      var mobCombatProcessor = new MobCombatProcessor(sim);
+      mobCombatProcessor.TakeAction();
     }
 
     if (iterationCount >= iterationLimit) {
-      newEvents.Add(PlayerEvent.Info("[DEV] Iteration limit reached! Something went wrong."));
-      return newEvents;
+      sim.AddEvent(PlayerEvent.Info("[DEV] Iteration limit reached! Something went wrong."));
     }
 
-    if (newEvents.Count > 0 && newEvents[newEvents.Count - 1].hasChoices) {
-      return newEvents;
+    if (sim.requiresInput) {
+      return;
     } else {
       Debug.Log("Iterating battle processor continue");
       ++iterationCount;
-      newEvents.AddRange(Continue());
-      return newEvents;
+      Continue();
     }
   }
 
@@ -83,29 +74,23 @@ public class BattleProcessor {
     //return hp > 0f;
   }
 
-  public List<PlayerEvent> MobDeath () {
-    var newEvents = new List<PlayerEvent>();
-    newEvents.Add (PlayerEvent.Info(currentMob.name + " dies!"));
-    return newEvents;
+  public void MobDeath () {
+    sim.AddEvent(PlayerEvent.Info(currentMob.name + " dies!"));
   }
 
-  public List<PlayerEvent> Victory () {
+  public void Victory () {
 
-    var newEvents = new List<PlayerEvent>();
+    GainExperience();
+    Gold();
+    Equipment();
+    Consumables();
 
-    newEvents.AddRange(GainExperience());
-    newEvents.AddRange(Gold());
-    newEvents.AddRange(Equipment());
-    newEvents.AddRange(Consumables());
-
-//    newEvents.AddRange(AfterBattleChoices());
+//    sim.AddEvent(AfterBattleChoices());
 
     sim.currentMob = null;
-    return newEvents;
   }
 
-  public List<PlayerEvent> Gold () {
-    var newEvents = new List<PlayerEvent>();
+  public void Gold () {
     // Gold
     if (tpd.RollPercent(currentMob.goldChance)) {
       var goldGenerator = new GoldGenerator(sim.player, currentMob);
@@ -116,27 +101,22 @@ public class BattleProcessor {
       trigger.data[Trigger.resourceAmountKey] = amount;
 
       ev.Triggers.Add(trigger);
-      newEvents.Add(ev);
+      sim.AddEvent(ev);
     }
-
-    return newEvents;
   }
 
-  public List<PlayerEvent> Equipment () {
-    var newEvents = new List<PlayerEvent>();
+  public void Equipment () {
 
     // Chance for loot
     if (tpd.RollPercent(currentMob.lootChance)) {
       var equipmentGenerator = new EquipmentGenerator(sim);
       var eq = equipmentGenerator.Generate();
-      newEvents.Add(PlayerEvent.Loot(eq));
+      sim.AddEvent(PlayerEvent.Loot(eq));
     }
 
-    return newEvents;
   }
 
-  public List<PlayerEvent> Consumables () {
-    var newEvents = new List<PlayerEvent>();
+  public void Consumables () {
 
     if (tpd.RollPercent(currentMob.consumableChance)) {
       //if (true) {
@@ -146,12 +126,11 @@ public class BattleProcessor {
       var consumable = consumableGenerator.Generate(consumableKey);
       var ev = PlayerEvent.Consumable(consumable);
 
-      newEvents.Add(ev);
+      sim.AddEvent(ev);
     }
-    return newEvents;
   }
 
-  public List<PlayerEvent> GainExperience () {
+  public void GainExperience () {
     var experienceProcessor = new ExperienceProcessor(sim.player, currentMob);
     var amount = experienceProcessor.ExperienceGain();
     var ev = PlayerEvent.Info(string.Format("+{0} experience", amount));
@@ -160,7 +139,7 @@ public class BattleProcessor {
     trigger.data[Trigger.statChangeAmountKey] = amount;
     ev.Triggers.Add(trigger);
 
-    return new List<PlayerEvent>(){ ev };
+    sim.AddEvent(ev);
   }
 
 }

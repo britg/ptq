@@ -13,27 +13,25 @@ public class RoomProcessor  {
     room = _room;
   }
 
-  public List<PlayerEvent> Explore () {
-    List<PlayerEvent> newEvents = new List<PlayerEvent>();
+  public void Explore () {
 
     var targetTile = DiscoverNearestNewContent();
 
     if (targetTile == null) {
       // look for the nearest door and go to it
+      TargetDoor();
     }
 
     if (targetTile.contentType == Constants.interactibleContentKey) {
-      sim.player.currentDestination = targetTile.position;
+      HandleInteractibleTile(targetTile);
     }
 
-    // TODO: Look for nearest stairs
-    // Look for nearest interactible
-    // Look for nearest mob
-    // Look for nearest door
+    if (targetTile.contentType == Constants.mobContentKey) {
+      HandleMobTile(targetTile);
+    }
 
-    newEvents.Add(PlayerEvent.Movement(Vector3.forward));
+    sim.AddEvent(PlayerEvent.Info("looking at " + targetTile.contentType));
 
-    return newEvents;
   }
 
   Tile DiscoverNearestNewContent (string type = null) {
@@ -57,16 +55,29 @@ public class RoomProcessor  {
     return nearest;
   }
 
-  List<PlayerEvent> MobTilePrompt (Tile targetTile) {
-    var promptEvents = new List<PlayerEvent>();
+  void TargetDoor () {
+    sim.AddEvent(PlayerEvent.Info("Nothing intersting... heading for door"));
+  }
 
+  void HandleInteractibleTile (Tile tile) {
+    sim.AddEvent(PlayerEvent.Info("Found interactible"));
+    sim.player.currentDestination = tile.position;
+    // var pathfindingProcessor = new PathfindingProcessor(sim);
+    // pathfindingProcessor.NextTile(from, to)
+
+  }
+
+  void HandleMobTile (Tile tile) {
+    //TODO: If the mob is low enough level, just go towards it.
+    PromptMobChoices(tile);
+  }
+
+  void PromptMobChoices (Tile targetTile) {
     var mob = MobStore.Find(targetTile.contentId);
     var prompt = string.Format("You notice [{0}] before it notices you...", mob.name);
-    promptEvents.Add(PlayerEvent.PromptChoice(prompt,
-                                              Choice.SwipeLeft("attack", "Attack"),
-                                              Choice.SwipeRight("ignore", "Ignore")));
-
-    return promptEvents;
+    sim.AddEvent(PlayerEvent.PromptChoice(prompt,
+                                          Choice.SwipeLeft("attack", "Attack"),
+                                          Choice.SwipeRight("ignore", "Ignore")));
   }
 
 }

@@ -10,21 +10,16 @@ public class InteractionProcessor {
     sim = _sim;
   }
 
-  public List<PlayerEvent> StartInteraction (Interactible interactible) {
-    var newEvents = new List<PlayerEvent>();
+  public void StartInteraction (Interactible interactible) {
     sim.currentInteractible = interactible;
 
-    newEvents.Add (PlayerEvent.Info ("[DEV] You find " + interactible.name + " and must make a choice about it."));
+    sim.AddEvent(PlayerEvent.Info ("[DEV] You find " + interactible.name + " and must make a choice about it."));
 
     // DEV
-    newEvents.Add (PlayerEvent.Info ("[DEV] ending interaction...."));
+    sim.AddEvent(PlayerEvent.Info ("[DEV] ending interaction...."));
     sim.currentInteractible = null;
-
-    return newEvents;
   }
 
-  public List<PlayerEvent> Continue () {
-    var newEvents = new List<PlayerEvent>();
-    return newEvents;
+  public void Continue () {
   }
 }

@@ -7,16 +7,17 @@ public class PlayerCombatProcessor  {
   public const string basicAttack = "basic";
   public const string specialAttack = "special";
 
+  Simulation sim;
   Player player;
   Mob mob;
 
-  public PlayerCombatProcessor (Player _player, Mob _mob) {
-    player = _player;
-    mob = _mob;
+  public PlayerCombatProcessor (Simulation _sim) {
+    sim = _sim;
+    player = sim.player;
+    mob = sim.currentMob;
   }
 
-  public List<PlayerEvent>  TakeAction () {
-    var newEvents = new List<PlayerEvent>();
+  public void TakeAction () {
 
     // Default action is to take a swing
     var chances = iTween.Hash(
@@ -28,15 +29,11 @@ public class PlayerCombatProcessor  {
     var chosen = tpd.RollMap(chances);
 
     if (chosen == basicAttack) {
-      newEvents.AddRange(BasicAttack());
+      BasicAttack();
     }
-
-    return newEvents;
   }
 
-  List<PlayerEvent> BasicAttack () {
-
-    var newEvents = new List<PlayerEvent>();
+  void BasicAttack () {
 
     // Calc damage
     HitType hitType = HitType.Hit;
@@ -62,8 +59,7 @@ public class PlayerCombatProcessor  {
     ev.data[PlayerEvent.damageKey] = damage;
     ev.data[PlayerEvent.hitTypeKey] = hitType;
 
-    newEvents.Add(ev);
-    return newEvents;
+    sim.AddEvent(ev);
   }
 
   /*

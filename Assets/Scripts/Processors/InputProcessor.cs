@@ -18,6 +18,7 @@ public class InputProcessor {
 
   public void TriggerContinue () {
     Debug.Log("Trigger continue");
+    sim.promptPull = false;
     var turnProcessor = new TurnProcessor(sim);
     turnProcessor.TakeTurn();
   }
@@ -53,6 +54,8 @@ public class InputProcessor {
     // TODO: Refactor into a choice processor when necessary
     ev.chosenKey = choiceKey;
     ev.conditionsSatisfied = true;
+    sim.currentChoiceKey = choiceKey;
+    sim.requiresInput = false;
 
     NotificationCenter.PostNotification(Constants.OnUpdateEvents);
   }

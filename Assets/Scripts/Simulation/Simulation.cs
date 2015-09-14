@@ -13,11 +13,16 @@ public class Simulation {
   public Room currentRoom;
   public Mob currentMob;
   public Interactible currentInteractible;
+  public Branch currentBranch;
+  public string currentChoiceKey;
 
-  public List<PlayerEvent> recentEvents;
+  string currentEventId;
   public List<PlayerEvent> newEvents;
 
   public List<string> discoveredCache;
+
+  public bool requiresInput = false;
+  public bool promptPull = false;
 
   public bool newGame {
     get {
@@ -27,40 +32,20 @@ public class Simulation {
 
   public PlayerEvent currentEvent {
     get {
-      if (newEvents.Count > 0) {
-        return newEvents[newEvents.Count - 1];
-      }
-
-      if (recentEvents.Count > 0) {
-        return recentEvents[recentEvents.Count - 1];
+      if (currentEventId != null) {
+        return EventStore.Find(currentEventId);
       }
       return null;
     }
   }
 
-  public string currentChoiceKey {
-    get {
-      if (currentEvent != null) {
-        return currentEvent.chosenKey;
-      }
-      return null;
-    }
-  }
 
-  public bool canContinue {
-    get {
-      if (currentEvent == null) {
-        return true;
-      }
-      return currentEvent.conditionsSatisfied;
-    }
-  }
 
-  public bool shouldExplore {
+  public bool idle {
     get {
       return (currentInteractible == null 
         && currentMob == null
-        && (currentEvent != null && !currentEvent.blocksContinue)
+        && (currentEvent != null && !currentEvent.requiresInput)
       );
     }
   }
@@ -85,7 +70,6 @@ public class Simulation {
   }
 
   void LoadEvents () {
-    recentEvents = new List<PlayerEvent>();
     newEvents = new List<PlayerEvent>();
 
     // TODO: Load some events from persistence
@@ -97,9 +81,9 @@ public class Simulation {
   }
 
   void SetupPlayer () {
-    var playerRepo = new PlayerStore(this);
-    if (playerRepo.playerPersisted) {
-      player = playerRepo.Load();
+    var playerStore = new PlayerStore(this);
+    if (playerStore.playerPersisted) {
+      player = playerStore.Load();
     } else {
       var playerGen = new PlayerGenerator(this);
       player = playerGen.Generate();
@@ -120,12 +104,25 @@ public class Simulation {
   }
 
   public void AddEvent (PlayerEvent ev) {
+    currentEventId = ev.Id;
+    newEvents.Add(ev);
 
+    if (ev.requiresInput) {
+      requiresInput = true;
+    }
+
+    EventStore.Save(ev);
   }
 
   public void FlushNewEvents () {
-    recentEvents.AddRange(newEvents);
     newEvents = new List<PlayerEvent>();
   }
 
+  public void EndPlayerTurn () {
+    currentTurn = Turn.Type.Game;
+  }
+
+  public void EndGameTurn () {
+    currentTurn = Turn.Type.Player;
+  }
 }
