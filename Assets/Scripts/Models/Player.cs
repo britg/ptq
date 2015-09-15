@@ -7,20 +7,26 @@ public class Player : AttributeBase {
 
   public string name = "Argent";
 
-  public enum Purpose {
-    Explore,
-    HeadToTarget,
-    Flee
-  }
-
   public Dictionary<string, Slot> Slots { get; set; }
+
+  public enum State {
+    Idling,
+    Exploring,
+    Targeting,
+    Interacting,
+    Battling,
+    Fleeing
+  }
 
   public Player () {
     Slots = new Dictionary<string, Slot>();
   }
 
-  public Purpose purpose = Purpose.Explore;
+  public State currentState = State.Idling;
   public Vector3 currentDestination;
   public string lastBattleMove;
 
+  public void SetState (State newState) {
+    currentState = newState;
+  }
 }

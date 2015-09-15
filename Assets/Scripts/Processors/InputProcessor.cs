@@ -51,6 +51,9 @@ public class InputProcessor {
   public void TriggerChoice (PlayerEvent ev, string choiceKey) {
     Debug.Log ("Trigger choice " + choiceKey + " for event " + ev.Content);
 
+    var choiceProcessor = new ChoiceProcessor(sim);
+    choiceProcessor.Choose(choiceKey);
+
     // TODO: Refactor into a choice processor when necessary
     ev.chosenKey = choiceKey;
     ev.conditionsSatisfied = true;

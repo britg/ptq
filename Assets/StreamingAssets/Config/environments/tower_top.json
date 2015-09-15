@@ -8,6 +8,8 @@
 
   ],
 
+  "enter_interaction": "",
+
   "events": {
 
     "_enter" :  [

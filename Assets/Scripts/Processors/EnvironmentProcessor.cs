@@ -13,6 +13,7 @@ public class EnvironmentProcessor {
   }
 
   public void Enter () {
+    sim.player.SetState(Player.State.Interacting);
     Events(Constants.enterKey);
   }
 

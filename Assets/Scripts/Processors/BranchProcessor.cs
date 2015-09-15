@@ -25,6 +25,7 @@ public class BranchProcessor {
     }
 
     if (res.thenToContinue) {
+      sim.player.SetState(Player.State.Idling);
       sim.currentBranch = null;
       return;
     }
