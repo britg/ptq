@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class InteractibleStore : Store {
-  static Dictionary<string, Interactible> repo = new Dictionary<string, Interactible>();
+  static Dictionary<string, Interaction> repo = new Dictionary<string, Interaction>();
 
-  public static Interactible Find (string id) {
+  public static Interaction Find (string id) {
     return repo[id];
   }
 
-  public static bool Save (Interactible interactible) {
+  public static bool Save (Interaction interactible) {
     repo[interactible.id] = interactible;
     return true;
   }

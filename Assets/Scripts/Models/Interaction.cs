@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class Interactible {
+public class Interaction {
 
-  public InteractibleTemplate template;
+  public InteractionTemplate template;
 
   public string id;
   public string name;

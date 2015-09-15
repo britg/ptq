@@ -1,18 +1,18 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GoldGenerator {
 
   Player player;
   Mob mob;
-  Interactible interactible;
+  Interaction interactible;
 
   public GoldGenerator (Player _player, Mob _mob) {
     player = _player;
     mob = _mob;
   }
 
-  public GoldGenerator (Player _player, Interactible _interactible) {
+  public GoldGenerator (Player _player, Interaction _interactible) {
     player = _player;
     interactible = _interactible;
   }

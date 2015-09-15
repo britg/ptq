@@ -10,7 +10,7 @@ public class InteractionProcessor {
     sim = _sim;
   }
 
-  public void StartInteraction (Interactible interactible) {
+  public void StartInteraction (Interaction interactible) {
     sim.currentInteractible = interactible;
 
     sim.AddEvent(PlayerEvent.Info ("[DEV] You find " + interactible.name + " and must make a choice about it."));

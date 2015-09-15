@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
-public class InteractibleTemplate : JSONResource {
-  public const string type = "InteractibleTemplate";
-  public InteractibleTemplate (JSONNode _sourceData) : base(_sourceData) { }
+public class InteractionTemplate : JSONResource {
+  public const string type = "InteractionTemplate";
+  public InteractionTemplate (JSONNode _sourceData) : base(_sourceData) { }
 
   public string name {
     get {

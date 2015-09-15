@@ -1,17 +1,17 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class InteractibleGenerator {
 
-  InteractibleTemplate interactibleTemplate;
-  Interactible interactible;
+  InteractionTemplate interactibleTemplate;
+  Interaction interactible;
 
-  public InteractibleGenerator (InteractibleTemplate _interactibleTemplate) {
+  public InteractibleGenerator (InteractionTemplate _interactibleTemplate) {
     interactibleTemplate = _interactibleTemplate;
   }
 
-  public Interactible Generate () {
-    interactible = new Interactible();
+  public Interaction Generate () {
+    interactible = new Interaction();
     interactible.id = System.Guid.NewGuid().ToString();
     interactible.template = interactibleTemplate;
     interactible.name = interactibleTemplate.name;

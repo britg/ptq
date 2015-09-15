@@ -23,7 +23,7 @@ public class ResourceLoader {
     Environment.type,
     RoomTemplate.type,
     MobTemplate.type,
-    InteractibleTemplate.type,
+    InteractionTemplate.type,
 
     Setting.type
   };
@@ -121,8 +121,8 @@ public class ResourceLoader {
       case MobTemplate.type:
         JSONResource.Cache<MobTemplate>(config);
         break;
-      case InteractibleTemplate.type:
-        JSONResource.Cache<InteractibleTemplate>(config);
+      case InteractionTemplate.type:
+        JSONResource.Cache<InteractionTemplate>(config);
         break;
       case Rarity.type:
         Rarity.Cache(config);
