@@ -39,24 +39,13 @@ public class Simulation {
     }
   }
 
-
-
-  public bool idle {
-    get {
-      return (currentInteractible == null 
-        && currentMob == null
-        && (currentEvent != null && !currentEvent.requiresInput)
-      );
-    }
-  }
-
   public void Setup() {
     LoadResources();
     LoadDiscoveredCache();
     LoadEvents();
     LoadTurn();
-    SetupPlayer();
-    SetupEnvironment();
+    LoadPlayer();
+    LoadEnvironment();
   }
 
   void LoadResources () {
@@ -80,7 +69,7 @@ public class Simulation {
     // TODO remember and load from persistence
   }
 
-  void SetupPlayer () {
+  void LoadPlayer () {
     var playerStore = new PlayerStore(this);
     if (playerStore.playerPersisted) {
       player = playerStore.Load();
@@ -90,7 +79,7 @@ public class Simulation {
     }
   }
 
-  void SetupEnvironment () {
+  void LoadEnvironment () {
     // TODO: Either pull the floor map from persistence
     // or generate the map.
     bool persisted = false;

@@ -16,24 +16,24 @@ public class PlayerProcessor {
       StartNewGame();
     }
 
-    if (sim.currentBranch != null) {
+    else if (sim.currentBranch != null) {
       if (sim.currentChoiceKey != null) {
         var branchProcessor = new BranchProcessor(sim);
         branchProcessor.Choose(sim.currentChoiceKey);
       }
     }
 
-    if (sim.currentMob != null) {
+    else if (sim.currentMob != null) {
       var battleProcessor = new BattleProcessor(sim);
       battleProcessor.Continue();
     }
     
-    if (sim.currentInteractible != null) {
+    else if (sim.currentInteractible != null) {
       var interactionProcessor = new InteractionProcessor(sim);
       interactionProcessor.Continue();
     }
 
-    if (sim.idle) {
+    else {
       envProcessor.Explore();
     }
 

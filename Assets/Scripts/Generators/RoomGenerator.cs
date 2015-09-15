@@ -61,6 +61,7 @@ public class RoomGenerator {
     var randomTile = room.RandomOpenTile();
     interactible.position = randomTile.position;
 
+    InteractibleStore.Save(interactible);
     randomTile.Occupy(Constants.interactibleContentKey, interactible.id);
   }
 

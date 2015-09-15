@@ -28,7 +28,7 @@ public class TurnProcessor {
       return;
     }
 
-    if (sim.idle && turnCount < maxTurnCount) {
+    if (!sim.requiresInput && turnCount < maxTurnCount) {
       TakeTurn();
     } else {
       NotificationCenter.PostNotification(Constants.OnRenderEvents);
