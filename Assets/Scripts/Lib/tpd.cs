@@ -34,6 +34,10 @@ public class tpd {
     return (s.Substring(0, match.Length) == match);
   }
 
+  public static string RemoveSubString (string s, string match) {
+    return s.Replace(match, "");
+  }
+
   public static string AddOrdinal (int num) {
     if (num <= 0) return num.ToString();
 

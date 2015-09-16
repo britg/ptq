@@ -14,30 +14,18 @@ public class EnvironmentProcessor {
 
   public void Enter () {
     sim.player.SetState(Player.State.Interacting);
-    Events(Constants.enterKey);
-  }
+    var interactionTemplateKey = sim.currentEnvironment.enterInteractionTemplateKey;
+    var interactionTemplate = JSONResource.Get<InteractionTemplate>(interactionTemplateKey);
 
-  public void Events (string group) {
-
-    foreach (var atmTxt in sim.currentEnvironment.events[group]) {
-      if (DetectBranch(atmTxt)) {
-        ExecuteBranch(atmTxt);
-      } else {
-        sim.AddEvent(PlayerEvent.Story(atmTxt));
-      }
+    if (interactionTemplate == null) {
+      return;
     }
-  }
 
-
-  bool DetectBranch (string txt) {
-    return tpd.BeginsWith(txt, Constants.branchLabel);
-  }
-
-  void ExecuteBranch (string key) {
-    var branch = sim.currentEnvironment.GetBranch(key);
-    sim.currentBranch = branch;
-    var branchProcessor = new BranchProcessor(sim);
-    branchProcessor.Start();
+    var interactionGenerator = new InteractionGenerator(interactionTemplate);
+    var interaction = interactionGenerator.Generate();
+    sim.currentInteraction = interaction;
+    var interactionProcessor = new InteractionProcessor(sim);
+    interactionProcessor.Start();
   }
 
   public void Explore () {
@@ -47,8 +35,6 @@ public class EnvironmentProcessor {
       roomProcessor.Explore();
     }
 
-    // If nothing is found, just pick a direction or use the last
-    // direction you were going.
   }
 
 }

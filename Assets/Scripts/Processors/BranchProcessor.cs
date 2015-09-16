@@ -31,9 +31,9 @@ public class BranchProcessor {
     }
 
     if (res.thenToEvents) {
-      var envProcessor = new EnvironmentProcessor(sim);
-      var eventsKey = res.thenTo.Replace("events:", "");
-      envProcessor.Events(eventsKey);
+      var interactionProcessor = new InteractionProcessor(sim);
+      var eventsKey = tpd.RemoveSubString(res.thenTo, "event_group:");
+      interactionProcessor.CreateEvents(eventsKey);
     }
 
     if (res.thenToPromptPull) {

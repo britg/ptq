@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-public class InteractibleGenerator {
+public class InteractionGenerator {
 
   InteractionTemplate interactibleTemplate;
   Interaction interactible;
 
-  public InteractibleGenerator (InteractionTemplate _interactibleTemplate) {
+  public InteractionGenerator (InteractionTemplate _interactibleTemplate) {
     interactibleTemplate = _interactibleTemplate;
   }
 

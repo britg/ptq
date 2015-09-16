@@ -10,16 +10,35 @@ public class InteractionProcessor {
     sim = _sim;
   }
 
-  public void StartInteraction (Interaction interactible) {
-    sim.currentInteractible = interactible;
-
-    sim.AddEvent(PlayerEvent.Info ("[DEV] You find " + interactible.name + " and must make a choice about it."));
-
-    // DEV
-    sim.AddEvent(PlayerEvent.Info ("[DEV] ending interaction...."));
-    sim.currentInteractible = null;
+  public void Start () {
+    CreateEvents(Constants.enterKey);
   }
 
   public void Continue () {
   }
+
+  public void CreateEvents (string group) {
+
+    var eventGroup = sim.currentInteraction.GetEventGroup(group);
+    foreach (var atmTxt in eventGroup) {
+      if (DetectBranch(atmTxt)) {
+        ExecuteBranch(atmTxt);
+      } else {
+        sim.AddEvent(PlayerEvent.Story(atmTxt));
+      }
+    }
+  }
+
+
+  bool DetectBranch (string txt) {
+    return tpd.BeginsWith(txt, Constants.branchLabel);
+  }
+
+  void ExecuteBranch (string key) {
+    var branch = sim.currentInteraction.GetBranch(key);
+    sim.currentBranch = branch;
+    var branchProcessor = new BranchProcessor(sim);
+    branchProcessor.Start();
+  }
+
 }

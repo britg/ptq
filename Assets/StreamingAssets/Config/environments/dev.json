@@ -4,12 +4,6 @@
   "name": "Dev Dungeon",
   "template": "old_tower",
 
-  "events": {
-    "_enter": [
-      "[Dev environment]"
-    ]
-  },
-  "branches": {},
   "content": []
 
 }

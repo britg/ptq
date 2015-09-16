@@ -2,7 +2,7 @@
   "type": "Setting",
   "key": "main",
 
-  "start_env": "dev",
+  "start_env": "tower_top",
 
   "attributes": [
     "gold",

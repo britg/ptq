@@ -7,32 +7,46 @@
   "loot_chance": 20,
   "gold_chance": 20,
 
-  "interaction_branch": {
-    "key": "interactible_branch",
-    "text": "A pile of bones lies in shambles ahead. A small pack fell nearby...",
-
-    "choices": [
-      {
-        "pull": "right",
-        "key": "inspect",
-        "label": "Investigate"
-      },
-
-      {
-        "pull": "left",
-        "key": "ignore",
-        "label": "Ignore"
-      }
-    ],
-
-    "results": [
-      {
-        "key": "inspect",
-        "events": [
-
-        ],
-        "then_to": ""
-      }
+  "event_groups": {
+    "_enter": [
+      "branch:investigate"
     ]
-  }
+  },
+
+  "branches": [
+    {
+      "key": "investigate",
+      "text": "A pile of bones lies in shambles ahead. A small pack fell nearby...",
+
+      "choices": [
+        {
+          "pull": "right",
+          "key": "inspect",
+          "label": "Investigate"
+        },
+
+        {
+          "pull": "left",
+          "key": "ignore",
+          "label": "Ignore"
+        }
+      ],
+
+      "results": [
+        {
+          "key": "inspect",
+          "events": [
+            "The pack falls apart at the slightest touch"
+          ],
+          "then_to": "continue"
+        },
+        {
+          "key": "ignore",
+          "events": [
+          ],
+          "then_to": "continue"
+        }
+      ]
+    }
+  ]
 }

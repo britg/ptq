@@ -56,7 +56,7 @@ public class RoomGenerator {
   void GenerateInteractible (Tile tile) {
     var interactibleTemplateKey = tpd.RollMap(env.interactibleChances);
     var interactibleTemplate = JSONResource.Get<InteractionTemplate>(interactibleTemplateKey);
-    var interactibleGenerator = new InteractibleGenerator(interactibleTemplate);
+    var interactibleGenerator = new InteractionGenerator(interactibleTemplate);
     var interactible = interactibleGenerator.Generate();
     var randomTile = room.RandomOpenTile();
     interactible.position = randomTile.position;

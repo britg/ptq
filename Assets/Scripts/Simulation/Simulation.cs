@@ -12,7 +12,7 @@ public class Simulation {
   public Environment currentEnvironment;
   public Room currentRoom;
   public Mob currentMob;
-  public Interaction currentInteractible;
+  public Interaction currentInteraction;
   public Branch currentBranch;
   public string currentChoiceKey;
 
