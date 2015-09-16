@@ -21,14 +21,9 @@ public class Simulation {
 
   public List<string> discoveredCache;
 
+  public bool newGame = true;
   public bool requiresInput = false;
   public bool promptPull = false;
-
-  public bool newGame {
-    get {
-      return currentEvent == null;
-    }
-  }
 
   public PlayerEvent currentEvent {
     get {
@@ -73,6 +68,7 @@ public class Simulation {
     var playerStore = new PlayerStore(this);
     if (playerStore.playerPersisted) {
       player = playerStore.Load();
+      newGame = false;
     } else {
       var playerGen = new PlayerGenerator(this);
       player = playerGen.Generate();
@@ -113,5 +109,21 @@ public class Simulation {
 
   public void EndGameTurn () {
     currentTurn = Turn.Type.Player;
+  }
+
+  public void PromptPull () {
+    promptPull = true;
+  }
+
+  public void EndPullPrompt () {
+    promptPull = false;
+  }
+
+  public void RequireInput () {
+    requiresInput = true;
+  }
+
+  public void EndInputRequirement () {
+    requiresInput = false;
   }
 }

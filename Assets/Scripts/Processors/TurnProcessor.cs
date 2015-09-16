@@ -12,6 +12,10 @@ public class TurnProcessor {
     sim = _sim;
   }
 
+  public static TurnProcessor With (Simulation sim) {
+    return new TurnProcessor(sim);
+  }
+
   public void TakeTurn () {
     ++turnCount;
 

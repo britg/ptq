@@ -12,7 +12,7 @@ public class Player : AttributeBase {
   public enum State {
     Idling,
     Exploring,
-    Targeting,
+    Pathfinding,
     Interacting,
     Battling,
     Fleeing

@@ -8,12 +8,15 @@ public class EnvironmentProcessor {
 
   Simulation sim;
 
+  public static EnvironmentProcessor With (Simulation sim) {
+    return new EnvironmentProcessor(sim);
+  }
+
   public EnvironmentProcessor (Simulation _sim) {
     sim = _sim;
   }
 
   public void Enter () {
-    sim.player.SetState(Player.State.Interacting);
     var interactionTemplateKey = sim.currentEnvironment.enterInteractionTemplateKey;
     var interactionTemplate = JSONResource.Get<InteractionTemplate>(interactionTemplateKey);
 
@@ -21,20 +24,12 @@ public class EnvironmentProcessor {
       return;
     }
 
+    sim.player.SetState(Player.State.Interacting);
     var interactionGenerator = new InteractionGenerator(interactionTemplate);
     var interaction = interactionGenerator.Generate();
     sim.currentInteraction = interaction;
     var interactionProcessor = new InteractionProcessor(sim);
     interactionProcessor.Start();
-  }
-
-  public void Explore () {
-
-    if (sim.currentRoom != null) {
-      var roomProcessor = new RoomProcessor(sim, sim.currentRoom);
-      roomProcessor.Explore();
-    }
-
   }
 
 }

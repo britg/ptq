@@ -18,9 +18,8 @@ public class InputProcessor {
 
   public void TriggerContinue () {
     Debug.Log("Trigger continue");
-    sim.promptPull = false;
-    var turnProcessor = new TurnProcessor(sim);
-    turnProcessor.TakeTurn();
+    sim.EndPullPrompt();
+    TurnProcessor.With(sim).TakeTurn();
   }
 
   public void TriggerEvent (PlayerEvent ev) {
@@ -51,14 +50,8 @@ public class InputProcessor {
   public void TriggerChoice (PlayerEvent ev, string choiceKey) {
     Debug.Log ("Trigger choice " + choiceKey + " for event " + ev.Content);
 
-    var choiceProcessor = new ChoiceProcessor(sim);
-    choiceProcessor.Choose(choiceKey);
-
-    // TODO: Refactor into a choice processor when necessary
-    ev.chosenKey = choiceKey;
-    ev.conditionsSatisfied = true;
-    sim.currentChoiceKey = choiceKey;
-    sim.requiresInput = false;
+    var interactionProcessor = new InteractionProcessor(sim);
+    interactionProcessor.StoreChoice(choiceKey);
 
     NotificationCenter.PostNotification(Constants.OnUpdateEvents);
   }

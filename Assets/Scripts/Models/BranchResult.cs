@@ -30,25 +30,25 @@ public class BranchResult : JSONResource {
 
   public bool thenToContinue {
     get {
-      return thenTo == "continue";
+      return thenTo == Constants.continueLabel;
     }
   }
 
-  public bool thenToRoom {
+  public bool thenToEventGroup {
     get {
-      return tpd.BeginsWith(thenTo, "room:");
-    }
-  }
-
-  public bool thenToEvents {
-    get {
-      return tpd.BeginsWith(thenTo, "events:");
+      return tpd.BeginsWith(thenTo, Constants.eventGroupLabel);
     }
   }
 
   public bool thenToPromptPull {
     get {
-      return thenTo == "prompt_pull";
+      return thenTo == Constants.promptPullLabel;
+    }
+  }
+
+  public bool thenToEndInteraction {
+    get {
+      return thenTo == Constants.endInteractionLabel;
     }
   }
 

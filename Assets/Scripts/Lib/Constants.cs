@@ -45,6 +45,9 @@ public class Constants {
   public const string branchLabel = "branch:";
   public const string continueLabel = "continue";
   public const string eventsLabel = "events:";
+  public const string eventGroupLabel = "event_group:";
+  public const string promptPullLabel = "promp_pull";
+  public const string endInteractionLabel = "end_interaction";
 
   // Attributes
   

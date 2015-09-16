@@ -18,59 +18,50 @@ public class PlayerProcessor {
     switch (sim.player.currentState) {
 
     case Player.State.Idling:
+      BeginExploring();
+      break;
+
     case Player.State.Exploring:
       Explore();
       break;
 
     case Player.State.Interacting:
-      // branch processor
+      Interact();
       break;
 
-    case Player.State.Targeting:
-      // pathfinding processor
+    case Player.State.Pathfinding:
+      Pathfind();
       break;
 
     case Player.State.Battling:
-
+      Battle();
       break;
     }
-
-//    else if (sim.currentBranch != null) {
-//      if (sim.currentChoiceKey != null) {
-//        var branchProcessor = new BranchProcessor(sim);
-//        branchProcessor.Choose(sim.currentChoiceKey);
-//      }
-//    }
-//
-//    else if (sim.currentMob != null) {
-//      var battleProcessor = new BattleProcessor(sim);
-//      battleProcessor.Continue();
-//    }
-//    
-//    else if (sim.currentInteractible != null) {
-//      var interactionProcessor = new InteractionProcessor(sim);
-//      interactionProcessor.Continue();
-//    }
-
-    sim.EndPlayerTurn();
 
   }
 
   void StartNewGame () {
-    var envProcessor = new EnvironmentProcessor(sim);
-
     NotificationCenter.PostNotification(Constants.OnFirstPull);
     NotificationCenter.PostNotification(Constants.OnEnvironmentUpdate);
-    envProcessor.Enter();
+    EnvironmentProcessor.With(sim).Enter();
+  }
+
+  void BeginExploring () {
+    sim.AddEvent(PlayerEvent.Story(string.Format("{0} ventures forth...", sim.player.name)));
+    ExplorationProcessor.With(sim).Explore();
   }
 
   void Explore () {
-    var envProcessor = new EnvironmentProcessor(sim);
-    envProcessor.Explore();
+    ExplorationProcessor.With(sim).Explore();
+  }
+
+  void Pathfind () {
+
   }
 
   void Interact () {
-
+    var interactionProcessor = new InteractionProcessor(sim);
+    interactionProcessor.Continue();
   }
 
   void Battle () {

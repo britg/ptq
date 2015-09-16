@@ -45,7 +45,6 @@ public class PlayerEvent {
   public string chosenKey;
 
   public bool hasTriggered = false;
-  public bool conditionsSatisfied = true;
 
   public bool hasActions {
     get {
@@ -125,7 +124,6 @@ public class PlayerEvent {
     ev.type = Type.Choice;
     ev.firstChoice = firstChoice;
     ev.secondChoice = secondChoice;
-    ev.conditionsSatisfied = false;
     return ev;
   }
 
