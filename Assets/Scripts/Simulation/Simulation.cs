@@ -127,4 +127,8 @@ public class Simulation {
     currentInteraction = null;
     player.SetState(Player.State.Idling);
   }
+
+  public void MarkGameStarted () {
+    newGame = false;
+  }
 }

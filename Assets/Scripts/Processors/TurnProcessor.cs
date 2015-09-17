@@ -27,9 +27,9 @@ public class TurnProcessor {
       gameProcessor.TakeTurn();
     }
 
-    bool underTurnLimit = turnCount < maxTurnCount;
+    bool atTurnLimit = (turnCount >= maxTurnCount);
 
-    if (sim.requiresInput && underTurnLimit) {
+    if (sim.requiresInput || atTurnLimit) {
       NotificationCenter.PostNotification(Constants.OnRenderEvents);
       return;
     } else {

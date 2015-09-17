@@ -24,9 +24,15 @@ public class Player : AttributeBase {
 
   public State currentState = State.Idling;
   public Vector3 currentDestination;
+  public bool hasDestination;
   public string lastBattleMove;
 
   public void SetState (State newState) {
     currentState = newState;
   }
+
+  public void SetDestination (Vector3 dest) {
+    currentDestination = dest;
+  }
+
 }

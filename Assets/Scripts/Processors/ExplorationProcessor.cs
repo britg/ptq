@@ -14,26 +14,24 @@ public class ExplorationProcessor {
     sim = _sim;
   }
 
-    public void Explore () {
+  public void Explore () {
 
-    var targetTile = DiscoverNearestNewContent();
-
-    if (targetTile == null) {
-      ExploreRandomly();
-      return;
-    }
-
-    if (targetTile.contentType == Constants.interactibleContentKey) {
-      HandleInteractibleTile(targetTile);
-    }
-
-    if (targetTile.contentType == Constants.mobContentKey) {
-      HandleMobTile(targetTile);
-    }
+    // Pick an open tile within your periphery and set it as your target
+    List<Vector3> dirs = new List<Vector3>() {
+      Vector3.forward,
+      Vector3.back,
+      Vector3.left,
+      Vector3.right
+    };
+    
+    var randomDir = tpd.RollList(dirs);
+    var destDelta = randomDir * sim.player.sight;
+    
+    sim.AddEvent(PlayerEvent.Movement(randomDir));
 
   }
 
-  Tile DiscoverNearestNewContent (string type = null) {
+  public Tile DiscoverNearestNewContent (string type = null) {
     var tiles = TilesToScan();
     Tile nearest = null;
     float dist = Mathf.Infinity;
@@ -73,43 +71,12 @@ public class ExplorationProcessor {
     return new List<Tile>();
   }
 
-  void ExploreRandomly () {
-
-    // Pick an open tile within your periphery and set it as your target
-
-
-  }
-
   void TargetDoor () {
     sim.AddEvent(PlayerEvent.Info("Nothing intersting... heading for door"));
   }
 
-  void HandleInteractibleTile (Tile tile) {
-    sim.AddEvent(PlayerEvent.Info("Found interactible"));
-//    sim.player.currentDestination = tile.position;
+  public void Pathfind () {
 
-    // var pathfindingProcessor = new PathfindingProcessor(sim);
-    // pathfindingProcessor.NextTile(from, to)
-    var interactible = InteractibleStore.Find(tile.contentId);
-    var prompt = string.Format("You see {0}", interactible.name);
-    sim.AddEvent(PlayerEvent.PromptChoice(prompt,
-                                          Choice.SwipeLeft("investigate", "Investigate"),
-                                          Choice.SwipeRight("ignore", "Ignore")));
-    sim.discoveredCache.Add(interactible.id);
-  }
-
-  void HandleMobTile (Tile tile) {
-    //TODO: If the mob is low enough level, just go towards it.
-    PromptMobChoices(tile);
-  }
-
-  void PromptMobChoices (Tile tile) {
-    var mob = MobStore.Find(tile.contentId);
-    var prompt = string.Format("You notice [{0}] before it notices you...", mob.name);
-    sim.AddEvent(PlayerEvent.PromptChoice(prompt,
-                                          Choice.SwipeLeft("attack", "Attack"),
-                                          Choice.SwipeRight("ignore", "Ignore")));
-    sim.discoveredCache.Add(mob.id);
   }
 
 }
