@@ -10,6 +10,10 @@ public class InteractionGenerator {
     interactibleTemplate = _interactibleTemplate;
   }
 
+  public static Interaction Generate (InteractionTemplate template) {
+    return new InteractionGenerator(template).Generate();
+  }
+
   public Interaction Generate () {
     interactible = new Interaction();
     interactible.id = System.Guid.NewGuid().ToString();

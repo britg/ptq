@@ -70,6 +70,7 @@ public class ExplorationProcessor {
     if (sim.currentRoom != null) {
       return sim.currentRoom.tiles;
     }
+    return new List<Tile>();
   }
 
   void ExploreRandomly () {

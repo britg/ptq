@@ -27,15 +27,13 @@ public class TurnProcessor {
       gameProcessor.TakeTurn();
     }
 
-    if (sim.promptPull) {
+    bool underTurnLimit = turnCount < maxTurnCount;
+
+    if (sim.requiresInput && underTurnLimit) {
       NotificationCenter.PostNotification(Constants.OnRenderEvents);
       return;
-    }
-
-    if (!sim.requiresInput && turnCount < maxTurnCount) {
-      TakeTurn();
     } else {
-      NotificationCenter.PostNotification(Constants.OnRenderEvents);
+      TakeTurn();
     }
 
   }
@@ -47,4 +45,5 @@ public class TurnProcessor {
       sim.currentTurn = Turn.Type.Player;
     }
   }
+
 }

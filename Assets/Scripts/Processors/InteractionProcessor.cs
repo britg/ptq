@@ -53,7 +53,7 @@ public class InteractionProcessor {
     var ev = sim.currentEvent;
     ev.chosenKey = choiceKey;
     sim.currentChoiceKey = choiceKey;
-    sim.requiresInput = false;
+    sim.EndInputRequirement();
   }
 
   public void ExecuteChoice (string choiceKey) {
@@ -68,24 +68,18 @@ public class InteractionProcessor {
     // TODO: Parse loot key
 
     if (res.thenToEventGroup) {
-      var eventsKey = tpd.RemoveSubString(res.thenTo, Constants.eventGroupLabel);
-      CreateEvents(eventsKey);
+      var eventGroupKey = tpd.RemoveSubString(res.thenTo, Constants.eventGroupLabel);
+      CreateEvents(eventGroupKey);
     }
     
     if (res.thenToPromptPull) {
-      sim.PromptPull();
+      sim.RequireInput();
     }
 
     if (res.thenToEndInteraction) {
-      sim.PromptPull();
-      End();
+      sim.RemoveInteraction();
+      sim.RequireInput();
     }
   }
-
-  public void End () {
-    sim.currentInteraction = null;
-    sim.player.currentState = Player.State.Idling;
-  }
-
 
 }

@@ -18,7 +18,7 @@ public class InputProcessor {
 
   public void TriggerContinue () {
     Debug.Log("Trigger continue");
-    sim.EndPullPrompt();
+    sim.EndInputRequirement();
     TurnProcessor.With(sim).TakeTurn();
   }
 

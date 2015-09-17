@@ -23,7 +23,6 @@ public class Simulation {
 
   public bool newGame = true;
   public bool requiresInput = false;
-  public bool promptPull = false;
 
   public PlayerEvent currentEvent {
     get {
@@ -93,7 +92,7 @@ public class Simulation {
     newEvents.Add(ev);
 
     if (ev.requiresInput) {
-      requiresInput = true;
+      RequireInput();
     }
 
     EventStore.Save(ev);
@@ -111,19 +110,21 @@ public class Simulation {
     currentTurn = Turn.Type.Player;
   }
 
-  public void PromptPull () {
-    promptPull = true;
-  }
-
-  public void EndPullPrompt () {
-    promptPull = false;
-  }
-
   public void RequireInput () {
     requiresInput = true;
   }
 
   public void EndInputRequirement () {
     requiresInput = false;
+  }
+
+  public void SetInteraction (Interaction interaction) {
+    currentInteraction = interaction;
+    player.SetState(Player.State.Interacting);
+  }
+
+  public void RemoveInteraction () {
+    currentInteraction = null;
+    player.SetState(Player.State.Idling);
   }
 }
