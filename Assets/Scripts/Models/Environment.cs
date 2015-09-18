@@ -30,41 +30,6 @@ public class Environment : JSONResource {
     }
   }
 
-//  Dictionary<string, List<string>> _events;
-//  public Dictionary<string, List<string>> events {
-//    get {
-//      if (_events == null) {
-//        _events = new Dictionary<string, List<string>>();
-//        var eventsNode = (JSONClass)sourceData["events"];
-//        foreach (KeyValuePair<string, JSONNode> node in eventsNode) {
-//          var k = node.Key;
-//          var eventsArr = (JSONArray)node.Value;
-//          _events[k] = new List<string>();
-//          foreach (JSONNode evNode in eventsArr) {
-//            var ev = evNode.Value;
-//            _events[k].Add(ev);
-//          }
-//        }
-//      }
-//      return _events;
-//    }
-//  }
-//
-//  Dictionary<string, Branch> _branches;
-//  public Dictionary<string, Branch> branches {
-//    get {
-//      if (_branches == null) {
-//        _branches = new Dictionary<string, Branch>();
-//        var branchesArr = sourceData["branches"].AsArray;
-//        foreach (JSONNode b in branchesArr) {
-//          _branches[b["key"].Value] = new Branch(b);
-//        }
-//      }
-//
-//      return _branches;
-//    }
-//  }
-
   public Dictionary<string, float> consumableChances {
     get {
       return new Dictionary<string, float>();

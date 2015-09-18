@@ -10,6 +10,7 @@ public class EnvironmentRenderer : BaseBehaviour {
   public GameObject corridorPrefab;
   public GameObject mobPrefab;
   public GameObject interactiblePrefab;
+  public GameObject fogPrefab;
 
 
   Environment env {
@@ -21,10 +22,15 @@ public class EnvironmentRenderer : BaseBehaviour {
 	// Use this for initialization
 	void Start () {
     NotificationCenter.AddObserver(this, Constants.OnEnvironmentUpdate);
+    NotificationCenter.AddObserver(this, Constants.OnUpdateTiles);
 	}
 
   void OnEnvironmentUpdate () {
     RenderEnvironment();
+  }
+
+  void OnUpdateTiles () {
+    UpdateNewlyVisibleTiles();
   }
 
   void RenderEnvironment () {
@@ -36,7 +42,7 @@ public class EnvironmentRenderer : BaseBehaviour {
 
   void ClearAll () {
     foreach (Transform childTransform in transform) {
-      Destroy(childTransform);
+      Destroy(childTransform.gameObject);
     }
   }
 
@@ -44,15 +50,19 @@ public class EnvironmentRenderer : BaseBehaviour {
     for (var r = 0; r < env.floor.tiles.GetLength(0); r++) {
       for (var c = 0; c < env.floor.tiles.GetLength(1); c++) {
         var tile = env.floor.tiles[r, c];
-        if (tile == DunGen.TileType.Perimeter
-            || tile == DunGen.TileType.Nothing
-            || tile == DunGen.TileType.Blocked) {
-          PlaceObj(wallPrefab, r, c);
-        }
 
-        if (tile == DunGen.TileType.Door) {
-          PlaceObj(doorPrefab, r, c);
-        }
+        PlaceObj(fogPrefab, r, c);
+
+//        if (tile == DunGen.TileType.Perimeter
+//            || tile == DunGen.TileType.Nothing
+//            || tile == DunGen.TileType.Blocked) {
+////          PlaceObj(wallPrefab, r, c);
+//          PlaceObj(fogPrefab, r, c);
+//        }
+//
+//        if (tile == DunGen.TileType.Door) {
+////          PlaceObj(doorPrefab, r, c);
+//        }
 
         //if (tile == DunGen.TileType.Room) {
         //  PlaceObj(roomPrefab, r, c);
@@ -94,6 +104,12 @@ public class EnvironmentRenderer : BaseBehaviour {
   }
 
   void RenderTile (Tile tile) {
+
+    if (!tile.visible) {
+      PlaceObj(fogPrefab, tile.position);
+      return;
+    }
+
     if (!tile.occupied) {
       return;
     }
@@ -102,11 +118,20 @@ public class EnvironmentRenderer : BaseBehaviour {
       var mob = MobStore.Find(tile.contentId);
       PlaceObj(mobPrefab, mob.position, tile.contentId);
     }
+
+    if (tile.contentType == Constants.interactibleContentKey) {
+      var interaction = InteractibleStore.Find(tile.contentId);
+      PlaceObj(interactiblePrefab, interaction.position, tile.contentId);
+    }
   }
 
   void RenderPlayer () {
     playerObj.transform.parent = transform.parent;
     playerObj.transform.localPosition = sim.player.position;
+  }
+
+  void UpdateNewlyVisibleTiles () {
+    RenderRoom(sim.currentRoom);
   }
 
   void PlaceObj (GameObject prefab, int r, int c) {

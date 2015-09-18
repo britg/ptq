@@ -9,6 +9,10 @@ public abstract class AttributeBase {
   public Vector3 position;
   public Dictionary<string, float> attributes;
 
+  public void Move (Vector3 delta) {
+    position += delta;
+  }
+
   public void ChangeAttribute (string key, float delta) {
     attributes[key] += delta;
   }

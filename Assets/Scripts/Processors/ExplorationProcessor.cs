@@ -26,9 +26,8 @@ public class ExplorationProcessor {
     
     var randomDir = tpd.RollList(dirs);
     var destDelta = randomDir * sim.player.sight;
-    
-    sim.AddEvent(PlayerEvent.Movement(randomDir));
 
+    sim.MovePlayer(randomDir);
   }
 
   public Tile DiscoverNearestNewContent (string type = null) {
@@ -41,6 +40,14 @@ public class ExplorationProcessor {
       bool matches = (type != null && tile.contentType == type);
       if (anything || matches) {
 
+        var tileDistance = Vector3.Distance(tile.position, sim.player.position);
+
+        if (tileDistance > sim.player.sight) {
+          continue;
+        } else {
+          tile.SetVisible();
+        }
+
         if (sim.discoveredCache.Contains(tile.contentId)) {
           continue;
         }
@@ -49,7 +56,6 @@ public class ExplorationProcessor {
           continue;
         }
 
-        var tileDistance = Vector3.Distance(tile.position, sim.player.position);
 
         if (tileDistance > sim.player.sight) {
           continue;

@@ -131,4 +131,9 @@ public class Simulation {
   public void MarkGameStarted () {
     newGame = false;
   }
+
+  public void MovePlayer (Vector3 delta) {
+    player.Move(delta);
+    AddEvent(PlayerEvent.Movement(delta));
+  }
 }

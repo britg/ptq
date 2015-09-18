@@ -3267,6 +3267,7 @@ MonoBehaviour:
   corridorPrefab: {fileID: 135102, guid: b9e114edb75704c4fa47ed5859c3625d, type: 2}
   mobPrefab: {fileID: 135102, guid: d2d5e41dbf17743b49bf1168d656cf99, type: 2}
   interactiblePrefab: {fileID: 135102, guid: 617512f52bbb045ab8ab3e45e8bb3cfc, type: 2}
+  fogPrefab: {fileID: 126592, guid: f19c879fd156e41bda12a16357bbfaaa, type: 2}
 --- !u!1 &682796088 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 121840, guid: 7daa4cc462352457cb730bed215b486f, type: 2}
