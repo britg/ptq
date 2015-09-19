@@ -20,7 +20,7 @@ public class Constants {
   public const string OnRequireInput = "OnRequireInput";
   public const string OnEnvironmentStart = "OnEnvironmentStart";
   public const string OnEnvironmentUpdate = "OnEnvironmentUpdate";
-  public const string OnUpdateTiles = "OnUpdateTiles";
+  public const string OnUpdateFog = "OnUpdateFog";
 
   // Layers
   public const string GroundLayer = "Ground";
@@ -36,6 +36,8 @@ public class Constants {
   // Content
   public const string playerContentKey = "player";
   public const string nothingContentKey = "nothing";
+  public const string wallContentKey = "wall";
+  public const string doorContentKey = "door";
   public const string mobContentKey = "mob";
   public const string interactibleContentKey = "interactible";
   public const string roomContentKey = "room";

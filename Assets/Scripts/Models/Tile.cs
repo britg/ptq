@@ -7,10 +7,13 @@ public class Tile {
   public int col;
   public Vector3 position;
 
+  public int roomId;
+
   public string contentType;
   public string contentId;
 
   public bool visible = false;
+  public bool discovered = false;
 
   public bool occupied {
     get {
@@ -33,6 +36,10 @@ public class Tile {
 
   public void SetVisible () {
     visible = true;
+  }
+
+  public void Discover () {
+    discovered = true;
   }
 
 }

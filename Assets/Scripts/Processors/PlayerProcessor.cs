@@ -93,7 +93,7 @@ public class PlayerProcessor {
     sim.AddEvent(PlayerEvent.PromptChoice(prompt,
                                           Choice.SwipeLeft("investigate", "Investigate"),
                                           Choice.SwipeRight("ignore", "Ignore")));
-    sim.discoveredCache.Add(interactible.id);
+    sim.discoveredObjects.Add(interactible.id);
   }
 
   void HandleMobTile (Tile tile) {
@@ -107,7 +107,7 @@ public class PlayerProcessor {
     sim.AddEvent(PlayerEvent.PromptChoice(prompt,
                                           Choice.SwipeLeft("attack", "Attack"),
                                           Choice.SwipeRight("ignore", "Ignore")));
-    sim.discoveredCache.Add(mob.id);
+    sim.discoveredObjects.Add(mob.id);
   }
 
   void Interact () {

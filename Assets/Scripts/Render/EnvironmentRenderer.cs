@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnvironmentRenderer : BaseBehaviour {
 
   public GameObject playerObj;
+  public GameObject tilePrefab;
+  public GameObject floorPrefab;
   public GameObject wallPrefab;
   public GameObject doorPrefab;
   public GameObject roomPrefab;
@@ -11,6 +14,8 @@ public class EnvironmentRenderer : BaseBehaviour {
   public GameObject mobPrefab;
   public GameObject interactiblePrefab;
   public GameObject fogPrefab;
+
+  Dictionary<Vector3, GameObject> tileObjs;
 
 
   Environment env {
@@ -22,15 +27,14 @@ public class EnvironmentRenderer : BaseBehaviour {
 	// Use this for initialization
 	void Start () {
     NotificationCenter.AddObserver(this, Constants.OnEnvironmentUpdate);
-    NotificationCenter.AddObserver(this, Constants.OnUpdateTiles);
+    NotificationCenter.AddObserver(this, Constants.OnUpdateFog);
 	}
 
   void OnEnvironmentUpdate () {
     RenderEnvironment();
   }
 
-  void OnUpdateTiles () {
-    UpdateNewlyVisibleTiles();
+  void OnUpdateFog () {
   }
 
   void RenderEnvironment () {
@@ -47,36 +51,31 @@ public class EnvironmentRenderer : BaseBehaviour {
   }
 
   void RenderBaseLayer () {
-    for (var r = 0; r < env.floor.tiles.GetLength(0); r++) {
-      for (var c = 0; c < env.floor.tiles.GetLength(1); c++) {
-        var tile = env.floor.tiles[r, c];
+    tileObjs = new Dictionary<Vector3, GameObject>();
+    foreach (KeyValuePair<Vector3, Tile> pair in env.tiles) {
+      var pos = pair.Key;
+      var tile = pair.Value;
+      GameObject tileObj = PlaceObj(tilePrefab, pos);
+      tileObj.name = pos.ToString();
 
-        PlaceObj(fogPrefab, r, c);
+//      var fogObj = PlaceObj(fogPrefab, pos);
+//      fogMap[fogObj.transform.localPosition] = fogObj;
+//      fogObj.transform.parent = fogParent.transform;
 
-//        if (tile == DunGen.TileType.Perimeter
-//            || tile == DunGen.TileType.Nothing
-//            || tile == DunGen.TileType.Blocked) {
-////          PlaceObj(wallPrefab, r, c);
-//          PlaceObj(fogPrefab, r, c);
-//        }
-//
-//        if (tile == DunGen.TileType.Door) {
-////          PlaceObj(doorPrefab, r, c);
-//        }
-
-        //if (tile == DunGen.TileType.Room) {
-        //  PlaceObj(roomPrefab, r, c);
-        //}
-
-        //if (tile == DunGen.TileType.Corridor) {
-        //  PlaceObj(corridorPrefab, r, c);
-        //}
-
-        // if (tile == DunGen.TileType.Entrance) {
-        //  PlaceObj(corridorPrefab, r, c);
-        // }
-
+      switch (tile.contentType) {
+      case Constants.wallContentKey:
+        AddContent(wallPrefab, tileObj);
+        break;
+      case Constants.doorContentKey:
+        AddContent(doorPrefab, tileObj);
+        break;
+      default:
+        AddContent(floorPrefab, tileObj);
+        break;
       }
+
+      tileObjs[pos] = tileObj;
+
     }
   }
 
@@ -105,10 +104,10 @@ public class EnvironmentRenderer : BaseBehaviour {
 
   void RenderTile (Tile tile) {
 
-    if (!tile.visible) {
-      PlaceObj(fogPrefab, tile.position);
-      return;
-    }
+//    if (!tile.visible) {
+//      PlaceObj(fogPrefab, tile.position);
+//      return;
+//    }
 
     if (!tile.occupied) {
       return;
@@ -134,23 +133,26 @@ public class EnvironmentRenderer : BaseBehaviour {
     RenderRoom(sim.currentRoom);
   }
 
-  void PlaceObj (GameObject prefab, int r, int c) {
-    PlaceObj(prefab, new Vector3(c, prefab.transform.localPosition.y, r));
+  GameObject PlaceObj (GameObject prefab, int r, int c) {
+    return PlaceObj(prefab, new Vector3(c, prefab.transform.localPosition.y, r));
   }
 
-  void PlaceObj (GameObject prefab, Vector3 pos) {
-    PlaceObj(prefab, pos, prefab.name);
+  GameObject PlaceObj (GameObject prefab, Vector3 pos) {
+    return PlaceObj(prefab, pos, prefab.name);
   }
 
-  void PlaceObj (GameObject prefab, Vector3 pos, string id) {
+  GameObject PlaceObj (GameObject prefab, Vector3 pos, string id) {
     var obj = Instantiate(prefab);
     obj.name = id;
     obj.transform.parent = transform;
     obj.transform.localPosition = pos;
+    return obj;
   }
 
-	// Update is called once per frame
-	void Update () {
-
-	}
+  void AddContent (GameObject prefab, GameObject tileObj) {
+    var originalPos = prefab.transform.position;
+    var tileContent = PlaceObj(prefab, tileObj.transform.position);
+    tileContent.transform.parent = tileObj.transform;
+    tileContent.transform.localPosition = originalPos;
+  }
 }

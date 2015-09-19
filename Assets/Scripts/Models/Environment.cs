@@ -82,7 +82,7 @@ public class Environment : JSONResource {
    */
 
   public DunGen.Floor floor;
+  public Dictionary<Vector3, Tile> tiles;
   public List<Room> rooms;
-  public List<Hallway> hallways;
 
 }

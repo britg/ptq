@@ -36,19 +36,22 @@ public class ExplorationProcessor {
     float dist = Mathf.Infinity;
 
     foreach (var tile in tiles) {
+
+      var tileDistance = Vector3.Distance(tile.position, sim.player.position);
+
+      if (tileDistance > sim.player.sight) {
+        continue;
+      } else {
+        sim.AddDiscoveredTile(tile.position);
+        tile.Discover();
+      }
+
       bool anything = (type == null && tile.contentType != null);
       bool matches = (type != null && tile.contentType == type);
       if (anything || matches) {
 
-        var tileDistance = Vector3.Distance(tile.position, sim.player.position);
 
-        if (tileDistance > sim.player.sight) {
-          continue;
-        } else {
-          tile.SetVisible();
-        }
-
-        if (sim.discoveredCache.Contains(tile.contentId)) {
+        if (sim.discoveredObjects.Contains(tile.contentId)) {
           continue;
         }
 
