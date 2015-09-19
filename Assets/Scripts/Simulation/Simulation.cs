@@ -19,7 +19,6 @@ public class Simulation {
   string currentEventId;
   public List<PlayerEvent> newEvents;
 
-  public List<Vector3> discoveredTiles;
   public List<string> discoveredObjects;
 
   public bool newGame = true;
@@ -37,7 +36,6 @@ public class Simulation {
   public void Setup() {
     LoadResources();
     LoadDiscoveredObjects();
-    LoadDiscoveredTiles();
     LoadEvents();
     LoadTurn();
     LoadPlayer();
@@ -52,11 +50,6 @@ public class Simulation {
   void LoadDiscoveredObjects () {
     discoveredObjects = new List<string>();
     // TODO: load discovered cache from persistence
-  }
-
-  void LoadDiscoveredTiles () {
-    discoveredTiles = new List<Vector3>();
-    // TODO: load discovered tiles from persistence
   }
 
   void LoadEvents () {
@@ -144,9 +137,4 @@ public class Simulation {
     AddEvent(PlayerEvent.Movement(delta));
   }
 
-  public void AddDiscoveredTile (Vector3 pos) {
-    if (!discoveredTiles.Contains(pos)) {
-      discoveredTiles.Add(pos);
-    }
-  }
 }

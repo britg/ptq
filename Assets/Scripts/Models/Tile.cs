@@ -7,6 +7,8 @@ public class Tile {
   public int col;
   public Vector3 position;
 
+  public GameObject tileObj;
+
   public int roomId;
 
   public string contentType;
@@ -40,6 +42,10 @@ public class Tile {
 
   public void Discover () {
     discovered = true;
+  }
+
+  public void SetTileObj (GameObject _tileObj) {
+    tileObj = _tileObj;
   }
 
 }

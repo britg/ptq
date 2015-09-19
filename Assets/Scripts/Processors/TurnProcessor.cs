@@ -30,7 +30,6 @@ public class TurnProcessor {
     bool atTurnLimit = (turnCount >= maxTurnCount);
 
     if (sim.requiresInput || atTurnLimit) {
-      NotificationCenter.PostNotification(Constants.OnUpdateFog);
       NotificationCenter.PostNotification(Constants.OnRenderEvents);
       return;
     } else {

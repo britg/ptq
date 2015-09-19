@@ -56,7 +56,10 @@ public class FeedView : BaseBehaviour {
     List<GameObject> eventObjs = new List<GameObject>();
     foreach (var playerEvent in sim.newEvents) {
       if (playerEvent.isFeedEvent) {
-        eventObjs.Add(CreatePlayerEventView(playerEvent));
+        var evObj = CreatePlayerEventView(playerEvent);
+        if (evObj != null) {
+          eventObjs.Add(evObj);
+        }
       }
     }
     DisplayNewEvents(eventObjs);
@@ -71,27 +74,44 @@ public class FeedView : BaseBehaviour {
 
   GameObject CreatePlayerEventView (PlayerEvent playerEvent) {
     GameObject prefab = eventPrefab;
-    GameObject eventObj;
+    GameObject eventObj = null;
 
-    if (playerEvent.type == PlayerEvent.Type.Info) {
-      prefab = eventInfoPrefab;
-    } else if (playerEvent.type == PlayerEvent.Type.Transition) {
-      prefab = eventTransitionPrefab;
-    } else if (playerEvent.type == PlayerEvent.Type.Equipment) {
-      prefab = eventEquipmentPrefab;
-    } else if (playerEvent.type == PlayerEvent.Type.Choice) {
-      prefab = eventChoicePrefab;
-    } else if (playerEvent.type == PlayerEvent.Type.PlayerBasicAttack) {
-      prefab = eventPlayerBasicAttackPrefab;
-    } else if (playerEvent.type == PlayerEvent.Type.MobBasicAttack) {
-      prefab = eventMobBasicAttackPrefab;
-    } else if (playerEvent.type == PlayerEvent.Type.Story) {
-      prefab = eventStoryPrefab;
-    } else if (playerEvent.type == PlayerEvent.Type.Consumable) {
-      prefab = eventConsumablePrefab;
+    switch (playerEvent.type) {
+
+    case PlayerEvent.Type.Info:
+      eventObj = InstantiatePrefab(eventInfoPrefab, playerEvent);
+      break;
+    case PlayerEvent.Type.Transition:
+      eventObj = InstantiatePrefab(eventTransitionPrefab, playerEvent);
+      break;
+    case PlayerEvent.Type.Equipment:
+      eventObj = InstantiatePrefab(eventEquipmentPrefab, playerEvent);
+      break;
+    case PlayerEvent.Type.Choice:
+      eventObj = InstantiatePrefab(eventChoicePrefab, playerEvent);
+      break;
+    case PlayerEvent.Type.PlayerBasicAttack:
+      eventObj = InstantiatePrefab(eventPlayerBasicAttackPrefab, playerEvent);
+      break;
+    case PlayerEvent.Type.MobBasicAttack:
+      eventObj = InstantiatePrefab(eventMobBasicAttackPrefab, playerEvent);
+      break;
+    case PlayerEvent.Type.Story:
+      eventObj = InstantiatePrefab(eventStoryPrefab, playerEvent);
+      break;
+    case PlayerEvent.Type.Consumable:
+      eventObj = InstantiatePrefab(eventConsumablePrefab, playerEvent);
+      break;
+    default:
+      break;
+
     }
 
-    eventObj = (GameObject)Instantiate(prefab);
+    return eventObj;
+  }
+
+  GameObject InstantiatePrefab (GameObject prefab, PlayerEvent playerEvent) {
+    var eventObj = (GameObject)Instantiate(prefab);
     eventObj.GetComponent<EventView>().playerEvent = playerEvent;
     return eventObj;
   }

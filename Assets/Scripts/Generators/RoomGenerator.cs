@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class RoomGenerator {
 
@@ -15,13 +16,24 @@ public class RoomGenerator {
   }
 
   public Room CreateRoom () {
-    room = new Room(roomBase);
+    room = new Room();
+    room.tiles = InitTiles();
     room.roomTemplate = roomTemplate;
     room.content = roomTemplate.content;
 
     GenerateContent();
 
     return room;
+  }
+
+  List<Tile> InitTiles () {
+    var roomTiles = new List<Tile>();
+    foreach (Vector3 position in roomBase.tiles) {
+      var tile = env.tiles[position];
+      roomTiles.Add(tile);
+    }
+
+    return roomTiles;
   }
 
   void GenerateContent () {

@@ -25,20 +25,32 @@ public class GameRenderer : BaseBehaviour {
     var ev = sim.newEvents[currentIndex];
     ++currentIndex;
 
-    if (ev.type == PlayerEvent.Type.Movement) {
+    switch (ev.type) {
 
-      Vector3 delta = (Vector3)ev.data[PlayerEvent.movementDeltaKey];
-      string mover = (string)ev.data[PlayerEvent.moverKey];
+    case PlayerEvent.Type.Movement:
+      RenderMoveEvent(ev);
+      break;
 
-      if (mover == Constants.playerContentKey) {
-        MovePlayer(delta);
-      } else if (mover == Constants.mobContentKey) {
-        string mobId = (string)ev.data[PlayerEvent.moverIdKey];
-        MoveMob(mobId, delta);
-      }
+    case PlayerEvent.Type.DiscoverTile:
+      RevealTile(ev);
+      break;
 
-    } else {
+    default:
       NextEvent();
+      break;
+    }
+
+  }
+
+  void RenderMoveEvent (PlayerEvent ev) {
+    Vector3 delta = (Vector3)ev.data[PlayerEvent.movementDeltaKey];
+    string mover = (string)ev.data[PlayerEvent.moverKey];
+
+    if (mover == Constants.playerContentKey) {
+      MovePlayer(delta);
+    } else if (mover == Constants.mobContentKey) {
+      string mobId = (string)ev.data[PlayerEvent.moverIdKey];
+      MoveMob(mobId, delta);
     }
   }
 
@@ -61,6 +73,12 @@ public class GameRenderer : BaseBehaviour {
       "oncompletetarget", gameObject
       )
     );
+  }
+
+  void RevealTile (PlayerEvent ev) {
+    Tile tile = (Tile)ev.data[PlayerEvent.tileKey];
+    tile.tileObj.SetActive(false);
+    NextEvent();
   }
 
   void NotifyDone () {

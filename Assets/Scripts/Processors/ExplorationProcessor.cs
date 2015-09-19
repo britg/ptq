@@ -42,8 +42,7 @@ public class ExplorationProcessor {
       if (tileDistance > sim.player.sight) {
         continue;
       } else {
-        sim.AddDiscoveredTile(tile.position);
-        tile.Discover();
+        DiscoverTile(tile);
       }
 
       bool anything = (type == null && tile.contentType != null);
@@ -86,6 +85,11 @@ public class ExplorationProcessor {
 
   public void Pathfind () {
 
+  }
+
+  void DiscoverTile (Tile tile) {
+    tile.Discover();
+    sim.AddEvent(PlayerEvent.DiscoverTile(tile));
   }
 
 }

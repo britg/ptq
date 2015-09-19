@@ -14,6 +14,7 @@ public class PlayerEvent {
   public const string movementDeltaKey = "delta";
   public const string moverKey = "mover";
   public const string moverIdKey = "mover";
+  public const string tileKey = "tile";
 
 
   public enum Type {
@@ -25,7 +26,8 @@ public class PlayerEvent {
     Choice,
     PlayerBasicAttack,
     MobBasicAttack,
-    Movement
+    Movement,
+    DiscoverTile
   }
 
   public string Id { get; set; }
@@ -148,6 +150,13 @@ public class PlayerEvent {
     ev.data[moverKey] = Constants.mobContentKey;
     ev.data[moverIdKey] = mobId;
     ev.data[movementDeltaKey] = delta;
+    return ev;
+  }
+
+  public static PlayerEvent DiscoverTile (Tile tile) {
+    var ev = new PlayerEvent();
+    ev.type = Type.DiscoverTile;
+    ev.data[tileKey] = tile;
     return ev;
   }
 

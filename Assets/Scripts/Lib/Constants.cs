@@ -20,7 +20,6 @@ public class Constants {
   public const string OnRequireInput = "OnRequireInput";
   public const string OnEnvironmentStart = "OnEnvironmentStart";
   public const string OnEnvironmentUpdate = "OnEnvironmentUpdate";
-  public const string OnUpdateFog = "OnUpdateFog";
 
   // Layers
   public const string GroundLayer = "Ground";

@@ -27,7 +27,6 @@ public class EnvironmentRenderer : BaseBehaviour {
 	// Use this for initialization
 	void Start () {
     NotificationCenter.AddObserver(this, Constants.OnEnvironmentUpdate);
-    NotificationCenter.AddObserver(this, Constants.OnUpdateFog);
 	}
 
   void OnEnvironmentUpdate () {
@@ -39,8 +38,7 @@ public class EnvironmentRenderer : BaseBehaviour {
 
   void RenderEnvironment () {
     ClearAll();
-    RenderBaseLayer();
-    RenderActiveLayer();
+    RenderGame();
     RenderPlayer();
   }
 
@@ -50,7 +48,7 @@ public class EnvironmentRenderer : BaseBehaviour {
     }
   }
 
-  void RenderBaseLayer () {
+  void RenderGame () {
     tileObjs = new Dictionary<Vector3, GameObject>();
     foreach (KeyValuePair<Vector3, Tile> pair in env.tiles) {
       var pos = pair.Key;
@@ -63,74 +61,39 @@ public class EnvironmentRenderer : BaseBehaviour {
 //      fogObj.transform.parent = fogParent.transform;
 
       switch (tile.contentType) {
+
       case Constants.wallContentKey:
         AddContent(wallPrefab, tileObj);
         break;
+
       case Constants.doorContentKey:
         AddContent(doorPrefab, tileObj);
         break;
+
+      case Constants.mobContentKey:
+        AddContent(floorPrefab, tileObj);
+        AddContent(mobPrefab, tileObj);
+        break;
+      
+      case Constants.interactibleContentKey:
+        AddContent(floorPrefab, tileObj);
+        AddContent(interactiblePrefab, tileObj);
+        break;
+
       default:
         AddContent(floorPrefab, tileObj);
         break;
       }
 
+      tile.SetTileObj(tileObj);
       tileObjs[pos] = tileObj;
 
-    }
-  }
-
-  void RenderActiveLayer () {
-    foreach (Room room in env.rooms) {
-      RenderRoom(room);
-    }
-    //foreach (DictionaryEntry e in env.activeLayer) {
-    //  Vector3 pos = (Vector3)e.Key;
-
-    //  // tmp implementation
-    //  string thing = (string)e.Value;
-    //  if (thing == Constants.mobContentKey) {
-    //    PlaceObj(mobPrefab, (int)pos.z, (int)pos.x);
-    //  } else if (thing == Constants.interactibleContentKey) {
-    //    PlaceObj(interactiblePrefab, (int)pos.z, (int)pos.x);
-    //  }
-    //}
-  }
-
-  void RenderRoom (Room room) {
-    foreach (Tile tile in room.tiles) {
-      RenderTile(tile);
-    }
-  }
-
-  void RenderTile (Tile tile) {
-
-//    if (!tile.visible) {
-//      PlaceObj(fogPrefab, tile.position);
-//      return;
-//    }
-
-    if (!tile.occupied) {
-      return;
-    }
-
-    if (tile.contentType == Constants.mobContentKey) {
-      var mob = MobStore.Find(tile.contentId);
-      PlaceObj(mobPrefab, mob.position, tile.contentId);
-    }
-
-    if (tile.contentType == Constants.interactibleContentKey) {
-      var interaction = InteractibleStore.Find(tile.contentId);
-      PlaceObj(interactiblePrefab, interaction.position, tile.contentId);
     }
   }
 
   void RenderPlayer () {
     playerObj.transform.parent = transform.parent;
     playerObj.transform.localPosition = sim.player.position;
-  }
-
-  void UpdateNewlyVisibleTiles () {
-    RenderRoom(sim.currentRoom);
   }
 
   GameObject PlaceObj (GameObject prefab, int r, int c) {
