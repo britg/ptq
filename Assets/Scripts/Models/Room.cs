@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Room {
 
   public string key;
+  public string id;
   public RoomTemplate roomTemplate;
   public Dictionary<string, float> content;
   public List<Tile> tiles;

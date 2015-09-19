@@ -17,6 +17,7 @@ public class RoomGenerator {
 
   public Room CreateRoom () {
     room = new Room();
+    room.id = roomBase.id.ToString();
     room.tiles = InitTiles();
     room.roomTemplate = roomTemplate;
     room.content = roomTemplate.content;

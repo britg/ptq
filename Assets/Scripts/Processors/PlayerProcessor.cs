@@ -77,12 +77,21 @@ public class PlayerProcessor {
   }
 
   void PromptContent (Tile targetTile) {
-    if (targetTile.contentType == Constants.interactibleContentKey) {
-      HandleInteractibleTile(targetTile);
-    }
 
-    if (targetTile.contentType == Constants.mobContentKey) {
+    switch (targetTile.contentType) {
+
+    case Constants.interactibleContentKey:
+      HandleInteractibleTile(targetTile);
+      break;
+
+    case Constants.mobContentKey:
       HandleMobTile(targetTile);
+      break;
+
+    case Constants.doorContentKey:
+      HandleDoorTile(targetTile);
+      break;
+
     }
   }
 
@@ -108,6 +117,14 @@ public class PlayerProcessor {
                                           Choice.SwipeLeft("attack", "Attack"),
                                           Choice.SwipeRight("ignore", "Ignore")));
     sim.discoveredObjects.Add(mob.id);
+  }
+
+  void HandleDoorTile (Tile tile) {
+    sim.AddEvent(PlayerEvent.Info("Found a door"));
+    var prompt = string.Format("Leave the room or look again?");
+    sim.AddEvent(PlayerEvent.PromptChoice(prompt,
+                                          Choice.SwipeLeft("leave", "Leave"),
+                                          Choice.SwipeRight("stay", "Stay")));
   }
 
   void Interact () {

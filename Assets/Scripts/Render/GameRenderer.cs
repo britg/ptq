@@ -77,7 +77,7 @@ public class GameRenderer : BaseBehaviour {
 
   void RevealTile (PlayerEvent ev) {
     Tile tile = (Tile)ev.data[PlayerEvent.tileKey];
-    tile.tileObj.SetActive(false);
+    tile.tileObj.transform.Find("Fog").gameObject.SetActive(false);
     NextEvent();
   }
 

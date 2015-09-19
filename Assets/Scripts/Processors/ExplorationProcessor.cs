@@ -49,17 +49,15 @@ public class ExplorationProcessor {
       bool matches = (type != null && tile.contentType == type);
       if (anything || matches) {
 
+        if (tile.contentType == Constants.wallContentKey) {
+          continue;
+        }
 
         if (sim.discoveredObjects.Contains(tile.contentId)) {
           continue;
         }
 
         if (tile.contentType == Constants.playerContentKey) {
-          continue;
-        }
-
-
-        if (tileDistance > sim.player.sight) {
           continue;
         }
 
@@ -88,6 +86,9 @@ public class ExplorationProcessor {
   }
 
   void DiscoverTile (Tile tile) {
+    if (tile.discovered) {
+      return;
+    }
     tile.Discover();
     sim.AddEvent(PlayerEvent.DiscoverTile(tile));
   }
