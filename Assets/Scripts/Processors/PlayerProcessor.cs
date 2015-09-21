@@ -107,7 +107,10 @@ public class PlayerProcessor {
 
   void HandleMobTile (Tile tile) {
     //TODO: If the mob is low enough level, just go towards it.
-    PromptMobChoices(tile);
+//    PromptMobChoices(tile);
+
+
+
   }
 
   void PromptMobChoices (Tile tile) {
